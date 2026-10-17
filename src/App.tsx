@@ -1,7 +1,7 @@
 // The gallery: each component, one section, in the poiesis-ui theme. Light or dark follows the system.
 import type * as React from "react"
-import { ChevronDown, CircleCheck, CircleX, Grid2x2, Info, ListFilter, OctagonAlert, Sparkles, TriangleAlert, X } from "lucide-react"
-import { Alert, AlertAction, AlertDescription } from "@/components/ui/alert"
+import { ChevronDown, Grid2x2, ListFilter, X } from "lucide-react"
+import { Alert, AlertAction, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible"
@@ -186,22 +186,23 @@ const ENTRIES: Entry[] = [
       </Field>
     )],
   ] },
-  { id: "alert", name: "Alert", for: "A message that needs attention.", states: [
-    ["Default", (
-      <Alert className="max-w-narrow">
-        <AlertDescription>New version available: 2.4</AlertDescription>
-        <AlertAction><Button variant="link" size="sm">Update</Button></AlertAction>
+  { id: "alert", name: "Alert", for: "A message that needs attention. Its icon shows the role.", states: [
+    ["With title and action", (
+      <Alert variant="info" className="max-w-narrow">
+        <AlertTitle>New version available</AlertTitle>
+        <AlertDescription>Version 2.4 adds export to PDF.</AlertDescription>
+        <AlertAction><Button variant="link" size="sm" className="px-0">Update</Button></AlertAction>
       </Alert>
     )],
-    ["Danger", <Alert variant="danger" className="max-w-narrow"><AlertDescription>The import failed.</AlertDescription></Alert>],
+    ["Message only", <Alert className="max-w-narrow"><AlertDescription>Imports run every night at 2:00.</AlertDescription></Alert>],
     ["Roles", (
-      <div className="grid max-w-narrow gap-2">
-        <Alert variant="info"><Info /><AlertDescription>Imports run every night at 2:00.</AlertDescription></Alert>
-        <Alert variant="success"><CircleCheck /><AlertDescription>All 3 sources imported.</AlertDescription></Alert>
-        <Alert variant="warning"><TriangleAlert /><AlertDescription>One source has not changed in 30 days.</AlertDescription></Alert>
-        <Alert variant="caution"><OctagonAlert /><AlertDescription>The quota is 90% used.</AlertDescription></Alert>
-        <Alert variant="danger"><CircleX /><AlertDescription>The import failed.</AlertDescription></Alert>
-        <Alert variant="new"><Sparkles /><AlertDescription>New: export to PDF.</AlertDescription></Alert>
+      <div className="grid max-w-narrow gap-3">
+        <Alert variant="info"><AlertDescription>Imports run every night at 2:00.</AlertDescription></Alert>
+        <Alert variant="success"><AlertDescription>All 3 sources imported.</AlertDescription></Alert>
+        <Alert variant="warning"><AlertDescription>One source has not changed in 30 days.</AlertDescription></Alert>
+        <Alert variant="caution"><AlertDescription>The quota is 90% used.</AlertDescription></Alert>
+        <Alert variant="danger"><AlertTitle>The import failed</AlertTitle><AlertDescription>The file is not a CSV. Choose another file.</AlertDescription></Alert>
+        <Alert variant="new"><AlertDescription>New: export to PDF.</AlertDescription></Alert>
       </div>
     )],
   ] },
