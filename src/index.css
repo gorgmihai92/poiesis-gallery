@@ -1,0 +1,26 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+/* The theme: poiesis-ui's atoms and cells, and its shadcn file that maps the components onto them. */
+@import "@poiesis-ui/atoms.css";
+@import "@poiesis-ui/cells.css";
+@import "@poiesis-ui/shadcn.css";
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-size: var(--body-size);
+    line-height: var(--body-leading);
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+@keyframes status-ring {
+  0% { opacity: 0.5; scale: 1; }
+  100% { opacity: 0; scale: 2.4; }
+}

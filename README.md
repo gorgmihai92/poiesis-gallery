@@ -1,17 +1,18 @@
 # Poiesis Gallery
 
-Every Poiesis component, organized, in each style, preset and theme. This is where you **look at** the output;
-[poiesis-design](https://github.com/gorgmihai92/poiesis-design) is where the rules and the components **live**.
+The components Poiesis uses, in one place, in the Poiesis theme. This is where you **look at** the output;
+[poiesis-design](https://github.com/gorgmihai92/poiesis-design) is where the rules and the theme **live**.
 
-The gallery copies nothing. It imports the components from `poiesis-components` and the tokens from `poiesis-ui`
-straight out of a poiesis-design checkout, and reads the component list (what each is for, its file, its rules)
-from `catalog.md`. Change a component or a token there and the gallery shows it on the next reload.
+The components are [shadcn/ui](https://ui.shadcn.com) (MIT) where it has them, and our own, built the same way,
+where it does not (status dot, meter, loading with elapsed time). Their look comes from poiesis-ui: the gallery
+imports `atoms.css`, `cells.css` and `shadcn.css` straight out of a poiesis-design checkout. Change an atom there
+and every component follows on the next reload.
 
 ## Run
 
 ```
 npm install
-npm run dev        # http://localhost:5173
+npm run dev
 npm run build      # static site in dist/
 ```
 
@@ -21,11 +22,8 @@ It expects poiesis-design next to it (`../poiesis-design`). Anywhere else: `POIE
 
 | File | Holds |
 |---|---|
-| `src/catalog.ts` | reads `catalog.md`; the groups in the sidebar (a new catalog row with no group shows under "Other") |
-| `src/demos.tsx` | the states each component is shown in, and the all-components composition |
-| `src/App.tsx` | sidebar, preset / theme / style controls, one page per component |
-| `src/gallery.css` | the gallery's own layout, cells only |
-| `vite.config.ts` | where poiesis-design is, and the tokens stylesheet built from it |
-
-A new component: add it to poiesis-design (its `.tsx`, `.css` and a row in `catalog.md`), then its states to
-`src/demos.tsx` here.
+| `src/components/ui/` | shadcn components, added with `npx shadcn add <name>`; ours to change |
+| `src/components/` | our own components: status dot, meter, loading |
+| `src/App.tsx` | the gallery page: each component, its source and its states |
+| `src/index.css` | Tailwind, shadcn's base, and the poiesis-ui theme |
+| poiesis-design `…/tokens/shadcn.css` | the theme: shadcn's colour, radius, shadow, font and spacing slots → the cells |

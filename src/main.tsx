@@ -1,14 +1,13 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { TipProvider } from "@poiesis/library/tip.js";
-import "virtual:poiesis-tokens.css";
-import "./gallery.css";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import "./index.css";
 import { App } from "./App.tsx";
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <TipProvider>
+    <TooltipProvider>
       <App />
-    </TipProvider>
+    </TooltipProvider>
   </StrictMode>,
 );
