@@ -1,4 +1,5 @@
 // The gallery: each component, one section, in the poiesis-ui theme. Light or dark follows the system.
+import { useLayoutEffect, useState } from "react"
 import type * as React from "react"
 import { ChevronDown, CircleCheck, CircleX, Grid2x2, Info, ListFilter, OctagonAlert, Sparkles, TriangleAlert, X } from "lucide-react"
 import { Alert, AlertAction, AlertDescription } from "@/components/ui/alert"
@@ -22,6 +23,13 @@ import { typography } from "@/typography"
 type Entry = { id: string; name: string; for: string; states: [string, React.ReactNode][] }
 
 const row = "flex flex-wrap items-center gap-2"
+
+/** Shows the demo only when the theme uses the atom; at 0 it says so instead of drawing identical boxes. */
+function ThemeValue({ atom, none, children }: { atom: string; none: string; children: React.ReactNode }) {
+  const [zero, setZero] = useState(false)
+  useLayoutEffect(() => setZero(parseFloat(getComputedStyle(document.documentElement).getPropertyValue(atom)) === 0), [atom])
+  return zero ? <p className="text-muted">{none}</p> : <>{children}</>
+}
 
 const ROLES = [
   ["info", "Info", "bg-info text-on-color", "bg-info-tint", "text-info-strong"],
@@ -89,13 +97,19 @@ const ENTRIES: Entry[] = [
     )],
     ["Icons (--icon, --icon-sm)", <div className="flex items-center gap-3"><Grid2x2 className="size-(--icon)" /><Grid2x2 className="size-(--icon-sm)" /></div>],
     ["Corners (rounded-sm, -md, -lg, -pill)", (
-      <div className="flex flex-wrap gap-3">
-        {["rounded-sm", "rounded-md", "rounded-lg", "rounded-pill"].map((r) => (
-          <div key={r} className={`grid size-16 place-items-center bg-surface-2 type-code text-muted ${r}`}>{r.slice(8)}</div>
-        ))}
-      </div>
+      <ThemeValue atom="--atom-radius" none="Straight corners: --atom-radius is 0 in this theme, so every corner is square.">
+        <div className="flex flex-wrap gap-3">
+          {["rounded-sm", "rounded-md", "rounded-lg", "rounded-pill"].map((r) => (
+            <div key={r} className={`grid size-16 place-items-center bg-surface-2 type-code text-muted ${r}`}>{r.slice(8)}</div>
+          ))}
+        </div>
+      </ThemeValue>
     )],
-    ["Shadows (shadow-sm, -md)", <div className="flex gap-3"><div className="size-16 bg-paper shadow-sm ring-1 ring-divider" /><div className="size-16 bg-paper shadow-md ring-1 ring-divider" /></div>],
+    ["Shadows (shadow-sm, -md)", (
+      <ThemeValue atom="--atom-elevation" none="No shadows: --atom-elevation is 0 in this theme.">
+        <div className="flex gap-3"><div className="size-16 bg-paper shadow-sm ring-1 ring-divider" /><div className="size-16 bg-paper shadow-md ring-1 ring-divider" /></div>
+      </ThemeValue>
+    )],
     ["Disabled (--disabled)", <div className="flex gap-2"><Button>Enabled</Button><Button disabled>Disabled</Button></div>],
     ["Widths (max-w-narrow, -measure)", (
       <div className="grid gap-2">
