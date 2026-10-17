@@ -16,7 +16,7 @@
     line-height: var(--body-leading);
   }
   html {
-    @apply font-sans;
+    font-family: var(--font-body);
   }
 }
 

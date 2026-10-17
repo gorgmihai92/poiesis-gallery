@@ -17,6 +17,7 @@ import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { typography } from "@/typography"
 
 type Entry = { id: string; name: string; for: string; states: [string, React.ReactNode][] }
 
@@ -34,6 +35,7 @@ const ROLES = [
 const swatch = "grid min-h-12 content-center rounded-md px-3 py-2 text-sm"
 
 const ENTRIES: Entry[] = [
+  { id: "typography", name: "Typography", for: "Three typefaces, the type atoms, the scale they produce and the text roles. Values are read from the page, so they are the current theme's.", states: typography },
   { id: "colors", name: "Colors", for: "The palette's roles. Each has its fill (with text on it), a tint (with ink text) and a strong shade for colored text and thin lines.", states: [
     ["Roles", (
       <div className="grid gap-2">

@@ -14,6 +14,7 @@ A theme is one file in poiesis-ui's `tokens/themes/` that picks one file from ea
 | Layer | Sets | Files |
 |---|---|---|
 | palette | colors: paper, ink, and a color + tint for info, success, warning, caution, danger, new | `tokens/palettes/` |
+| typeface | the sans, serif and mono families | `tokens/typefaces/` |
 | preset | type and density | `tokens/presets/` |
 | style | corners, lines, shadows, selection | `tokens/styles/` |
 
@@ -36,6 +37,7 @@ It expects poiesis-design next to it (`../poiesis-design`). Anywhere else: `POIE
 | File | Holds |
 |---|---|
 | `src/components/ui/` | the components: shadcn's, added with `npx shadcn add <name>`, and status dot and meter |
-| `src/App.tsx` | the gallery page: each component, its source and its states |
+| `src/App.tsx` | the gallery page: each component and its states |
+| `src/typography.tsx` | the typography section: typefaces, type atoms, scale and roles, with live values |
 | `src/index.css` | Tailwind, shadcn's base, `poiesis.css` and the theme line |
 | poiesis-design `…/tokens/poiesis.css` | the theme: atoms, cells, and the components’ colour, radius, shadow, font and spacing slots mapped onto the cells |
