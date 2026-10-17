@@ -242,7 +242,7 @@ export function App() {
         <ul className="flex flex-wrap md:grid">
           {ENTRIES.map((e) => (
             <li key={e.id}>
-              <Button variant="ghost" size="sm" asChild className="w-full justify-start font-regular text-muted">
+              <Button variant="ghost" size="sm" asChild className="w-full justify-start text-muted">
                 <a href={`#${e.id}`}>{e.name}</a>
               </Button>
             </li>
@@ -253,7 +253,7 @@ export function App() {
         {ENTRIES.map((e) => (
           <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-6 border-t border-divider py-10 first:border-t-0 first:pt-0">
             <header className="grid gap-1">
-              <h2 className="font-display text-lg font-strong">{e.name}</h2>
+              <h2 className="type-heading">{e.name}</h2>
               <p className="text-muted">{e.for}</p>
             </header>
             {e.states.map(([name, node]) => (

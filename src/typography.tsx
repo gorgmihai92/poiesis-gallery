@@ -13,16 +13,13 @@ const ATOMS = [
   ["--atom-font-sans", "sans typeface"],
   ["--atom-font-serif", "serif typeface"],
   ["--atom-font-mono", "mono typeface"],
-  ["--atom-font-body", "body uses"],
-  ["--atom-font-display", "headings use"],
   ["--atom-text-base", "page body size"],
   ["--atom-text-ui", "component text size"],
   ["--atom-ratio", "scale ratio"],
   ["--atom-leading", "body line height"],
   ["--atom-leading-tight", "heading line height"],
-  ["--atom-weight-regular", "regular weight"],
-  ["--atom-weight-strong", "strong weight"],
-  ["--atom-weight-heading", "heading weight"],
+  ["--atom-weight-regular", "regular weight: running text"],
+  ["--atom-weight-strong", "strong weight: headings, component text"],
   ["--atom-tracking", "body letter spacing"],
   ["--atom-tracking-tight", "heading letter spacing"],
   ["--atom-measure", "line length"],
@@ -43,13 +40,13 @@ const ROLES = [
 /** A role's cells as inline style: the text takes its size, weight, leading, font and tracking together. "ui" is
  *  component text (T6): one size, the UI leading, the body face. */
 const role = (r: string): React.CSSProperties => r === "ui" ? {
-  fontFamily: "var(--font-body)",
+  fontFamily: "var(--font-sans)",
   fontSize: "var(--text-ui)",
-  fontWeight: "var(--weight-regular)",
+  fontWeight: "var(--weight-strong)",
   lineHeight: "var(--leading-ui)",
   letterSpacing: "var(--tracking-body)",
 } : ({
-  fontFamily: `var(--${r}-font)`,
+  fontFamily: r === "code" ? "var(--font-mono)" : "var(--font-sans)",
   fontSize: `var(--${r}-size)`,
   fontWeight: `var(--${r}-weight)`,
   lineHeight: `var(--${r}-leading)`,
@@ -97,7 +94,6 @@ function Face({ name, cell }: { name: string; cell: string }) {
       <p className="flex flex-wrap gap-x-4">
         <span style={{ fontWeight: "var(--weight-regular)" }}>Regular</span>
         <span style={{ fontWeight: "var(--weight-strong)" }}>Strong</span>
-        <span style={{ fontWeight: "var(--weight-heading)" }}>Heading</span>
         <span className="italic">Italic</span>
       </p>
     </div>
