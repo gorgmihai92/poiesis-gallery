@@ -265,7 +265,7 @@ export function App() {
       {/* The bottom padding lets the last sections scroll up to the top, so their rows can become current. */}
       <main className="grid min-w-0 content-start pb-8 lg:pt-8 lg:pb-[50svh]">
         {ENTRIES.map((e) => (
-          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-6 border-t border-divider pt-(--block-pad) pb-(--section-space) first:border-t-0 first:pt-0">
+          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-(--subsection-space) border-t border-divider pt-(--block-pad) pb-(--section-space) first:border-t-0 first:pt-0">
             <header className="grid gap-1 lg:sr-only">
               <h2 className="text-ui font-strong">{e.name}</h2>
               <p className="text-muted">{e.for}</p>
