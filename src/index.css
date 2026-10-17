@@ -1,14 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
-@import "shadcn/tailwind.css";
 /* Poiesis: the token engine, then the theme (a palette, a preset and a style; tokens/themes). Another feel is
    another theme file on this line. */
 @import "@poiesis-ui/poiesis.css";
 @import "@poiesis-ui/themes/poiesis.css";
+/* The components are poiesis-components' set, outside this folder: Tailwind reads their classes there. */
+@source "../../poiesis-design/plugins/poiesis-components/skills/components/library";
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border outline-ring;
   }
   body {
     @apply bg-background text-foreground;

@@ -1,7 +1,8 @@
 # Poiesis Gallery
 
-The components Poiesis uses, in one place, in the Poiesis theme. This is where you **look at** the output;
-[poiesis-design](https://github.com/gorgmihai92/poiesis-design) is where the rules and the theme **live**.
+The Poiesis component set, in one place, in the Poiesis theme. This is where you **look at** it;
+[poiesis-design](https://github.com/gorgmihai92/poiesis-design) is where the components (the poiesis-components
+plugin), the rules and the theme **live**. Nothing is copied here: the page reads them from a poiesis-design checkout.
 
 The components are [shadcn/ui](https://ui.shadcn.com) (MIT), plus two built the same way where shadcn has none
 (status dot, meter). They keep shadcn's structure and behaviour; their look comes from poiesis-ui, read straight
@@ -36,7 +37,7 @@ It expects poiesis-design next to it (`../poiesis-design`). Anywhere else: `POIE
 
 | File | Holds |
 |---|---|
-| `src/components/ui/` | the components: shadcn's, added with `npx shadcn add <name>`, and status dot and meter |
+| poiesis-design `…/poiesis-components/skills/components/library/` | the components (imported here as `@/components/ui/…`); a new one is added there, then shown here |
 | `src/App.tsx` | the gallery page: each component and its states |
 | `src/typography.tsx` | the typography section: typefaces, type atoms, scale and roles, with live values |
 | `src/index.css` | Tailwind, shadcn's base, `poiesis.css` and the theme line |

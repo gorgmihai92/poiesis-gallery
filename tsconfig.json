@@ -11,7 +11,17 @@
     "allowImportingTsExtensions": true,
     "types": ["vite/client", "node"],
     "baseUrl": ".",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": {
+      "@/components/ui/*": ["../poiesis-design/plugins/poiesis-components/skills/components/library/*"],
+      "@/*": ["./src/*"],
+      "react": ["./node_modules/@types/react"],
+      "react/*": ["./node_modules/@types/react/*"],
+      "radix-ui": ["./node_modules/radix-ui"],
+      "class-variance-authority": ["./node_modules/class-variance-authority"],
+      "clsx": ["./node_modules/clsx"],
+      "tailwind-merge": ["./node_modules/tailwind-merge"],
+      "lucide-react": ["./node_modules/lucide-react"]
+    }
   },
   "include": ["src", "vite.config.ts"]
 }
