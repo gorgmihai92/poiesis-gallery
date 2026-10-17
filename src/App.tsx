@@ -147,10 +147,14 @@ export function App() {
   return (
     <div className="mx-auto grid max-w-6xl gap-8 px-4 py-8 md:grid-cols-[11rem_1fr] md:px-8">
       <nav aria-label="Components" className="md:sticky md:top-8 md:self-start">
-        <p className="mb-2 font-semibold">Poiesis Gallery</p>
-        <ul className="flex flex-wrap gap-x-3 gap-y-1 md:grid md:gap-1">
+        <p className="mb-2 px-2.5 font-semibold">Poiesis Gallery</p>
+        <ul className="flex flex-wrap md:grid">
           {ENTRIES.map((e) => (
-            <li key={e.id}><a href={`#${e.id}`} className="text-muted-foreground hover:text-foreground">{e.name}</a></li>
+            <li key={e.id}>
+              <Button variant="ghost" size="sm" asChild className="w-full justify-start font-normal text-muted-foreground">
+                <a href={`#${e.id}`}>{e.name}</a>
+              </Button>
+            </li>
           ))}
         </ul>
       </nav>
@@ -162,10 +166,12 @@ export function App() {
               <p className="text-muted-foreground">{e.for}</p>
             </header>
             {e.states.map(([name, node]) => (
-              <div key={name} className="grid gap-2 rounded-lg bg-card p-4">
-                <span className="text-sm text-muted-foreground">{name}</span>
-                <div>{node}</div>
-              </div>
+              <Card key={name} size="sm">
+                <CardHeader>
+                  <CardDescription>{name}</CardDescription>
+                </CardHeader>
+                <CardContent>{node}</CardContent>
+              </Card>
             ))}
           </section>
         ))}
