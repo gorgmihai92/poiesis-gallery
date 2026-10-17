@@ -5,7 +5,7 @@ The Poiesis component set, in one place, in the Poiesis theme. This is where you
 plugin), the rules and the theme **live**. Nothing is copied here: the page reads them from a poiesis-design checkout.
 
 The components are [shadcn/ui](https://ui.shadcn.com) (MIT), plus two built the same way where shadcn has none
-(status dot, meter). They keep shadcn's structure and behaviour; their look comes from poiesis-ui, read straight
+(status dot, meter). They keep shadcn's structure and behavior; their look comes from poiesis-ui, read straight
 out of a poiesis-design checkout: `poiesis.css` (the token engine) and one **theme**.
 
 ## Themes: another feel without touching the components

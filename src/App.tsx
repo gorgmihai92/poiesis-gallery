@@ -9,15 +9,17 @@ import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Masthead, MastheadByline, MastheadDescription, MastheadName, MastheadTitle } from "@/components/ui/masthead"
 import { Meter } from "@/components/ui/meter"
+import { PageSection, PageSectionDescription, PageSectionHeader, PageSectionTitle } from "@/components/ui/page-section"
 import { Progress } from "@/components/ui/progress"
+import { SectionNav } from "@/components/ui/section-nav"
 import { Spinner } from "@/components/ui/spinner"
 import { StatusDot } from "@/components/ui/status-dot"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
-import { StackNav } from "@/nav"
 import { typography } from "@/typography"
 
 type Entry = { id: string; name: string; for: string; states: [string, React.ReactNode][] }
@@ -58,9 +60,28 @@ const NEUTRALS = [
 
 const swatch = "grid min-h-12 content-center rounded-md px-3 py-2 text-ui"
 
+/** The gallery's name, who made it (quiet, so Get is the one call to action), what it is, and where to get it. */
+const masthead = (
+  <Masthead>
+    <MastheadTitle>
+      <MastheadName>Poiesis Gallery</MastheadName>
+      <MastheadByline>
+        {" by "}
+        <Button variant="quiet" size="inline" asChild>
+          <a href="https://georgemihai.com" target="_blank" rel="noreferrer">George Mihai</a>
+        </Button>
+      </MastheadByline>
+    </MastheadTitle>
+    <MastheadDescription>A design system: components, type, spacing and color, shown in its own theme.</MastheadDescription>
+    <Button size="sm" asChild>
+      <a href="https://github.com/gorgmihai92/poiesis-design" target="_blank" rel="noreferrer">Get</a>
+    </Button>
+  </Masthead>
+)
+
 const ENTRIES: Entry[] = [
   { id: "typography", name: "Typography", for: "Three typefaces, the type atoms, the scale they produce and the text roles. Values are read from the page, so they are the current theme's.", states: typography },
-  { id: "colors", name: "Colors", for: "The palette's roles. Each has its fill (with text on it), a tint (with ink text) and a strong shade for colored text and thin lines.", states: [
+  { id: "colors", name: "Colors", for: "The palette's roles. Each is one color, for fills, text, icons and lines, with a tint for backgrounds under ink text.", states: [
     ["Roles", (
       <div className="grid gap-2">
         {ROLES.map(([id, name, fill, tint, strong]) => (
@@ -114,6 +135,7 @@ const ENTRIES: Entry[] = [
   ] },
   { id: "button", name: "Button", for: "Triggers an action.", states: [
     ["Variants", <div className={row}><Button>Default</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="danger">Danger</Button><Button variant="link">Link</Button></div>],
+    ["Quiet link (a byline or credit, in the text's own color)", <p className="text-muted">Photo by <Button variant="quiet" size="inline">Ana Pop</Button></p>],
     ["Sizes", <div className={row}><Button size="xs">Extra small</Button><Button size="sm">Small</Button><Button>Default</Button><Button size="lg">Large</Button></div>],
     ["Icon", <div className={row}><Button variant="outline" size="icon" aria-label="Grid view"><Grid2x2 /></Button><Button variant="ghost" size="icon" aria-label="Close"><X /></Button></div>],
     ["Loading and disabled", <div className={row}><Button disabled><Spinner data-icon="inline-start" />Saving…</Button><Button variant="secondary" disabled>Disabled</Button></div>],
@@ -134,9 +156,9 @@ const ENTRIES: Entry[] = [
           <TabsTrigger value="activity">Activity</TabsTrigger>
           <TabsTrigger value="settings">Settings</TabsTrigger>
         </TabsList>
-        <TabsContent value="overview" className="pt-2 text-muted">Overview content.</TabsContent>
-        <TabsContent value="activity" className="pt-2 text-muted">Activity content.</TabsContent>
-        <TabsContent value="settings" className="pt-2 text-muted">Settings content.</TabsContent>
+        <TabsContent value="overview" className="pt-2 text-muted">3 imports this week.</TabsContent>
+        <TabsContent value="activity" className="pt-2 text-muted">Last change 2 hours ago.</TabsContent>
+        <TabsContent value="settings" className="pt-2 text-muted">Notifications are on.</TabsContent>
       </Tabs>
     )],
   ] },
@@ -149,7 +171,7 @@ const ENTRIES: Entry[] = [
     )],
   ] },
   { id: "tooltip", name: "Tooltip", for: "A short label shown on hover or focus.", states: [
-    ["Default", <Tooltip><TooltipTrigger asChild><Button variant="outline">Hover me</Button></TooltipTrigger><TooltipContent>Exports the visible rows</TooltipContent></Tooltip>],
+    ["Default", <Tooltip><TooltipTrigger asChild><Button variant="outline">Export</Button></TooltipTrigger><TooltipContent>Exports the visible rows</TooltipContent></Tooltip>],
   ] },
   { id: "collapsible", name: "Collapsible", for: "Shows and hides a panel of content.", states: [
     ["Default", (
@@ -176,7 +198,7 @@ const ENTRIES: Entry[] = [
       <Field data-invalid className="max-w-narrow">
         <FieldLabel htmlFor="f2">Project name</FieldLabel>
         <Input id="f2" defaultValue="Atlas" aria-invalid />
-        <FieldError>That name is taken.</FieldError>
+        <FieldError>That name is taken. Try another.</FieldError>
       </Field>
     )],
     ["Disabled", (
@@ -193,14 +215,14 @@ const ENTRIES: Entry[] = [
         <AlertAction><Button variant="link" size="sm">Update</Button></AlertAction>
       </Alert>
     )],
-    ["Danger", <Alert variant="danger" className="max-w-narrow"><AlertDescription>The import failed.</AlertDescription></Alert>],
+    ["Danger", <Alert variant="danger" className="max-w-narrow"><AlertDescription>The import failed. Check the file and try again.</AlertDescription></Alert>],
     ["Roles", (
       <div className="grid max-w-narrow gap-2">
         <Alert variant="info"><Info /><AlertDescription>Imports run every night at 2:00.</AlertDescription></Alert>
         <Alert variant="success"><CircleCheck /><AlertDescription>All 3 sources imported.</AlertDescription></Alert>
-        <Alert variant="warning"><TriangleAlert /><AlertDescription>One source has not changed in 30 days.</AlertDescription></Alert>
+        <Alert variant="warning"><TriangleAlert /><AlertDescription>One source has not changed in 30 days. Check that it still exports.</AlertDescription></Alert>
         <Alert variant="caution"><OctagonAlert /><AlertDescription>The quota is 90% used.</AlertDescription></Alert>
-        <Alert variant="danger"><CircleX /><AlertDescription>The import failed.</AlertDescription></Alert>
+        <Alert variant="danger"><CircleX /><AlertDescription>The import failed. Check the file and try again.</AlertDescription></Alert>
         <Alert variant="new"><Sparkles /><AlertDescription>New: export to PDF.</AlertDescription></Alert>
       </div>
     )],
@@ -240,43 +262,38 @@ const ENTRIES: Entry[] = [
       </Empty>
     )],
   ] },
+  { id: "masthead", name: "Masthead", for: "A page's name, byline and one call to action.", states: [
+    ["Default", masthead],
+  ] },
+  { id: "page-section", name: "Page section", for: "One section of a long page: a divider on top, the content near it, the section's space after it. Every section on this page is one.", states: [
+    ["Parts", <p className="text-muted">Its parts sit one level of space apart (--subsection-space), the sections a level above (--section-space).</p>],
+  ] },
+  { id: "section-nav", name: "Section navigation", for: "Navigation for a page of sections: the column on the left of this page on wide screens, a wrapped list on narrow ones.", states: [
+    ["Behavior", <p className="text-muted">Passed sections stack at the top, coming ones at the bottom. Each row rides up with its section and darkens from faint to ink as it nears the current place.</p>],
+  ] },
 ]
 
 export function App() {
   return (
     <div className="mx-auto grid max-w-page gap-8 px-4 md:px-8 lg:grid-cols-[16rem_16rem_minmax(0,1fr)]">
-      <div className="hidden lg:block">
-        <StackNav items={ENTRIES} />
-      </div>
+      <SectionNav items={ENTRIES.map((e) => ({ id: e.id, title: e.name, description: e.for }))} header={masthead} />
       {/* An empty column as wide as the navigation, between it and the content. */}
       <div aria-hidden className="hidden lg:block" />
-      <nav aria-label="Sections" className="pt-8 lg:hidden">
-        <p className="mb-2 px-2.5 font-strong">Poiesis Gallery</p>
-        <ul className="flex flex-wrap">
-          {ENTRIES.map((e) => (
-            <li key={e.id}>
-              <Button variant="ghost" size="sm" asChild className="text-muted">
-                <a href={`#${e.id}`}>{e.name}</a>
-              </Button>
-            </li>
-          ))}
-        </ul>
-      </nav>
       {/* The bottom padding lets the last sections scroll up to the top, so their rows can become current. */}
       <main className="grid min-w-0 content-start pb-8 lg:pt-8 lg:pb-[50svh]">
         {ENTRIES.map((e) => (
-          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-(--subsection-space) border-t border-divider pt-(--block-pad) pb-(--section-space) first:border-t-0 first:pt-0">
-            <header className="grid gap-1 lg:sr-only">
-              <h2 className="text-ui font-strong">{e.name}</h2>
-              <p className="text-muted">{e.for}</p>
-            </header>
+          <PageSection key={e.id} id={e.id} className="scroll-mt-8">
+            <PageSectionHeader className="lg:sr-only">
+              <PageSectionTitle>{e.name}</PageSectionTitle>
+              <PageSectionDescription>{e.for}</PageSectionDescription>
+            </PageSectionHeader>
             {e.states.map(([name, node]) => (
               <div key={name} className="grid gap-3">
                 <StateTitle name={name} />
                 <div>{node}</div>
               </div>
             ))}
-          </section>
+          </PageSection>
         ))}
       </main>
     </div>

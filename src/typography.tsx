@@ -19,7 +19,7 @@ const ATOMS = [
   ["--atom-leading", "body line height"],
   ["--atom-leading-tight", "heading line height"],
   ["--atom-weight-regular", "regular weight: running text"],
-  ["--atom-weight-strong", "strong weight: headings, component text"],
+  ["--atom-weight-strong", "strong weight: headings, buttons, toggles, tabs, card and empty titles"],
   ["--atom-tracking", "body letter spacing"],
   ["--atom-tracking-tight", "heading letter spacing"],
   ["--atom-measure", "line length"],
@@ -80,22 +80,14 @@ const meta: React.CSSProperties = { fontFamily: "var(--font-sans)", fontSize: "v
 
 function Face({ name, cell }: { name: string; cell: string }) {
   const [ref, style] = useComputed<HTMLDivElement>()
-  const loaded = style && document.fonts?.check(`16px "${firstFamily(style.fontFamily)}"`)
   return (
     <div ref={ref} className="grid gap-2" style={{ fontFamily: `var(${cell})` }}>
       <div className={details} style={meta}>
         <span>{name}</span>
         <span>{style ? firstFamily(style.fontFamily) : ""}</span>
-        <span>{style ? (loaded ? "loaded" : "fallback in use") : ""}</span>
         <span>{cell}</span>
       </div>
       <p style={{ fontSize: "var(--text-2xl)", lineHeight: "var(--leading-display)" }}>The quick brown fox jumps over the lazy dog</p>
-      <p className="text-muted">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;!?@€%</p>
-      <p className="flex flex-wrap gap-x-4">
-        <span style={{ fontWeight: "var(--weight-regular)" }}>Regular</span>
-        <span style={{ fontWeight: "var(--weight-strong)" }}>Strong</span>
-        <span className="italic">Italic</span>
-      </p>
     </div>
   )
 }
