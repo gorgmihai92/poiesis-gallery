@@ -47,13 +47,14 @@ const ENTRIES: Entry[] = [
       </div>
     )],
     ["Neutrals", (
-      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
-        <div className={`${swatch} bg-background text-foreground ring-1 ring-border`}>Paper</div>
-        <div className={`${swatch} bg-card text-foreground`}>Surface 1</div>
-        <div className={`${swatch} bg-secondary text-foreground`}>Surface 2</div>
-        <div className={`${swatch} bg-accent text-foreground`}>Surface 3</div>
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-7">
+        <div className={`${swatch} bg-background text-foreground ring-1 ring-border`}>White</div>
+        <div className={`${swatch} bg-card text-foreground ring-1 ring-border`}>Block</div>
+        <div className={`${swatch} bg-secondary text-foreground`}>Grey 1</div>
+        <div className={`${swatch} bg-accent text-foreground`}>Grey 2</div>
+        <div className={`${swatch} bg-border text-foreground`}>Line</div>
         <div className={`${swatch} bg-muted-foreground text-background`}>Muted</div>
-        <div className={`${swatch} bg-foreground text-background`}>Ink</div>
+        <div className={`${swatch} bg-foreground text-background`}>Black</div>
       </div>
     )],
   ] },
@@ -202,20 +203,18 @@ export function App() {
           ))}
         </ul>
       </nav>
-      <main className="grid gap-12">
+      <main className="grid">
         {ENTRIES.map((e) => (
-          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-4">
+          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-6 border-t border-border py-10 first:border-t-0 first:pt-0">
             <header className="grid gap-1">
               <h2 className="font-heading text-lg font-semibold">{e.name}</h2>
               <p className="text-muted-foreground">{e.for}</p>
             </header>
             {e.states.map(([name, node]) => (
-              <Card key={name} size="sm">
-                <CardHeader>
-                  <CardDescription>{name}</CardDescription>
-                </CardHeader>
-                <CardContent>{node}</CardContent>
-              </Card>
+              <div key={name} className="grid gap-3">
+                <span className="text-sm text-muted-foreground">{name}</span>
+                <div>{node}</div>
+              </div>
             ))}
           </section>
         ))}
