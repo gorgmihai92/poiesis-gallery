@@ -13,11 +13,16 @@
   }
   body {
     @apply bg-paper text-ink;
-    font-size: var(--body-size);
-    line-height: var(--body-leading);
+    /* The gallery's own text is all one size: the component text cell (--atom-text-ui). */
+    font-size: var(--text-ui);
+    line-height: var(--leading-ui);
   }
   html {
     font-family: var(--font-sans);
   }
 }
 
+/* Clicking a navigation item glides to its section; not under reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}

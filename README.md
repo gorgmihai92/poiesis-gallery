@@ -21,7 +21,7 @@ A theme is one file in poiesis-ui's `tokens/themes/` that picks one file from ea
 
 To try another feel, point the theme line in `src/index.css` at another theme. To make one, copy
 `themes/poiesis.css` and change its layers or atoms. Components use only role names (`bg-success`,
-`text-danger-strong`, `bg-info-tint`…), so they follow any theme.
+`text-danger`, `bg-surface`…), so they follow any theme.
 
 ## Run
 

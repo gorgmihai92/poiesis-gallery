@@ -18,6 +18,7 @@ import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
+import { StackNav } from "@/nav"
 import { typography } from "@/typography"
 
 type Entry = { id: string; name: string; for: string; states: [string, React.ReactNode][] }
@@ -32,27 +33,25 @@ function ThemeValue({ atom, none, children }: { atom: string; none: string; chil
 }
 
 const ROLES = [
-  ["info", "Info", "bg-info text-on-color", "bg-info-tint", "text-info-strong"],
-  ["success", "Success", "bg-success text-on-color", "bg-success-tint", "text-success-strong"],
-  ["warning", "Warning", "bg-warning text-on-color", "bg-warning-tint", "text-warning-strong"],
-  ["caution", "Caution", "bg-caution text-on-color", "bg-caution-tint", "text-caution-strong"],
-  ["danger", "Danger", "bg-danger text-on-color", "bg-danger-tint", "text-danger-strong"],
-  ["new", "New", "bg-new text-on-color", "bg-new-tint", "text-new-strong"],
+  ["info", "Info", "bg-info text-on-color", "bg-info-tint", "text-info"],
+  ["success", "Success", "bg-success text-on-color", "bg-success-tint", "text-success"],
+  ["warning", "Warning", "bg-warning text-on-color", "bg-warning-tint", "text-warning"],
+  ["caution", "Caution", "bg-caution text-on-color", "bg-caution-tint", "text-caution"],
+  ["danger", "Danger", "bg-danger text-on-color", "bg-danger-tint", "text-danger"],
+  ["new", "New", "bg-new text-on-color", "bg-new-tint", "text-new"],
 ] as const
 
 const NEUTRALS = [
-  ["bg-paper text-ink ring-1 ring-divider", "Paper", "page"],
-  ["bg-surface-1 text-ink", "Surface 1", "grey step"],
-  ["bg-surface-2 text-ink", "Surface 2", "grey step"],
-  ["bg-surface-3 text-ink", "Surface 3", "grey step"],
-  ["bg-block text-ink ring-1 ring-divider", "Block", "cards, panels"],
+  ["bg-paper text-ink ring-1 ring-divider", "Paper", "page, blocks"],
+  ["bg-surface text-ink", "Surface", "grey fill, hover"],
   ["bg-divider text-ink", "Divider", "between sections"],
   ["bg-line text-paper", "Line", "control edges"],
+  ["bg-faint text-ink", "Faint", "text out of focus"],
   ["bg-muted text-paper", "Muted", "secondary text"],
-  ["bg-ink text-paper", "Ink", "text"],
+  ["bg-ink text-paper", "Ink", "text, primary fill"],
 ] as const
 
-const swatch = "grid min-h-12 content-center rounded-md px-3 py-2 text-sm"
+const swatch = "grid min-h-12 content-center rounded-md px-3 py-2 text-ui"
 
 const ENTRIES: Entry[] = [
   { id: "typography", name: "Typography", for: "Three typefaces, the type atoms, the scale they produce and the text roles. Values are read from the page, so they are the current theme's.", states: typography },
@@ -63,7 +62,7 @@ const ENTRIES: Entry[] = [
           <div key={id} className="grid grid-cols-3 gap-2">
             <div className={`${swatch} ${fill}`}>{name}</div>
             <div className={`${swatch} ${tint}`}>{name} tint</div>
-            <div className={`${swatch} bg-paper font-strong ${strong}`}>{name} strong</div>
+            <div className={`${swatch} bg-paper font-strong ${strong}`}>{name} text</div>
           </div>
         ))}
       </div>
@@ -78,9 +77,9 @@ const ENTRIES: Entry[] = [
     ["States", (
       <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
         <div className={`${swatch} bg-selected text-selected-foreground`}>Selected</div>
-        <div className={`${swatch} bg-hover text-ink`}>Hover</div>
-        <div className={`${swatch} bg-ink-hover text-paper`}>Ink hover</div>
-        <div className={`${swatch} bg-danger-hover text-on-color`}>Danger hover</div>
+        <div className={`${swatch} bg-surface text-ink`}>Hover, plain</div>
+        <div className={`${swatch} bg-ink text-paper opacity-(--hover)`}>Hover, filled</div>
+        <div className={`${swatch} bg-ink text-paper opacity-(--disabled)`}>Disabled</div>
       </div>
     )],
   ] },
@@ -89,8 +88,8 @@ const ENTRIES: Entry[] = [
       <div className="flex flex-wrap items-end gap-3">
         {(["xs", "sm", "md", "lg"] as const).map((s) => (
           <div key={s} className="grid justify-items-center gap-1">
-            <div className="w-16 bg-surface-2" style={{ height: `var(--control-${s})` }} />
-            <span className="type-code text-muted">{s}</span>
+            <div className="w-16 bg-surface" style={{ height: `var(--control-${s})` }} />
+            <span className="font-mono text-ui text-muted">{s}</span>
           </div>
         ))}
       </div>
@@ -100,7 +99,7 @@ const ENTRIES: Entry[] = [
       <ThemeValue atom="--atom-radius" none="Straight corners: --atom-radius is 0 in this theme, so every corner is square.">
         <div className="flex flex-wrap gap-3">
           {["rounded-sm", "rounded-md", "rounded-lg", "rounded-pill"].map((r) => (
-            <div key={r} className={`grid size-16 place-items-center bg-surface-2 type-code text-muted ${r}`}>{r.slice(8)}</div>
+            <div key={r} className={`grid size-16 place-items-center bg-surface font-mono text-ui text-muted ${r}`}>{r.slice(8)}</div>
           ))}
         </div>
       </ThemeValue>
@@ -113,8 +112,8 @@ const ENTRIES: Entry[] = [
     ["Disabled (--disabled)", <div className="flex gap-2"><Button>Enabled</Button><Button disabled>Disabled</Button></div>],
     ["Widths (max-w-narrow, -measure)", (
       <div className="grid gap-2">
-        <div className="max-w-narrow bg-surface-2 p-2 type-code text-muted">narrow</div>
-        <div className="max-w-measure bg-surface-2 p-2 type-code text-muted">measure</div>
+        <div className="max-w-narrow bg-surface p-2 font-mono text-ui text-muted">narrow</div>
+        <div className="max-w-measure bg-surface p-2 font-mono text-ui text-muted">measure</div>
       </div>
     )],
   ] },
@@ -250,29 +249,35 @@ const ENTRIES: Entry[] = [
 
 export function App() {
   return (
-    <div className="mx-auto grid max-w-page gap-8 px-4 py-8 md:grid-cols-[11rem_1fr] md:px-8">
-      <nav aria-label="Components" className="md:sticky md:top-8 md:self-start">
+    <div className="mx-auto grid max-w-page gap-8 px-4 md:px-8 lg:grid-cols-[16rem_16rem_minmax(0,1fr)]">
+      <div className="hidden lg:block">
+        <StackNav items={ENTRIES} />
+      </div>
+      {/* An empty column as wide as the navigation, between it and the content. */}
+      <div aria-hidden className="hidden lg:block" />
+      <nav aria-label="Sections" className="pt-8 lg:hidden">
         <p className="mb-2 px-2.5 font-strong">Poiesis Gallery</p>
-        <ul className="flex flex-wrap md:grid">
+        <ul className="flex flex-wrap">
           {ENTRIES.map((e) => (
             <li key={e.id}>
-              <Button variant="ghost" size="sm" asChild className="w-full justify-start text-muted">
+              <Button variant="ghost" size="sm" asChild className="text-muted">
                 <a href={`#${e.id}`}>{e.name}</a>
               </Button>
             </li>
           ))}
         </ul>
       </nav>
-      <main className="grid">
+      {/* The bottom padding lets the last sections scroll up to the top, so their rows can become current. */}
+      <main className="grid min-w-0 content-start pb-8 lg:pt-8 lg:pb-[50svh]">
         {ENTRIES.map((e) => (
-          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-6 border-t border-divider py-10 first:border-t-0 first:pt-0">
-            <header className="grid gap-1">
-              <h2 className="type-heading">{e.name}</h2>
+          <section key={e.id} id={e.id} className="grid scroll-mt-8 gap-6 border-t border-divider pt-(--block-pad) pb-(--section-space) first:border-t-0 first:pt-0">
+            <header className="grid gap-1 lg:sr-only">
+              <h2 className="text-ui font-strong">{e.name}</h2>
               <p className="text-muted">{e.for}</p>
             </header>
             {e.states.map(([name, node]) => (
               <div key={name} className="grid gap-3">
-                <span className="text-sm text-muted">{name}</span>
+                <span className="text-ui text-muted">{name}</span>
                 <div>{node}</div>
               </div>
             ))}

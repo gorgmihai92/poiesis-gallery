@@ -76,7 +76,7 @@ function useRootValue(name: string) {
 }
 
 const details = "flex flex-wrap gap-x-4 gap-y-1"
-const meta = { ...role("code"), color: "var(--muted)" }
+const meta: React.CSSProperties = { fontFamily: "var(--font-sans)", fontSize: "var(--text-ui)", lineHeight: "var(--leading-ui)", color: "var(--muted)" }
 
 function Face({ name, cell }: { name: string; cell: string }) {
   const [ref, style] = useComputed<HTMLDivElement>()
@@ -104,8 +104,8 @@ function Atom({ name, about }: { name: string; about: string }) {
   const value = useRootValue(name)
   return (
     <tr className="border-b border-divider align-baseline">
-      <td className="py-2 pr-4" style={role("code")}>{name}</td>
-      <td className="py-2 pr-4" style={role("code")}>{value}</td>
+      <td className="py-2 pr-4 font-mono">{name}</td>
+      <td className="py-2 pr-4 font-mono">{value}</td>
       <td className="py-2 text-muted">{about}</td>
     </tr>
   )
