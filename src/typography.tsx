@@ -15,7 +15,8 @@ const ATOMS = [
   ["--atom-font-mono", "mono typeface"],
   ["--atom-font-body", "body uses"],
   ["--atom-font-display", "headings use"],
-  ["--atom-text-base", "body size"],
+  ["--atom-text-base", "page body size"],
+  ["--atom-text-ui", "component text size"],
   ["--atom-ratio", "scale ratio"],
   ["--atom-leading", "body line height"],
   ["--atom-leading-tight", "heading line height"],
@@ -34,14 +35,20 @@ const ROLES = [
   ["heading", "Costs by region"],
   ["subheading", "North and east"],
   ["body", "Costs rose in two of three regions, led by energy and transport."],
-  ["label", "Project name"],
-  ["control", "Save changes"],
   ["caption", "Updated 14 Oct · 3 sources"],
   ["code", "import { Button } from \"@/components/ui/button\""],
+  ["ui", "Every component's text: buttons, labels, captions, content"],
 ] as const
 
-/** A role's cells as inline style: the text takes its size, weight, leading, font and tracking together. */
-const role = (r: string): React.CSSProperties => ({
+/** A role's cells as inline style: the text takes its size, weight, leading, font and tracking together. "ui" is
+ *  component text (T6): one size, the UI leading, the body face. */
+const role = (r: string): React.CSSProperties => r === "ui" ? {
+  fontFamily: "var(--font-body)",
+  fontSize: "var(--text-ui)",
+  fontWeight: "var(--weight-regular)",
+  lineHeight: "var(--leading-ui)",
+  letterSpacing: "var(--tracking-body)",
+} : ({
   fontFamily: `var(--${r}-font)`,
   fontSize: `var(--${r}-size)`,
   fontWeight: `var(--${r}-weight)`,
@@ -86,7 +93,7 @@ function Face({ name, cell }: { name: string; cell: string }) {
         <span>{cell}</span>
       </div>
       <p style={{ fontSize: "var(--text-2xl)", lineHeight: "var(--leading-display)" }}>The quick brown fox jumps over the lazy dog</p>
-      <p className="text-muted-foreground">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;!?@€%</p>
+      <p className="text-muted">ABCDEFGHIJKLMNOPQRSTUVWXYZ abcdefghijklmnopqrstuvwxyz 0123456789 &amp;!?@€%</p>
       <p className="flex flex-wrap gap-x-4">
         <span style={{ fontWeight: "var(--weight-regular)" }}>Regular</span>
         <span style={{ fontWeight: "var(--weight-strong)" }}>Strong</span>
@@ -100,10 +107,10 @@ function Face({ name, cell }: { name: string; cell: string }) {
 function Atom({ name, about }: { name: string; about: string }) {
   const value = useRootValue(name)
   return (
-    <tr className="border-b border-border align-baseline">
+    <tr className="border-b border-divider align-baseline">
       <td className="py-2 pr-4" style={role("code")}>{name}</td>
       <td className="py-2 pr-4" style={role("code")}>{value}</td>
-      <td className="py-2 text-muted-foreground">{about}</td>
+      <td className="py-2 text-muted">{about}</td>
     </tr>
   )
 }
@@ -111,7 +118,7 @@ function Atom({ name, about }: { name: string; about: string }) {
 function Step({ step }: { step: string }) {
   const [ref, style] = useComputed<HTMLSpanElement>()
   return (
-    <div className="grid gap-1 border-b border-border py-3">
+    <div className="grid gap-1 border-b border-divider py-3">
       <div className={details} style={meta}>
         <span>--text-{step}</span>
         <span>{style ? `${px(style.fontSize)} · ${rem(style.fontSize)}` : ""}</span>
@@ -125,7 +132,7 @@ function Role({ name, sample }: { name: string; sample: string }) {
   const [ref, style] = useComputed<HTMLParagraphElement>()
   const leading = style ? parseFloat(style.lineHeight) / parseFloat(style.fontSize) : 0
   return (
-    <div className="grid gap-1 border-b border-border py-3">
+    <div className="grid gap-1 border-b border-divider py-3">
       <div className={details} style={meta}>
         <span style={{ color: "var(--ink)" }}>{name}</span>
         {style && (
@@ -147,11 +154,11 @@ export const typography: [string, React.ReactNode][] = [
   ["Typefaces", <div className="grid gap-8">{FACES.map(([n, c]) => <Face key={n} name={n} cell={c} />)}</div>],
   ["Atoms", (
     <div className="overflow-x-auto">
-      <table className="w-full border-t border-border text-left">
+      <table className="w-full border-t border-divider text-left">
         <tbody>{ATOMS.map(([n, a]) => <Atom key={n} name={n} about={a} />)}</tbody>
       </table>
     </div>
   )],
-  ["Scale", <div className="border-t border-border">{SCALE.map((s) => <Step key={s} step={s} />)}</div>],
-  ["Roles", <div className="border-t border-border">{ROLES.map(([n, s]) => <Role key={n} name={n} sample={s} />)}</div>],
+  ["Scale", <div className="border-t border-divider">{SCALE.map((s) => <Step key={s} step={s} />)}</div>],
+  ["Roles", <div className="border-t border-divider">{ROLES.map(([n, s]) => <Role key={n} name={n} sample={s} />)}</div>],
 ]

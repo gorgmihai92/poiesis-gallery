@@ -9,10 +9,10 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring;
+    @apply border-divider outline-info;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-paper text-ink;
     font-size: var(--body-size);
     line-height: var(--body-leading);
   }
