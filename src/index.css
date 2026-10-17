@@ -1,12 +1,9 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
-/* The theme, from poiesis-ui: the atoms, one style (quiet, soft, crisp or bold: change this line to switch),
-   the cells derived from them, and the file that maps the shadcn components onto the cells. */
-@import "@poiesis-ui/atoms.css";
+/* The Poiesis theme (atoms, cells, component slots) and the style: quiet, soft, crisp or bold. */
+@import "@poiesis-ui/poiesis.css";
 @import "@poiesis-ui/styles/quiet.css";
-@import "@poiesis-ui/cells.css";
-@import "@poiesis-ui/shadcn.css";
 
 @layer base {
   * {
