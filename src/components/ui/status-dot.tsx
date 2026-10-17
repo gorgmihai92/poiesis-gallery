@@ -5,10 +5,10 @@ import { cn } from "@/lib/utils"
 const statusDotVariants = cva("relative inline-block size-2.5 shrink-0", {
   variants: {
     state: {
-      active: "text-success",
-      paused: "text-warning",
+      active: "text-success-strong",
+      paused: "text-warning-strong",
       stopped: "text-muted-foreground",
-      error: "text-destructive",
+      error: "text-danger-strong",
     },
   },
   defaultVariants: {

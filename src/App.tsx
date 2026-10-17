@@ -1,6 +1,6 @@
 // The gallery: each component, one section, in the poiesis-ui theme. Light or dark follows the system.
 import type * as React from "react"
-import { ChevronDown, Grid2x2, ListFilter, X } from "lucide-react"
+import { ChevronDown, CircleCheck, CircleX, Grid2x2, Info, ListFilter, OctagonAlert, Sparkles, TriangleAlert, X } from "lucide-react"
 import { Alert, AlertAction, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -22,7 +22,41 @@ type Entry = { id: string; name: string; for: string; states: [string, React.Rea
 
 const row = "flex flex-wrap items-center gap-2"
 
+const ROLES = [
+  ["info", "Info", "bg-info text-info-foreground", "bg-info-tint", "text-info-strong"],
+  ["success", "Success", "bg-success text-success-foreground", "bg-success-tint", "text-success-strong"],
+  ["warning", "Warning", "bg-warning text-warning-foreground", "bg-warning-tint", "text-warning-strong"],
+  ["caution", "Caution", "bg-caution text-caution-foreground", "bg-caution-tint", "text-caution-strong"],
+  ["danger", "Danger", "bg-danger text-danger-foreground", "bg-danger-tint", "text-danger-strong"],
+  ["new", "New", "bg-new text-new-foreground", "bg-new-tint", "text-new-strong"],
+] as const
+
+const swatch = "grid min-h-12 content-center rounded-md px-3 py-2 text-sm"
+
 const ENTRIES: Entry[] = [
+  { id: "colors", name: "Colors", for: "The palette's roles. Each has its fill (with text on it), a tint (with ink text) and a strong shade for colored text and thin lines.", states: [
+    ["Roles", (
+      <div className="grid gap-2">
+        {ROLES.map(([id, name, fill, tint, strong]) => (
+          <div key={id} className="grid grid-cols-3 gap-2">
+            <div className={`${swatch} ${fill}`}>{name}</div>
+            <div className={`${swatch} ${tint}`}>{name} tint</div>
+            <div className={`${swatch} bg-background font-semibold ${strong}`}>{name} strong</div>
+          </div>
+        ))}
+      </div>
+    )],
+    ["Neutrals", (
+      <div className="grid grid-cols-3 gap-2 sm:grid-cols-6">
+        <div className={`${swatch} bg-background text-foreground ring-1 ring-border`}>Paper</div>
+        <div className={`${swatch} bg-card text-foreground`}>Surface 1</div>
+        <div className={`${swatch} bg-secondary text-foreground`}>Surface 2</div>
+        <div className={`${swatch} bg-accent text-foreground`}>Surface 3</div>
+        <div className={`${swatch} bg-muted-foreground text-background`}>Muted</div>
+        <div className={`${swatch} bg-foreground text-background`}>Ink</div>
+      </div>
+    )],
+  ] },
   { id: "button", name: "Button", for: "Triggers an action.", states: [
     ["Variants", <div className={row}><Button>Default</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="destructive">Destructive</Button><Button variant="link">Link</Button></div>],
     ["Sizes", <div className={row}><Button size="xs">Extra small</Button><Button size="sm">Small</Button><Button>Default</Button><Button size="lg">Large</Button></div>],
@@ -105,6 +139,16 @@ const ENTRIES: Entry[] = [
       </Alert>
     )],
     ["Destructive", <Alert variant="destructive" className="max-w-md"><AlertDescription>The import failed.</AlertDescription></Alert>],
+    ["Roles", (
+      <div className="grid max-w-md gap-2">
+        <Alert variant="info"><Info /><AlertDescription>Imports run every night at 2:00.</AlertDescription></Alert>
+        <Alert variant="success"><CircleCheck /><AlertDescription>All 3 sources imported.</AlertDescription></Alert>
+        <Alert variant="warning"><TriangleAlert /><AlertDescription>One source has not changed in 30 days.</AlertDescription></Alert>
+        <Alert variant="caution"><OctagonAlert /><AlertDescription>The quota is 90% used.</AlertDescription></Alert>
+        <Alert variant="danger"><CircleX /><AlertDescription>The import failed.</AlertDescription></Alert>
+        <Alert variant="new"><Sparkles /><AlertDescription>New: export to PDF.</AlertDescription></Alert>
+      </div>
+    )],
   ] },
   { id: "spinner", name: "Spinner", for: "Shows that something is loading.", states: [
     ["Default", <div className="flex items-center gap-2 text-muted-foreground"><Spinner />Reading the file</div>],
@@ -117,7 +161,7 @@ const ENTRIES: Entry[] = [
   ] },
   { id: "meter", name: "Meter", for: "A level from 1 to 3.", states: [
     ["Values", <div className={row}><Meter value={1} aria-label="Level 1" /><Meter value={2} aria-label="Level 2" /><Meter value={3} aria-label="Level 3" /></div>],
-    ["Tones", <div className={row}><Meter value={1} tone="success" aria-label="Low" /><Meter value={2} tone="warning" aria-label="Medium" /><Meter value={3} tone="destructive" aria-label="High" /></div>],
+    ["Tones", <div className={row}><Meter value={1} tone="success" aria-label="Low" /><Meter value={2} tone="warning" aria-label="Medium" /><Meter value={2} tone="caution" aria-label="Medium-high" /><Meter value={3} tone="danger" aria-label="High" /></div>],
   ] },
   { id: "card", name: "Card", for: "A container for one item.", states: [
     ["Default", (

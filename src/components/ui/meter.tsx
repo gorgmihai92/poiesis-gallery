@@ -6,9 +6,12 @@ const meterVariants = cva("inline-block h-3 w-3.5 shrink-0", {
   variants: {
     tone: {
       default: "text-foreground",
-      destructive: "text-destructive",
-      warning: "text-warning",
-      success: "text-success",
+      info: "text-info-strong",
+      success: "text-success-strong",
+      warning: "text-warning-strong",
+      caution: "text-caution-strong",
+      danger: "text-danger-strong",
+      new: "text-new-strong",
     },
   },
   defaultVariants: {

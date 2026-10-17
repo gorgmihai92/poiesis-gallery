@@ -4,12 +4,22 @@ The components Poiesis uses, in one place, in the Poiesis theme. This is where y
 [poiesis-design](https://github.com/gorgmihai92/poiesis-design) is where the rules and the theme **live**.
 
 The components are [shadcn/ui](https://ui.shadcn.com) (MIT), plus two built the same way where shadcn has none
-(status dot, meter). They keep shadcn's structure and behaviour; only their look comes from poiesis-ui. The
-gallery imports `poiesis.css` (atoms, cells and the component slots) and one style straight out of a poiesis-design checkout.
-Change an atom there and every component follows on the next reload.
+(status dot, meter). They keep shadcn's structure and behaviour; their look comes from poiesis-ui, read straight
+out of a poiesis-design checkout: `poiesis.css` (the token engine) and one **theme**.
 
-**Another style:** change the style line in `src/index.css` (`styles/quiet.css` → `soft`, `crisp` or `bold`). A
-new style is a new file in poiesis-ui's `tokens/styles/` that sets the shape atoms.
+## Themes: another feel without touching the components
+
+A theme is one file in poiesis-ui's `tokens/themes/` that picks one file from each layer and can set extra atoms:
+
+| Layer | Sets | Files |
+|---|---|---|
+| palette | colors: paper, ink, and a color + tint for info, success, warning, caution, danger, new | `tokens/palettes/` |
+| preset | type and density | `tokens/presets/` |
+| style | corners, lines, shadows, selection | `tokens/styles/` |
+
+To try another feel, point the theme line in `src/index.css` at another theme. To make one, copy
+`themes/poiesis.css` and change its layers or atoms. Components use only role names (`bg-success`,
+`text-danger-strong`, `bg-info-tint`…), so they follow any theme.
 
 ## Run
 
@@ -27,5 +37,5 @@ It expects poiesis-design next to it (`../poiesis-design`). Anywhere else: `POIE
 |---|---|
 | `src/components/ui/` | the components: shadcn's, added with `npx shadcn add <name>`, and status dot and meter |
 | `src/App.tsx` | the gallery page: each component, its source and its states |
-| `src/index.css` | Tailwind, shadcn's base, and the poiesis-ui theme (with the style line) |
+| `src/index.css` | Tailwind, shadcn's base, `poiesis.css` and the theme line |
 | poiesis-design `…/tokens/poiesis.css` | the theme: atoms, cells, and the components’ colour, radius, shadow, font and spacing slots mapped onto the cells |
