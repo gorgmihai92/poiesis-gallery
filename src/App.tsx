@@ -1,5 +1,4 @@
 // The gallery: each component, one section, in the poiesis-ui theme. Light or dark follows the system.
-import { useLayoutEffect, useState } from "react"
 import type * as React from "react"
 import { ChevronDown, CircleCheck, CircleX, Grid2x2, Info, ListFilter, OctagonAlert, Sparkles, TriangleAlert, X } from "lucide-react"
 import { Alert, AlertAction, AlertDescription } from "@/components/ui/alert"
@@ -25,11 +24,17 @@ type Entry = { id: string; name: string; for: string; states: [string, React.Rea
 
 const row = "flex flex-wrap items-center gap-2"
 
-/** Shows the demo only when the theme uses the atom; at 0 it says so instead of drawing identical boxes. */
-function ThemeValue({ atom, none, children }: { atom: string; none: string; children: React.ReactNode }) {
-  const [zero, setZero] = useState(false)
-  useLayoutEffect(() => setZero(parseFloat(getComputedStyle(document.documentElement).getPropertyValue(atom)) === 0), [atom])
-  return zero ? <p className="text-muted">{none}</p> : <>{children}</>
+/** A state's title: the name in strong ink, the tokens it shows (in brackets) muted and regular after it. */
+function StateTitle({ name }: { name: string }) {
+  const at = name.indexOf(" (")
+  const title = at < 0 ? name : name.slice(0, at)
+  const tokens = at < 0 ? "" : name.slice(at)
+  return (
+    <span className="text-ui">
+      <span className="font-strong text-ink">{title}</span>
+      {tokens && <span className="font-regular text-muted">{tokens}</span>}
+    </span>
+  )
 }
 
 const ROLES = [
@@ -83,7 +88,7 @@ const ENTRIES: Entry[] = [
       </div>
     )],
   ] },
-  { id: "tokens", name: "Size, shape and state", for: "Control heights and padding follow density; icons, corners, shadows, the disabled look and widths each have one token.", states: [
+  { id: "tokens", name: "Size, shape and state", for: "Control heights and padding follow density; icons, the disabled look and widths each have one token.", states: [
     ["Control heights (--control-*)", (
       <div className="flex flex-wrap items-end gap-3">
         {(["xs", "sm", "md", "lg"] as const).map((s) => (
@@ -95,25 +100,15 @@ const ENTRIES: Entry[] = [
       </div>
     )],
     ["Icons (--icon, --icon-sm)", <div className="flex items-center gap-3"><Grid2x2 className="size-(--icon)" /><Grid2x2 className="size-(--icon-sm)" /></div>],
-    ["Corners (rounded-sm, -md, -lg, -pill)", (
-      <ThemeValue atom="--atom-radius" none="Straight corners: --atom-radius is 0 in this theme, so every corner is square.">
-        <div className="flex flex-wrap gap-3">
-          {["rounded-sm", "rounded-md", "rounded-lg", "rounded-pill"].map((r) => (
-            <div key={r} className={`grid size-16 place-items-center bg-surface font-mono text-ui text-muted ${r}`}>{r.slice(8)}</div>
-          ))}
-        </div>
-      </ThemeValue>
-    )],
-    ["Shadows (shadow-sm, -md)", (
-      <ThemeValue atom="--atom-elevation" none="No shadows: --atom-elevation is 0 in this theme.">
-        <div className="flex gap-3"><div className="size-16 bg-paper shadow-sm ring-1 ring-divider" /><div className="size-16 bg-paper shadow-md ring-1 ring-divider" /></div>
-      </ThemeValue>
-    )],
     ["Disabled (--disabled)", <div className="flex gap-2"><Button>Enabled</Button><Button disabled>Disabled</Button></div>],
-    ["Widths (max-w-narrow, -measure)", (
-      <div className="grid gap-2">
-        <div className="max-w-narrow bg-surface p-2 font-mono text-ui text-muted">narrow</div>
-        <div className="max-w-measure bg-surface p-2 font-mono text-ui text-muted">measure</div>
+    ["Widths (max-w-narrow, max-w-measure)", (
+      <div className="grid gap-6">
+        {([["max-w-narrow", "Narrow · tooltips, empty states, short forms"], ["max-w-measure", "Measure · running text"]] as const).map(([w, use]) => (
+          <div key={w} className="grid gap-1">
+            <span className="text-muted">{use}</span>
+            <p className={w}>A line stops at this width, so text never stretches across the whole screen and stays easy to follow from one line to the next.</p>
+          </div>
+        ))}
       </div>
     )],
   ] },
@@ -277,7 +272,7 @@ export function App() {
             </header>
             {e.states.map(([name, node]) => (
               <div key={name} className="grid gap-3">
-                <span className="text-ui text-muted">{name}</span>
+                <StateTitle name={name} />
                 <div>{node}</div>
               </div>
             ))}
