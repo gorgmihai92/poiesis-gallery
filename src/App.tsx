@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import type * as React from "react";
 import { Segmented, Tabs } from "@poiesis/library/tabs.js";
 import { Hint } from "@poiesis/library/layout.js";
+import { Button } from "@poiesis/library/button.js";
 import { type Entry, entries, groups } from "./catalog.ts";
 import { Composition, demos } from "./demos.tsx";
 
@@ -151,9 +152,9 @@ export function App() {
   return (
     <div className="g-shell" data-atoms data-preset="tool" data-style="quiet">
       <header className="g-bar">
-        <button type="button" className="g-menu pc-button" data-variant="secondary" data-size="s" aria-expanded={menu} aria-controls="g-nav" onClick={() => setMenu(!menu)}>
+        <Button className="g-menu" size="s" aria-expanded={menu} aria-controls="g-nav" onClick={() => setMenu(!menu)}>
           Components
-        </button>
+        </Button>
         <a className="g-brand" href="#/">Poiesis Gallery</a>
         <div className="g-controls">
           <Choice label="Preset" value={preset} options={PRESETS} onChange={setPreset} />
