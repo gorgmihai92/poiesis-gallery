@@ -1,11 +1,6 @@
-// The gallery: the components Poiesis uses, one section each, in the poiesis-ui theme. shadcn/ui where it has
-// the component, our own (in the same way) where it does not. One style; light or dark follows the system.
-import { useState } from "react"
+// The gallery: each component, one section, in the poiesis-ui theme. Light or dark follows the system.
 import type * as React from "react"
 import { ChevronDown, Grid2x2, ListFilter, X } from "lucide-react"
-import { Loading } from "@/components/loading"
-import { Meter } from "@/components/meter"
-import { StatusDot } from "@/components/status-dot"
 import { Alert, AlertAction, AlertDescription } from "@/components/ui/alert"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -14,150 +9,36 @@ import { Empty, EmptyContent, EmptyDescription, EmptyHeader, EmptyTitle } from "
 import { Field, FieldDescription, FieldError, FieldLabel } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Meter } from "@/components/ui/meter"
 import { Progress } from "@/components/ui/progress"
 import { Spinner } from "@/components/ui/spinner"
+import { StatusDot } from "@/components/ui/status-dot"
 import { Switch } from "@/components/ui/switch"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Toggle } from "@/components/ui/toggle"
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip"
 
-type Entry = { id: string; name: string; source: string; for: string; states: [string, React.ReactNode][] }
-
-const started = Date.now() - 12_000
-
-function BusyButton() {
-  const [busy, setBusy] = useState(false)
-  return (
-    <Button
-      aria-disabled={busy || undefined}
-      aria-busy={busy || undefined}
-      onClick={() => {
-        if (busy) return
-        setBusy(true)
-        setTimeout(() => setBusy(false), 2000)
-      }}
-    >
-      {busy && <Spinner data-icon="inline-start" />}
-      {busy ? "Saving…" : "Save changes"}
-    </Button>
-  )
-}
-
-/** Disabled with a reason: stays focusable (aria-disabled) so the tooltip and description can be reached (E1). */
-function ReasonButton({ reason, children }: { reason: string; children: React.ReactNode }) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="secondary" aria-disabled aria-description={reason} className="cursor-not-allowed opacity-50" onClick={(e) => e.preventDefault()}>
-          {children}
-        </Button>
-      </TooltipTrigger>
-      <TooltipContent>{reason}</TooltipContent>
-    </Tooltip>
-  )
-}
-
-function IconAction({ label, children }: { label: string; children: React.ReactNode }) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Button variant="ghost" size="icon" aria-label={label}>{children}</Button>
-      </TooltipTrigger>
-      <TooltipContent>{label}</TooltipContent>
-    </Tooltip>
-  )
-}
-
-function FilterToggle({ initial = false }: { initial?: boolean }) {
-  return (
-    <Tooltip>
-      <TooltipTrigger asChild>
-        <Toggle aria-label="Only flagged rows" defaultPressed={initial}><ListFilter /></Toggle>
-      </TooltipTrigger>
-      <TooltipContent>Only flagged rows</TooltipContent>
-    </Tooltip>
-  )
-}
-
-function SwitchRow({ id, label, initial }: { id: string; label: string; initial: boolean }) {
-  return (
-    <Field orientation="horizontal" className="max-w-sm">
-      <Label htmlFor={id} className="flex-auto">{label}</Label>
-      <Switch id={id} defaultChecked={initial} />
-    </Field>
-  )
-}
-
-function NameField({ error }: { error?: boolean }) {
-  const id = error ? "name-error" : "name"
-  return (
-    <Field data-invalid={error || undefined} className="max-w-sm">
-      <FieldLabel htmlFor={id}>Project name</FieldLabel>
-      <Input id={id} placeholder="Untitled" defaultValue={error ? "Atlas" : ""} aria-invalid={error || undefined} />
-      <FieldDescription>Letters, numbers and spaces, up to 40 characters.</FieldDescription>
-      {error && <FieldError>That name is taken. Try another one.</FieldError>}
-    </Field>
-  )
-}
-
-function Notice() {
-  const [open, setOpen] = useState(true)
-  if (!open) return <Button variant="secondary" size="sm" onClick={() => setOpen(true)}>Show the notice again</Button>
-  return (
-    <Alert role="status" className="max-w-md">
-      <AlertDescription>New version available: 2.4</AlertDescription>
-      <AlertAction className="flex items-center gap-1">
-        <Button variant="link" size="sm">Update</Button>
-        <Tooltip>
-          <TooltipTrigger asChild>
-            <Button variant="ghost" size="icon-sm" aria-label="Close" onClick={() => setOpen(false)}><X /></Button>
-          </TooltipTrigger>
-          <TooltipContent>Close</TooltipContent>
-        </Tooltip>
-      </AlertAction>
-    </Alert>
-  )
-}
-
-function Disclosure({ open }: { open?: boolean }) {
-  return (
-    <Collapsible defaultOpen={open}>
-      <CollapsibleTrigger asChild>
-        <Button variant="ghost" className="group -ml-2.5">
-          Advanced options
-          <ChevronDown data-icon="inline-end" className="transition-transform group-data-[state=open]:rotate-180 motion-reduce:transition-none" />
-        </Button>
-      </CollapsibleTrigger>
-      <CollapsibleContent className="pt-2 text-muted-foreground">Keep raw files for 30 days after import.</CollapsibleContent>
-    </Collapsible>
-  )
-}
-
-function UploadProgress({ value }: { value: number }) {
-  return (
-    <div className="grid max-w-sm grid-cols-[auto_1fr_auto] items-center gap-2">
-      <span id={`upload-${value}`}>Upload</span>
-      <Progress value={value} aria-labelledby={`upload-${value}`} />
-      <span className="text-muted-foreground tabular-nums">{value}%</span>
-    </div>
-  )
-}
+type Entry = { id: string; name: string; for: string; states: [string, React.ReactNode][] }
 
 const row = "flex flex-wrap items-center gap-2"
 
 const ENTRIES: Entry[] = [
-  { id: "button", name: "Button", source: "shadcn button", for: "One action. Primary once per view; secondary; quiet as a text link.", states: [
-    ["Variants", <div className={row}><Button>Save changes</Button><Button variant="secondary">Export CSV</Button><Button variant="link">Cancel</Button></div>],
-    ["Small", <div className={row}><Button size="sm">Import data</Button><Button variant="secondary" size="sm">Export CSV</Button></div>],
-    ["Busy (press it)", <BusyButton />],
-    ["Disabled, with and without a reason", <div className={row}><ReasonButton reason="Add a name first">Publish</ReasonButton><Button variant="secondary" disabled>Publish</Button></div>],
+  { id: "button", name: "Button", for: "Triggers an action.", states: [
+    ["Variants", <div className={row}><Button>Default</Button><Button variant="secondary">Secondary</Button><Button variant="outline">Outline</Button><Button variant="ghost">Ghost</Button><Button variant="destructive">Destructive</Button><Button variant="link">Link</Button></div>],
+    ["Sizes", <div className={row}><Button size="xs">Extra small</Button><Button size="sm">Small</Button><Button>Default</Button><Button size="lg">Large</Button></div>],
+    ["Icon", <div className={row}><Button variant="outline" size="icon" aria-label="Grid view"><Grid2x2 /></Button><Button variant="ghost" size="icon" aria-label="Close"><X /></Button></div>],
+    ["Loading and disabled", <div className={row}><Button disabled><Spinner data-icon="inline-start" />Saving…</Button><Button variant="secondary" disabled>Disabled</Button></div>],
   ] },
-  { id: "icon-button", name: "Icon button", source: "shadcn button (icon) + tooltip, toggle", for: "An action shown as an icon, always named; a toggle for an on/off icon.", states: [
-    ["Action", <IconAction label="Grid view"><Grid2x2 /></IconAction>],
-    ["On/off (press it)", <div className={row}><FilterToggle /><FilterToggle initial /></div>],
+  { id: "toggle", name: "Toggle", for: "A two-state button that can be on or off.", states: [
+    ["Off and on", <div className={row}><Toggle aria-label="Filter"><ListFilter /></Toggle><Toggle aria-label="Filter" defaultPressed><ListFilter /></Toggle></div>],
   ] },
-  { id: "tabs", name: "Tabs", source: "shadcn tabs (line)", for: "The main sections of a screen.", states: [
-    ["Sections", (
+  { id: "tabs", name: "Tabs", for: "Layered sections of content, one shown at a time.", states: [
+    ["Default", (
+      <Tabs defaultValue="list">
+        <TabsList><TabsTrigger value="list">List</TabsTrigger><TabsTrigger value="grid">Grid</TabsTrigger></TabsList>
+      </Tabs>
+    )],
+    ["Line", (
       <Tabs defaultValue="overview">
         <TabsList variant="line">
           <TabsTrigger value="overview">Overview</TabsTrigger>
@@ -170,54 +51,87 @@ const ENTRIES: Entry[] = [
       </Tabs>
     )],
   ] },
-  { id: "segmented", name: "Segmented", source: "shadcn tabs", for: "A small choice between views of the same content.", states: [
-    ["Two views", <Tabs defaultValue="list"><TabsList><TabsTrigger value="list">List</TabsTrigger><TabsTrigger value="grid">Grid</TabsTrigger></TabsList></Tabs>],
+  { id: "switch", name: "Switch", for: "Toggles a setting on or off.", states: [
+    ["With label", (
+      <div className="grid max-w-sm gap-3">
+        <Field orientation="horizontal"><Label htmlFor="s1" className="flex-auto">Email me a weekly summary</Label><Switch id="s1" defaultChecked /></Field>
+        <Field orientation="horizontal"><Label htmlFor="s2" className="flex-auto">Share with the team</Label><Switch id="s2" /></Field>
+      </div>
+    )],
   ] },
-  { id: "switch", name: "Switch", source: "shadcn switch + label", for: "An on/off setting that applies at once, with its label.", states: [
-    ["On", <SwitchRow id="weekly" label="Email me a weekly summary" initial />],
-    ["Off", <SwitchRow id="share" label="Share with the team" initial={false} />],
+  { id: "tooltip", name: "Tooltip", for: "A short label shown on hover or focus.", states: [
+    ["Default", <Tooltip><TooltipTrigger asChild><Button variant="outline">Hover me</Button></TooltipTrigger><TooltipContent>Exports the visible rows</TooltipContent></Tooltip>],
   ] },
-  { id: "tooltip", name: "Tooltip", source: "shadcn tooltip", for: "A short label on hover and focus; Esc closes. Never the only copy of needed information.", states: [
-    ["On hover or focus", <Tooltip><TooltipTrigger asChild><Button variant="secondary">Export CSV</Button></TooltipTrigger><TooltipContent>Exports the visible rows</TooltipContent></Tooltip>],
+  { id: "collapsible", name: "Collapsible", for: "Shows and hides a panel of content.", states: [
+    ["Default", (
+      <Collapsible>
+        <CollapsibleTrigger asChild>
+          <Button variant="ghost" className="group">
+            Advanced options
+            <ChevronDown data-icon="inline-end" className="transition-transform group-data-[state=open]:rotate-180" />
+          </Button>
+        </CollapsibleTrigger>
+        <CollapsibleContent className="px-2.5 pt-2 text-muted-foreground">Keep raw files for 30 days after import.</CollapsibleContent>
+      </Collapsible>
+    )],
   ] },
-  { id: "disclosure", name: "Disclosure", source: "shadcn collapsible", for: "Secondary content under its name; arrow down closed, up open.", states: [
-    ["Closed", <Disclosure />],
-    ["Open", <Disclosure open />],
+  { id: "field", name: "Field", for: "A label, a control, its description and its error.", states: [
+    ["Default", (
+      <Field className="max-w-sm">
+        <FieldLabel htmlFor="f1">Project name</FieldLabel>
+        <Input id="f1" placeholder="Untitled" />
+        <FieldDescription>Up to 40 characters.</FieldDescription>
+      </Field>
+    )],
+    ["Invalid", (
+      <Field data-invalid className="max-w-sm">
+        <FieldLabel htmlFor="f2">Project name</FieldLabel>
+        <Input id="f2" defaultValue="Atlas" aria-invalid />
+        <FieldError>That name is taken.</FieldError>
+      </Field>
+    )],
+    ["Disabled", (
+      <Field className="max-w-sm">
+        <FieldLabel htmlFor="f3">Workspace</FieldLabel>
+        <Input id="f3" defaultValue="Poiesis Lab" disabled />
+      </Field>
+    )],
   ] },
-  { id: "field", name: "Field", source: "shadcn field + input", for: "A labelled input with hint and error; the error says what to do and keeps the input.", states: [
-    ["Empty, with hint", <NameField />],
-    ["Error", <NameField error />],
+  { id: "alert", name: "Alert", for: "A message that needs attention.", states: [
+    ["Default", (
+      <Alert className="max-w-md">
+        <AlertDescription>New version available: 2.4</AlertDescription>
+        <AlertAction><Button variant="link" size="sm">Update</Button></AlertAction>
+      </Alert>
+    )],
+    ["Destructive", <Alert variant="destructive" className="max-w-md"><AlertDescription>The import failed.</AlertDescription></Alert>],
   ] },
-  { id: "notice", name: "Notice", source: "shadcn alert", for: "A short status with its action and close, in one fixed slot.", states: [
-    ["With action and close", <Notice />],
+  { id: "spinner", name: "Spinner", for: "Shows that something is loading.", states: [
+    ["Default", <div className="flex items-center gap-2 text-muted-foreground"><Spinner />Reading the file</div>],
   ] },
-  { id: "loading", name: "Loading", source: "own, on shadcn spinner", for: "What is pending and, after 3 s, for how long.", states: [
-    ["Just started", <Loading>Reading the file</Loading>],
-    ["After a while", <Loading since={started}>Reading the file</Loading>],
+  { id: "progress", name: "Progress", for: "How much of a task is done.", states: [
+    ["Default", <Progress value={64} aria-label="Upload" className="max-w-sm" />],
   ] },
-  { id: "status", name: "Status dot", source: "own", for: "A process running, paused, stopped or failed, by colour and shape.", states: [
-    ["Four states", <div className="flex items-center gap-3.5"><StatusDot state="active" label="Importing" /><StatusDot state="paused" label="Paused" /><StatusDot state="stopped" label="Stopped" /><StatusDot state="error" label="Import failed" /></div>],
+  { id: "status-dot", name: "Status dot", for: "The state of a process.", states: [
+    ["States", <div className="flex items-center gap-3.5"><StatusDot state="active" aria-label="Active" /><StatusDot state="paused" aria-label="Paused" /><StatusDot state="stopped" aria-label="Stopped" /><StatusDot state="error" aria-label="Error" /></div>],
   ] },
-  { id: "meter", name: "Meter", source: "own", for: "A level 1–3 as rising bars; the tone repeats the count.", states: [
-    ["Levels", <div className={row}><Meter value={1} label="Level 1 of 3" /><Meter value={2} label="Level 2 of 3" /><Meter value={3} label="Level 3 of 3" /></div>],
-    ["Tones", <div className={row}><Meter value={1} tone="success" label="Risk: low" /><Meter value={2} tone="warning" label="Risk: medium" /><Meter value={3} tone="danger" label="Risk: high" /></div>],
+  { id: "meter", name: "Meter", for: "A level from 1 to 3.", states: [
+    ["Values", <div className={row}><Meter value={1} aria-label="Level 1" /><Meter value={2} aria-label="Level 2" /><Meter value={3} aria-label="Level 3" /></div>],
+    ["Tones", <div className={row}><Meter value={1} tone="success" aria-label="Low" /><Meter value={2} tone="warning" aria-label="Medium" /><Meter value={3} tone="destructive" aria-label="High" /></div>],
   ] },
-  { id: "progress", name: "Progress", source: "shadcn progress", for: "How much of a known amount is done, from real work.", states: [
-    ["Under way", <UploadProgress value={64} />],
-  ] },
-  { id: "tile", name: "Tile", source: "shadcn card", for: "One item on a grey step.", states: [
-    ["Item", (
+  { id: "card", name: "Card", for: "A container for one item.", states: [
+    ["Default", (
       <Card className="max-w-sm">
         <CardHeader>
-          <CardTitle className="flex items-center justify-between">Quarterly costs<Meter value={3} tone="danger" label="Risk: high" /></CardTitle>
+          <CardTitle>Quarterly costs</CardTitle>
           <CardDescription>Updated 14 Oct · 3 sources</CardDescription>
         </CardHeader>
         <CardContent className="text-muted-foreground">Costs rose in two of three regions.</CardContent>
       </Card>
     )],
   ] },
-  { id: "empty", name: "Empty", source: "shadcn empty", for: "An empty view that says why and what to do, with its action.", states: [
-    ["With its action", (
+  { id: "empty", name: "Empty", for: "An empty state with what to do next.", states: [
+    ["Default", (
       <Empty className="max-w-md border">
         <EmptyHeader>
           <EmptyTitle>No reports yet</EmptyTitle>
@@ -246,7 +160,6 @@ export function App() {
             <header className="grid gap-1">
               <h2 className="font-heading text-lg font-semibold">{e.name}</h2>
               <p className="text-muted-foreground">{e.for}</p>
-              <p className="font-mono text-sm text-muted-foreground">{e.source}</p>
             </header>
             {e.states.map(([name, node]) => (
               <div key={name} className="grid gap-2 rounded-lg bg-card p-4">
