@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sections · Poiesis Gallery</title>
+  <meta name="description" content="A page of sections built with po-sections, from poiesis-components.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap">
+  <style>
+    /* The tokens, the theme and the library, then only this page's width: everything else is po-sections. */
+    @import "poiesis-ui/poiesis.css";
+    @import "poiesis-ui/themes/poiesis.css";
+    @import "poiesis-components/poiesis-components.css";
+    body { margin: 0; }
+    .demo { max-inline-size: var(--page); margin-inline: auto; padding-inline: calc(var(--space) * 4); }
+  </style>
+  <script type="module" src="poiesis-components/poiesis-components.js"></script>
+</head>
+<body class="po-paper">
+<div class="demo">
+  <po-sections>
+    <div class="po-sections-head">
+      <h2><a class="po-focus" href="#overview">Overview</a></h2>
+      <div class="po-sections-about">Costs across your regions this quarter, from 3 sources.</div>
+    </div>
+    <section id="overview">
+      <div class="po-stack" style="--po-gap: 4">
+        <p class="po-sections-lead po-ui po-muted">Costs across your regions this quarter, from 3 sources.</p>
+        <p class="po-heading">Costs rose in two of three regions</p>
+        <p class="po-body po-measure">Energy and transport led the rise in the north and the east. The west held steady after its new supplier
+          contract began in August.</p>
+        <article class="po-block po-card po-narrow">
+          <h3 class="po-card-title">North</h3>
+          <p class="po-muted">Up 8% · energy and transport</p>
+        </article>
+        <article class="po-block po-card po-narrow">
+          <h3 class="po-card-title">East</h3>
+          <p class="po-muted">Up 5% · transport</p>
+        </article>
+        <article class="po-block po-card po-narrow">
+          <h3 class="po-card-title">West</h3>
+          <p class="po-muted">No change</p>
+        </article>
+      </div>
+    </section>
+
+    <div class="po-sections-head">
+      <h2><a class="po-focus" href="#sources">Sources</a></h2>
+      <div class="po-sections-about">Where the figures come from.</div>
+    </div>
+    <section id="sources">
+      <div class="po-stack" style="--po-gap: 4">
+        <p class="po-sections-lead po-ui po-muted">Where the figures come from.</p>
+        <div class="po-narrow">
+          <div class="po-line"><span class="po-line-mark"><span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span></span><div class="po-line-text">North export <span class="po-muted">· daily</span></div></div>
+          <div class="po-line"><span class="po-line-mark"><span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span></span><div class="po-line-text">East ledger <span class="po-muted">· weekly</span></div></div>
+          <div class="po-line" data-rule="none"><span class="po-line-mark"><span class="po-status-dot" data-state="paused" role="img" aria-label="Paused"></span></span><div class="po-line-text">West supplier feed <span class="po-muted">· paused</span></div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="po-sections-head">
+      <h2><a class="po-focus" href="#imports">Imports</a></h2>
+      <div class="po-sections-about">Every import this quarter, newest first.</div>
+    </div>
+    <section id="imports">
+      <div class="po-stack" style="--po-gap: 4">
+        <p class="po-sections-lead po-ui po-muted">Every import this quarter, newest first.</p>
+        <div class="po-narrow" data-imports></div>
+      </div>
+    </section>
+
+    <div class="po-sections-head">
+      <h2><a class="po-focus" href="#settings">Settings</a></h2>
+      <div class="po-sections-about">When imports run and who hears about them.</div>
+    </div>
+    <section id="settings">
+      <div class="po-stack" style="--po-gap: 4">
+        <p class="po-sections-lead po-ui po-muted">When imports run and who hears about them.</p>
+        <div class="po-row po-narrow" style="justify-content: space-between">
+          <label class="po-label" for="weekly">Email me a weekly summary</label>
+          <input type="checkbox" role="switch" class="po-focus po-switch" id="weekly" checked>
+        </div>
+      </div>
+    </section>
+  </po-sections>
+</div>
+<script type="module">
+  // A quarter of imports, so one section is longer than a screen.
+  const list = document.querySelector("[data-imports]")
+  const weeks = ["14 Oct", "7 Oct", "30 Sept", "23 Sept", "16 Sept", "9 Sept", "2 Sept", "26 Aug", "19 Aug", "12 Aug", "5 Aug", "29 Jul", "22 Jul"]
+  weeks.forEach((day, i) => {
+    list.insertAdjacentHTML("beforeend", `<div class="po-line"${i === weeks.length - 1 ? ' data-rule="none"' : ""}>
+      <span class="po-line-mark"><span class="po-icon" data-icon="check" aria-hidden="true"></span></span>
+      <div class="po-line-text">${day} <span class="po-muted">· 3 sources, all imported</span></div></div>`)
+  })
+</script>
+</body>
+</html>

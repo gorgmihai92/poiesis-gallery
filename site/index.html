@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poiesis Gallery</title>
-  <meta name="description" content="A design system: tokens, primitives and components, shown in its own theme.">
+  <meta name="description" content="A design system: tokens, primitives, components and compositions, shown in its own theme.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap">
@@ -18,7 +18,7 @@
   <aside class="gallery-side">
     <header class="gallery-masthead po-stack">
       <p><strong>Poiesis Gallery</strong> <span class="po-muted">by <a class="po-pressable po-button" data-variant="quiet" href="https://georgemihai.com" target="_blank" rel="noreferrer">George Mihai</a></span></p>
-      <p class="po-muted">A design system: tokens, primitives and components, shown in its own theme.</p>
+      <p class="po-muted">A design system: tokens, primitives, components and compositions, shown in its own theme.</p>
       <p><a class="po-pressable po-button" data-size="sm" href="https://github.com/gorgmihai92/poiesis-design" target="_blank" rel="noreferrer">Get</a></p>
     </header>
     <nav class="gallery-nav" aria-label="Sections">
@@ -46,6 +46,11 @@
         <li><a class="po-pressable" href="#tabs">Tabs</a></li>
         <li><a class="po-pressable" href="#tooltip">Tooltip</a></li>
         <li><a class="po-pressable" href="#collapsible">Collapsible</a></li>
+        <li><a class="po-pressable" href="#fold">Fold</a></li>
+        <li><a class="po-pressable" href="#morph">Morph</a></li>
+        <li><a class="po-pressable" href="#line">Line</a></li>
+        <li><a class="po-pressable" href="#check">Check</a></li>
+        <li><a class="po-pressable" href="#options">Options</a></li>
         <li><a class="po-pressable" href="#alert">Alert</a></li>
         <li><a class="po-pressable" href="#card">Card</a></li>
         <li><a class="po-pressable" href="#separator">Separator</a></li>
@@ -53,6 +58,11 @@
         <li><a class="po-pressable" href="#meter">Meter</a></li>
         <li><a class="po-pressable" href="#spinner">Spinner</a></li>
         <li><a class="po-pressable" href="#status-dot">Status dot</a></li>
+      </ul>
+      <p class="gallery-nav-group">Compositions</p>
+      <ul>
+        <li><a class="po-pressable" href="#combobox">Combobox</a></li>
+        <li><a class="po-pressable" href="#sections">Sections</a></li>
       </ul>
     </nav>
   </aside>
@@ -350,6 +360,119 @@
       </div>
     </section>
 
+    <section id="fold" class="gallery-section">
+      <header><h2>Fold</h2><p class="po-muted">Opens and closes content in place, moving what follows with it.</p></header>
+      <div class="gallery-state">
+        <h3>Closed and open <span>(inert)</span></h3>
+        <div class="po-stack po-narrow">
+          <p><button class="po-pressable po-button" data-variant="outline" data-size="sm" aria-expanded="false" aria-controls="fold-filters" data-fold-toggle>Show filters</button></p>
+          <div class="po-fold" id="fold-filters" inert>
+            <div>
+              <div class="po-stack">
+                <label class="po-label" for="fold-source">Source</label>
+                <input class="po-field po-input" id="fold-source" placeholder="Any source">
+              </div>
+            </div>
+          </div>
+          <p class="po-muted">3 sources match.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="morph" class="gallery-section">
+      <header><h2>Morph</h2><p class="po-muted">One place whose content is swapped, its height gliding to the new content.</p></header>
+      <div class="gallery-state">
+        <h3>A button that becomes its form</h3>
+        <div class="po-stack po-narrow">
+          <po-morph data-morph>
+            <p><button class="po-pressable po-button" data-variant="outline" data-size="sm" data-morph-open>Send feedback</button></p>
+          </po-morph>
+          <template data-morph-form>
+            <div class="po-stack">
+              <label class="po-label" for="morph-note">Feedback</label>
+              <textarea class="po-field po-input gallery-demo-area" id="morph-note" placeholder="What would make this better?"></textarea>
+              <div class="po-row">
+                <button class="po-pressable po-button" data-size="sm" data-morph-close>Send</button>
+                <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-morph-close>Cancel</button>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <section id="line" class="gallery-section">
+      <header><h2>Line</h2><p class="po-muted">One item of a list: a mark, its words, and a rule under the words.</p></header>
+      <div class="gallery-state">
+        <h3>Open, done and empty <span>(data-state, data-rule)</span></h3>
+        <div class="po-measure">
+          <div class="po-line">
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Check the north export" data-line-check></label></span>
+            <div class="po-line-text">Check the north export <span class="po-muted">· due Friday</span></div>
+          </div>
+          <div class="po-line" data-state="done">
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Rename the east source" checked data-line-check></label></span>
+            <div class="po-line-text">Rename the east source</div>
+          </div>
+          <div class="po-line" data-rule="none">
+            <span class="po-line-mark"></span>
+            <div class="po-line-text po-muted">Add a task…</div>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Done with its steps <span>(--po-step)</span></h3>
+        <div class="po-measure" data-steps>
+          <div class="po-line">
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Publish the report" data-steps-main></label></span>
+            <div class="po-line-text">Publish the report</div>
+          </div>
+          <div class="po-line" style="--po-step: 1">
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Draft the summary" data-line-check></label></span>
+            <div class="po-line-text">Draft the summary</div>
+          </div>
+          <div class="po-line" style="--po-step: 2">
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Check the figures" data-line-check></label></span>
+            <div class="po-line-text">Check the figures</div>
+          </div>
+          <div class="po-line" style="--po-step: 3" data-rule="none">
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Share the link" data-line-check></label></span>
+            <div class="po-line-text">Share the link</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="check" class="gallery-section">
+      <header><h2>Check</h2><p class="po-muted">Marks one item done, or not.</p></header>
+      <div class="gallery-state">
+        <h3>States</h3>
+        <div class="po-row" style="--po-gap: 4">
+          <label class="po-check"><input type="checkbox" aria-label="Not done"></label>
+          <label class="po-check"><input type="checkbox" aria-label="Done" checked></label>
+          <label class="po-check"><input type="checkbox" aria-label="Not done, unavailable" disabled></label>
+          <label class="po-check"><input type="checkbox" aria-label="Done, unavailable" checked disabled></label>
+        </div>
+      </div>
+    </section>
+
+    <section id="options" class="gallery-section">
+      <header><h2>Options</h2><p class="po-muted">A short list to choose one from, five at most, with the rest counted.</p></header>
+      <div class="gallery-state">
+        <h3>Highlighted and counted <span>(aria-selected, .po-options-more)</span></h3>
+        <div class="po-measure">
+          <ul class="po-options" role="listbox" aria-label="Sources">
+            <li class="po-option" role="option" aria-selected="false">North</li>
+            <li class="po-option" role="option" aria-selected="true">North-east <span class="po-muted">· 12 files</span></li>
+            <li class="po-option" role="option" aria-selected="false">North-west</li>
+            <li class="po-option" role="option" aria-selected="false">Nordic archive</li>
+            <li class="po-option" role="option" aria-selected="false">Northern ports</li>
+          </ul>
+          <p class="po-options-more">+3 more</p>
+        </div>
+      </div>
+    </section>
+
     <section id="alert" class="gallery-section">
       <header><h2>Alert</h2><p class="po-muted">A message that needs attention.</p></header>
       <div class="gallery-state">
@@ -444,6 +567,48 @@
           <span class="po-status-dot" data-state="stopped" role="img" aria-label="Stopped"></span>
           <span class="po-status-dot" data-state="error" role="img" aria-label="Error"></span>
         </div>
+      </div>
+    </section>
+
+    <!-- Compositions -->
+
+    <section id="combobox" class="gallery-section">
+      <header><h2>Combobox</h2><p class="po-muted">A field with suggestions under it. Type, use ↓ ↑, then Enter or Tab; Esc closes the list.</p></header>
+      <div class="gallery-state">
+        <h3>Default <span>(max, open-on-focus)</span></h3>
+        <div class="po-stack po-narrow">
+          <label class="po-label" for="combo-region">Region</label>
+          <po-combobox open-on-focus>
+            <input class="po-field po-input" id="combo-region" placeholder="Any region">
+            <div class="po-fold" inert>
+              <div>
+                <ul class="po-options" role="listbox" aria-label="Regions">
+                  <li class="po-option" role="option">North</li>
+                  <li class="po-option" role="option">North-east</li>
+                  <li class="po-option" role="option">North-west</li>
+                  <li class="po-option" role="option">East</li>
+                  <li class="po-option" role="option">South</li>
+                  <li class="po-option" role="option">South-east</li>
+                  <li class="po-option" role="option">South-west</li>
+                  <li class="po-option" role="option">West</li>
+                </ul>
+              </div>
+            </div>
+          </po-combobox>
+          <p class="po-muted">Costs are shown for the region you choose.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sections" class="gallery-section">
+      <header><h2>Sections</h2><p class="po-muted">A long page whose section names always show, with no blank screen between sections.</p></header>
+      <div class="gallery-state">
+        <h3>On a phone <span>(scroll inside the frame)</span></h3>
+        <iframe class="gallery-frame" src="sections.html" title="Sections on a phone" loading="lazy"></iframe>
+      </div>
+      <div class="gallery-state">
+        <h3>On a wide screen</h3>
+        <p><a class="po-pressable po-button" data-variant="outline" data-size="sm" href="sections.html" target="_blank" rel="noreferrer">Open the page</a></p>
       </div>
     </section>
 

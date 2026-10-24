@@ -96,3 +96,7 @@ h2, h3 { font: inherit; font-weight: var(--weight-strong); }
 .gallery-icons figcaption { color: var(--muted); font-family: var(--font-mono); }
 .gallery-setting { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--space) * 4); }
 .gallery-error { color: var(--danger); }
+.gallery-demo-area { block-size: calc(var(--control-md) * 3); padding: calc(var(--space) * 2) var(--control-pad); resize: vertical; }
+
+/* Compositions: a page of sections, in a frame as wide as a phone. */
+.gallery-frame { inline-size: min(24.375rem, 100%); block-size: 40rem; border: 1px solid var(--divider); border-radius: var(--radius-m); }

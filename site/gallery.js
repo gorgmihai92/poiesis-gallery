@@ -1,6 +1,6 @@
 // The gallery's own script: the values on the page are read from the browser, so they are always the current
-// theme's, and the section navigation marks where the reader is. The components need only
-// poiesis-components.js.
+// theme's, the section navigation marks where the reader is, and a few demos get a hand (below). The components
+// need only poiesis-components.js.
 
 const root = getComputedStyle(document.documentElement)
 const px = (v) => `${Math.round(parseFloat(v) * 100) / 100}px`
@@ -108,4 +108,42 @@ const io = new IntersectionObserver((entries) => {
 for (const id of links.keys()) {
   const section = document.getElementById(id)
   if (section) io.observe(section)
+}
+
+// Demos that need a hand from the page: a control that opens a fold, a morph swapped to its form and back, and
+// checks that set their line done (a task's check sets its steps too, one after another by --po-step).
+for (const button of document.querySelectorAll("[data-fold-toggle]")) {
+  const fold = document.getElementById(button.getAttribute("aria-controls"))
+  button.addEventListener("click", () => {
+    const open = fold.inert
+    fold.inert = !open
+    button.setAttribute("aria-expanded", String(open))
+    button.textContent = open ? "Hide filters" : "Show filters"
+  })
+}
+
+for (const morph of document.querySelectorAll("[data-morph]")) {
+  const closed = morph.innerHTML
+  const form = morph.parentElement.querySelector("[data-morph-form]")
+  morph.addEventListener("click", (e) => {
+    if (e.target.closest("[data-morph-open]")) {
+      morph.replaceChildren(form.content.cloneNode(true))
+      morph.querySelector("textarea")?.focus()
+    } else if (e.target.closest("[data-morph-close]")) {
+      morph.innerHTML = closed
+      morph.querySelector("button")?.focus()
+    }
+  })
+}
+
+const setLine = (input) => { input.closest(".po-line").dataset.state = input.checked ? "done" : "" }
+for (const input of document.querySelectorAll("[data-line-check]")) input.addEventListener("change", () => setLine(input))
+for (const main of document.querySelectorAll("[data-steps-main]")) {
+  main.addEventListener("change", () => {
+    setLine(main)
+    for (const step of main.closest("[data-steps]").querySelectorAll("[data-line-check]")) {
+      step.checked = main.checked
+      setLine(step)
+    }
+  })
 }
