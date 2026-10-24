@@ -97,7 +97,7 @@ describe()
 document.fonts?.ready.then(describe)
 
 // The navigation marks the section in view (aria-current), so the reader sees where they are.
-const links = new Map([...document.querySelectorAll(".gallery-nav a")].map((a) => [a.hash.slice(1), a]))
+const links = new Map([...document.querySelectorAll(".po-frame-side .po-nav a")].map((a) => [a.hash.slice(1), a]))
 const seen = new Set()
 const io = new IntersectionObserver((entries) => {
   for (const e of entries) e.isIntersecting ? seen.add(e.target.id) : seen.delete(e.target.id)

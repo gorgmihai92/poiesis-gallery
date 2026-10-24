@@ -13,22 +13,22 @@
   <script type="module" src="gallery.js"></script>
 </head>
 <body class="po-paper">
-<div class="gallery">
+<div class="po-frame">
 
-  <aside class="gallery-side">
+  <aside class="po-frame-side">
     <header class="gallery-masthead po-stack">
       <p><strong>Poiesis Gallery</strong> <span class="po-muted">by <a class="po-pressable po-button" data-variant="quiet" href="https://georgemihai.com" target="_blank" rel="noreferrer">George Mihai</a></span></p>
       <p class="po-muted">A design system: tokens, primitives, components and patterns, shown in its own theme.</p>
       <p><a class="po-pressable po-button" data-size="sm" href="https://github.com/gorgmihai92/poiesis-design" target="_blank" rel="noreferrer">Get</a></p>
     </header>
-    <nav class="gallery-nav" aria-label="Sections">
-      <p class="gallery-nav-group">Tokens</p>
+    <nav class="po-nav" aria-label="Sections">
+      <p class="po-nav-group">Tokens</p>
       <ul>
         <li><a class="po-pressable" href="#typography">Typography</a></li>
         <li><a class="po-pressable" href="#colors">Colors</a></li>
         <li><a class="po-pressable" href="#tokens">Size, shape and state</a></li>
       </ul>
-      <p class="gallery-nav-group">Primitives</p>
+      <p class="po-nav-group">Primitives</p>
       <ul>
         <li><a class="po-pressable" href="#layout">Layout</a></li>
         <li><a class="po-pressable" href="#text">Text</a></li>
@@ -37,7 +37,7 @@
         <li><a class="po-pressable" href="#field">Field</a></li>
         <li><a class="po-pressable" href="#motion">Motion</a></li>
       </ul>
-      <p class="gallery-nav-group">Components</p>
+      <p class="po-nav-group">Components</p>
       <ul>
         <li><a class="po-pressable" href="#icon">Icon</a></li>
         <li><a class="po-pressable" href="#button">Button</a></li>
@@ -53,7 +53,7 @@
         <li><a class="po-pressable" href="#status-dot">Status dot</a></li>
         <li><a class="po-pressable" href="#separator">Separator</a></li>
       </ul>
-      <p class="gallery-nav-group">Patterns</p>
+      <p class="po-nav-group">Patterns</p>
       <ul>
         <li><a class="po-pressable" href="#combobox">Combobox</a></li>
         <li><a class="po-pressable" href="#picker">Picker</a></li>
@@ -65,11 +65,13 @@
         <li><a class="po-pressable" href="#empty">Empty</a></li>
         <li><a class="po-pressable" href="#masthead">Masthead</a></li>
         <li><a class="po-pressable" href="#sections">Sections</a></li>
+        <li><a class="po-pressable" href="#nav">Nav</a></li>
+        <li><a class="po-pressable" href="#frame">Frame</a></li>
       </ul>
     </nav>
   </aside>
 
-  <main class="gallery-main">
+  <main class="po-frame-main gallery-main">
 
     <!-- Tokens -->
 
@@ -790,6 +792,28 @@
         <h3>On a wide screen</h3>
         <p><a class="po-pressable po-button" data-variant="outline" data-size="sm" href="sections.html" target="_blank" rel="noreferrer">Open the page</a></p>
       </div>
+    </section>
+
+    <section id="nav" class="gallery-section">
+      <header><h2>Nav</h2><p class="po-muted">The places of an app, or the sections of a long page: every link ink, the current one strong, never a fill.</p></header>
+      <div class="gallery-state">
+        <h3>In groups <span>(the current page: Plan)</span></h3>
+        <nav class="po-nav" aria-label="Example">
+          <ul>
+            <li><a class="po-pressable" href="#nav">Overview</a></li>
+            <li><a class="po-pressable" href="#nav">Orders</a></li>
+          </ul>
+          <p class="po-nav-group">Settings</p>
+          <ul>
+            <li><a class="po-pressable" href="#nav" aria-current="page">Plan</a></li>
+            <li><a class="po-pressable" href="#nav">Integrations</a></li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <section id="frame" class="gallery-section">
+      <header><h2>Frame</h2><p class="po-muted">A side column with the masthead and the nav, then the page. This page is one: from 64rem the side stays in view, a free column follows it, then the page; on a phone the side sits above.</p></header>
     </section>
 
   </main>
