@@ -1,7 +1,7 @@
 # Poiesis Gallery
 
 The Poiesis library in one place, in the Poiesis theme: the tokens, the primitives, and every component and
-composition in its states. This is where you **look at** it; [poiesis-design](https://github.com/gorgmihai92/poiesis-design) is
+pattern in its states. This is where you **look at** it; [poiesis-design](https://github.com/gorgmihai92/poiesis-design) is
 where the tokens (poiesis-ui), the primitives and components (poiesis-components) and the rules **live**. Nothing
 is copied here while developing: the page reads them from a poiesis-design checkout.
 
@@ -22,7 +22,7 @@ Node 18+. It expects poiesis-design next to it (`../poiesis-design`). Anywhere e
 
 | File | Holds |
 |---|---|
-| `site/index.html` | the page: tokens, primitives, and each component and composition in its states |
+| `site/index.html` | the page: tokens, primitives, and each component and pattern in its states |
 | `site/sections.html` | a page built with `<po-sections>`, shown in a phone-sized frame and opened on its own for wide screens |
 | `site/gallery.css` | imports the tokens, the theme and the library, then the page's own layout |
 | `site/gallery.js` | reads the typography values from the browser, lists the icons, marks the current section |

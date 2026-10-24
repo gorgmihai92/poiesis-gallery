@@ -29,7 +29,9 @@ h2, h3 { font: inherit; font-weight: var(--weight-strong); }
   padding-inline: calc(var(--space) * 4);
 }
 @media (min-width: 64rem) {
-  .gallery { grid-template-columns: 16rem minmax(0, 1fr); gap: calc(var(--space) * 16); padding-inline: calc(var(--space) * 8); }
+  /* Navigation, a free column as wide as it, then the content. */
+  .gallery { grid-template-columns: 16rem 16rem minmax(0, 1fr); gap: calc(var(--space) * 16); padding-inline: calc(var(--space) * 8); }
+  .gallery-main { grid-column: 3; }
   .gallery-side { position: sticky; top: 0; align-self: start; max-block-size: 100svh; overflow-y: auto; }
 }
 
@@ -96,7 +98,6 @@ h2, h3 { font: inherit; font-weight: var(--weight-strong); }
 .gallery-icons figcaption { color: var(--muted); font-family: var(--font-mono); }
 .gallery-setting { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--space) * 4); }
 .gallery-error { color: var(--danger); }
-.gallery-demo-area { block-size: calc(var(--control-md) * 3); padding: calc(var(--space) * 2) var(--control-pad); resize: vertical; }
 
-/* Compositions: a page of sections, in a frame as wide as a phone. */
+/* Patterns: a page of sections, in a frame as wide as a phone. */
 .gallery-frame { inline-size: min(24.375rem, 100%); block-size: 40rem; border: 1px solid var(--divider); border-radius: var(--radius-m); }

@@ -31,16 +31,16 @@
         <p class="po-heading">Costs rose in two of three regions</p>
         <p class="po-body po-measure">Energy and transport led the rise in the north and the east. The west held steady after its new supplier
           contract began in August.</p>
-        <article class="po-block po-card po-narrow">
-          <h3 class="po-card-title">North</h3>
+        <article class="po-block po-box po-ui po-narrow">
+          <h3>North</h3>
           <p class="po-muted">Up 8% · energy and transport</p>
         </article>
-        <article class="po-block po-card po-narrow">
-          <h3 class="po-card-title">East</h3>
+        <article class="po-block po-box po-ui po-narrow">
+          <h3>East</h3>
           <p class="po-muted">Up 5% · transport</p>
         </article>
-        <article class="po-block po-card po-narrow">
-          <h3 class="po-card-title">West</h3>
+        <article class="po-block po-box po-ui po-narrow">
+          <h3>West</h3>
           <p class="po-muted">No change</p>
         </article>
       </div>
@@ -54,9 +54,9 @@
       <div class="po-stack" style="--po-gap: 4">
         <p class="po-sections-lead po-ui po-muted">Where the figures come from.</p>
         <div class="po-narrow">
-          <div class="po-line"><span class="po-line-mark"><span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span></span><div class="po-line-text">North export <span class="po-muted">· daily</span></div></div>
-          <div class="po-line"><span class="po-line-mark"><span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span></span><div class="po-line-text">East ledger <span class="po-muted">· weekly</span></div></div>
-          <div class="po-line" data-rule="none"><span class="po-line-mark"><span class="po-status-dot" data-state="paused" role="img" aria-label="Paused"></span></span><div class="po-line-text">West supplier feed <span class="po-muted">· paused</span></div></div>
+          <div class="po-item"><span class="po-item-mark"><span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span></span><span class="po-item-text">North export <span class="po-muted">· daily</span></span></div>
+          <div class="po-item"><span class="po-item-mark"><span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span></span><span class="po-item-text">East ledger <span class="po-muted">· weekly</span></span></div>
+          <div class="po-item" data-rule="none"><span class="po-item-mark"><span class="po-status-dot" data-state="paused" role="img" aria-label="Paused"></span></span><span class="po-item-text">West supplier feed <span class="po-muted">· paused</span></span></div>
         </div>
       </div>
     </section>
@@ -81,7 +81,7 @@
         <p class="po-sections-lead po-ui po-muted">When imports run and who hears about them.</p>
         <div class="po-row po-narrow" style="justify-content: space-between">
           <label class="po-label" for="weekly">Email me a weekly summary</label>
-          <input type="checkbox" role="switch" class="po-focus po-switch" id="weekly" checked>
+          <label class="po-checkbox" data-variant="switch"><input type="checkbox" role="switch" id="weekly" checked></label>
         </div>
       </div>
     </section>
@@ -92,9 +92,9 @@
   const list = document.querySelector("[data-imports]")
   const weeks = ["14 Oct", "7 Oct", "30 Sept", "23 Sept", "16 Sept", "9 Sept", "2 Sept", "26 Aug", "19 Aug", "12 Aug", "5 Aug", "29 Jul", "22 Jul"]
   weeks.forEach((day, i) => {
-    list.insertAdjacentHTML("beforeend", `<div class="po-line"${i === weeks.length - 1 ? ' data-rule="none"' : ""}>
-      <span class="po-line-mark"><span class="po-icon" data-icon="check" aria-hidden="true"></span></span>
-      <div class="po-line-text">${day} <span class="po-muted">· 3 sources, all imported</span></div></div>`)
+    list.insertAdjacentHTML("beforeend", `<div class="po-item"${i === weeks.length - 1 ? ' data-rule="none"' : ""}>
+      <span class="po-item-mark"><span class="po-icon" data-icon="check" aria-hidden="true"></span></span>
+      <span class="po-item-text">${day} <span class="po-muted">· 3 sources, all imported</span></span></div>`)
   })
 </script>
 </body>

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Poiesis Gallery</title>
-  <meta name="description" content="A design system: tokens, primitives, components and compositions, shown in its own theme.">
+  <meta name="description" content="A design system: tokens, primitives, components and patterns, shown in its own theme.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap">
@@ -18,7 +18,7 @@
   <aside class="gallery-side">
     <header class="gallery-masthead po-stack">
       <p><strong>Poiesis Gallery</strong> <span class="po-muted">by <a class="po-pressable po-button" data-variant="quiet" href="https://georgemihai.com" target="_blank" rel="noreferrer">George Mihai</a></span></p>
-      <p class="po-muted">A design system: tokens, primitives, components and compositions, shown in its own theme.</p>
+      <p class="po-muted">A design system: tokens, primitives, components and patterns, shown in its own theme.</p>
       <p><a class="po-pressable po-button" data-size="sm" href="https://github.com/gorgmihai92/poiesis-design" target="_blank" rel="noreferrer">Get</a></p>
     </header>
     <nav class="gallery-nav" aria-label="Sections">
@@ -35,40 +35,33 @@
         <li><a class="po-pressable" href="#surface">Surface</a></li>
         <li><a class="po-pressable" href="#pressable">Pressable</a></li>
         <li><a class="po-pressable" href="#field">Field</a></li>
+        <li><a class="po-pressable" href="#motion">Motion</a></li>
       </ul>
       <p class="gallery-nav-group">Components</p>
       <ul>
         <li><a class="po-pressable" href="#icon">Icon</a></li>
         <li><a class="po-pressable" href="#button">Button</a></li>
-        <li><a class="po-pressable" href="#toggle">Toggle</a></li>
-        <li><a class="po-pressable" href="#switch">Switch</a></li>
-        <li><a class="po-pressable" href="#input">Input and label</a></li>
+        <li><a class="po-pressable" href="#input">Input</a></li>
+        <li><a class="po-pressable" href="#label">Label</a></li>
+        <li><a class="po-pressable" href="#checkbox">Checkbox</a></li>
+        <li><a class="po-pressable" href="#list">List</a></li>
         <li><a class="po-pressable" href="#tabs">Tabs</a></li>
         <li><a class="po-pressable" href="#tooltip">Tooltip</a></li>
         <li><a class="po-pressable" href="#collapsible">Collapsible</a></li>
-        <li><a class="po-pressable" href="#fold">Fold</a></li>
-        <li><a class="po-pressable" href="#morph">Morph</a></li>
-        <li><a class="po-pressable" href="#line">Line</a></li>
-        <li><a class="po-pressable" href="#check">Check</a></li>
-        <li><a class="po-pressable" href="#options">Options</a></li>
-        <li><a class="po-pressable" href="#due">Due</a></li>
-        <li><a class="po-pressable" href="#bars">Bars</a></li>
         <li><a class="po-pressable" href="#alert">Alert</a></li>
-        <li><a class="po-pressable" href="#card">Card</a></li>
-        <li><a class="po-pressable" href="#separator">Separator</a></li>
         <li><a class="po-pressable" href="#progress">Progress</a></li>
-        <li><a class="po-pressable" href="#meter">Meter</a></li>
-        <li><a class="po-pressable" href="#spinner">Spinner</a></li>
         <li><a class="po-pressable" href="#status-dot">Status dot</a></li>
+        <li><a class="po-pressable" href="#separator">Separator</a></li>
       </ul>
-      <p class="gallery-nav-group">Compositions</p>
+      <p class="gallery-nav-group">Patterns</p>
       <ul>
         <li><a class="po-pressable" href="#combobox">Combobox</a></li>
+        <li><a class="po-pressable" href="#picker">Picker</a></li>
         <li><a class="po-pressable" href="#date-pick">Date pick</a></li>
         <li><a class="po-pressable" href="#line-form">Line form</a></li>
-        <li><a class="po-pressable" href="#picker">Picker</a></li>
         <li><a class="po-pressable" href="#pager">Pager</a></li>
         <li><a class="po-pressable" href="#toast">Toast</a></li>
+        <li><a class="po-pressable" href="#bars">Bars</a></li>
         <li><a class="po-pressable" href="#empty">Empty</a></li>
         <li><a class="po-pressable" href="#masthead">Masthead</a></li>
         <li><a class="po-pressable" href="#sections">Sections</a></li>
@@ -208,7 +201,7 @@
     </section>
 
     <section id="field" class="gallery-section">
-      <header><h2>Field</h2><p class="po-muted">The base of everything typed into: one edge, the text, the placeholder and the shared states.</p></header>
+      <header><h2>Field</h2><p class="po-muted">The base of everything typed into: one edge, the text, the placeholder and the shared states. The input is built on it.</p></header>
       <div class="gallery-state">
         <h3>States <span>(default, invalid, disabled)</span></h3>
         <div class="po-stack po-narrow">
@@ -219,7 +212,44 @@
       </div>
     </section>
 
-    <!-- Components -->
+    <section id="motion" class="gallery-section">
+      <header><h2>Motion</h2><p class="po-muted">One motion for everything that opens or changes in place: a fold opens and closes content, a morph swaps it.</p></header>
+      <div class="gallery-state">
+        <h3>Fold <span>(.po-fold, inert)</span></h3>
+        <div class="po-stack po-narrow">
+          <p><button class="po-pressable po-button" data-variant="outline" data-size="sm" aria-expanded="false" aria-controls="fold-filters" data-fold-toggle>Show filters</button></p>
+          <div class="po-fold" id="fold-filters" inert>
+            <div>
+              <div class="po-stack">
+                <label class="po-label" for="fold-source">Source</label>
+                <input class="po-field po-input" id="fold-source" placeholder="Any source">
+              </div>
+            </div>
+          </div>
+          <p class="po-muted">3 sources match.</p>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Morph <span>(&lt;po-morph&gt;: a button that becomes its form)</span></h3>
+        <div class="po-stack po-narrow">
+          <po-morph data-morph>
+            <p><button class="po-pressable po-button" data-variant="outline" data-size="sm" data-morph-open>Send feedback</button></p>
+          </po-morph>
+          <template data-morph-form>
+            <div class="po-stack">
+              <label class="po-label" for="morph-note">Feedback</label>
+              <textarea class="po-field po-input" id="morph-note" placeholder="What would make this better?"></textarea>
+              <div class="po-row">
+                <button class="po-pressable po-button" data-size="sm" data-morph-close>Send</button>
+                <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-morph-close>Cancel</button>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components: the fundamentals, every variant a setting -->
 
     <section id="icon" class="gallery-section">
       <header><h2>Icon</h2><p class="po-muted">The one icon set, in the current text color.</p></header>
@@ -227,12 +257,16 @@
         <h3>Set <span>(data-icon)</span></h3>
         <div class="gallery-icons" data-icons></div>
       </div>
+      <div class="gallery-state">
+        <h3>Spin <span>(data-spin: loading for an unknown time)</span></h3>
+        <div class="po-row po-muted"><span class="po-icon" data-icon="spinner" data-spin role="status" aria-label="Loading"></span>Reading the file</div>
+      </div>
     </section>
 
     <section id="button" class="gallery-section">
-      <header><h2>Button</h2><p class="po-muted">Triggers an action.</p></header>
+      <header><h2>Button</h2><p class="po-muted">One action, or one thing pressed or not.</p></header>
       <div class="gallery-state">
-        <h3>Variants</h3>
+        <h3>Variant <span>(data-variant)</span></h3>
         <div class="po-row">
           <button class="po-pressable po-button">Primary</button>
           <button class="po-pressable po-button" data-variant="secondary">Secondary</button>
@@ -241,13 +275,10 @@
           <button class="po-pressable po-button" data-variant="danger">Delete</button>
           <button class="po-pressable po-button" data-variant="link">Link</button>
         </div>
+        <p class="po-muted">Photo by <a class="po-pressable po-button" data-variant="quiet" href="#button">Ana Pop</a> <span>(quiet: a byline or credit, in the text's own color)</span></p>
       </div>
       <div class="gallery-state">
-        <h3>Quiet link <span>(a byline or credit, in the text's own color)</span></h3>
-        <p class="po-muted">Photo by <a class="po-pressable po-button" data-variant="quiet" href="#button">Ana Pop</a></p>
-      </div>
-      <div class="gallery-state">
-        <h3>Sizes</h3>
+        <h3>Size <span>(data-size)</span></h3>
         <div class="po-row">
           <button class="po-pressable po-button" data-size="sm">Small</button>
           <button class="po-pressable po-button">Default</button>
@@ -255,10 +286,19 @@
         </div>
       </div>
       <div class="gallery-state">
-        <h3>Icon</h3>
+        <h3>Icon only <span>(data-shape="icon")</span></h3>
         <div class="po-row">
           <button class="po-pressable po-button" data-variant="outline" data-shape="icon" aria-label="Grid view"><span class="po-icon" data-icon="grid" aria-hidden="true"></span></button>
           <button class="po-pressable po-button" data-variant="ghost" data-shape="icon" aria-label="Close"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button>
+          <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Edit"><span class="po-icon" data-icon="pencil" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Pressed or not <span>(a checkbox inside: the toggle)</span></h3>
+        <div class="po-row">
+          <label class="po-pressable po-button" data-variant="ghost" data-shape="icon"><input type="checkbox" aria-label="Show only open tasks"><span class="po-icon" data-icon="filter" aria-hidden="true"></span></label>
+          <label class="po-pressable po-button" data-variant="ghost"><input type="checkbox" checked>Bold</label>
+          <label class="po-pressable po-button" data-variant="outline"><input type="checkbox">Italic</label>
         </div>
       </div>
       <div class="gallery-state">
@@ -270,34 +310,10 @@
       </div>
     </section>
 
-    <section id="toggle" class="gallery-section">
-      <header><h2>Toggle</h2><p class="po-muted">A two-state button that can be on or off.</p></header>
-      <div class="gallery-state">
-        <h3>Off and on</h3>
-        <div class="po-row">
-          <label class="po-pressable po-toggle" data-shape="icon"><input type="checkbox" aria-label="Filter"><span class="po-icon" data-icon="filter" aria-hidden="true"></span></label>
-          <label class="po-pressable po-toggle" data-shape="icon"><input type="checkbox" aria-label="Filter" checked><span class="po-icon" data-icon="filter" aria-hidden="true"></span></label>
-          <label class="po-pressable po-toggle"><input type="checkbox">Bold</label>
-        </div>
-      </div>
-    </section>
-
-    <section id="switch" class="gallery-section">
-      <header><h2>Switch</h2><p class="po-muted">Toggles a setting on or off.</p></header>
-      <div class="gallery-state">
-        <h3>With label</h3>
-        <div class="po-stack po-narrow" style="--po-gap: 3">
-          <div class="gallery-setting"><label class="po-label" for="s1">Email me a weekly summary</label><input type="checkbox" role="switch" class="po-focus po-switch" id="s1" checked></div>
-          <div class="gallery-setting"><label class="po-label" for="s2">Share with the team</label><input type="checkbox" role="switch" class="po-focus po-switch" id="s2"></div>
-          <div class="gallery-setting"><label class="po-label" for="s3">Sync while on mobile data</label><input type="checkbox" role="switch" class="po-focus po-switch" id="s3" disabled></div>
-        </div>
-      </div>
-    </section>
-
     <section id="input" class="gallery-section">
-      <header><h2>Input and label</h2><p class="po-muted">A line of text, named by its label.</p></header>
+      <header><h2>Input</h2><p class="po-muted">Text typed in, named by its label.</p></header>
       <div class="gallery-state">
-        <h3>Default</h3>
+        <h3>Box <span>(default; with a hint)</span></h3>
         <div class="po-stack po-narrow">
           <label class="po-label" for="f1">Project name</label>
           <input class="po-field po-input" id="f1" placeholder="Untitled" maxlength="40" aria-describedby="f1-hint">
@@ -305,18 +321,141 @@
         </div>
       </div>
       <div class="gallery-state">
-        <h3>Invalid</h3>
+        <h3>Bare <span>(data-variant="bare": no box, a rule under the words)</span></h3>
+        <div class="po-narrow">
+          <input class="po-field po-input" data-variant="bare" placeholder="Name the report" aria-label="Report name">
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>With icons <span>(the box holds the icons and the control)</span></h3>
+        <div class="po-stack po-narrow">
+          <div class="po-field po-input">
+            <span class="po-icon" data-icon="search" aria-hidden="true"></span>
+            <input type="search" placeholder="Find a task" aria-label="Find a task">
+          </div>
+          <div class="po-field po-input">
+            <input placeholder="Pick a day" aria-label="Day">
+            <span class="po-icon" data-icon="calendar-plus" aria-hidden="true"></span>
+          </div>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Several lines <span>(textarea)</span></h3>
+        <div class="po-narrow">
+          <textarea class="po-field po-input" rows="2" placeholder="Add a note…" aria-label="Note"></textarea>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Size <span>(data-size)</span></h3>
+        <div class="po-stack po-narrow">
+          <input class="po-field po-input" data-size="sm" placeholder="Small" aria-label="Small field">
+          <input class="po-field po-input" placeholder="Default" aria-label="Default field">
+          <input class="po-field po-input" data-size="lg" placeholder="Large" aria-label="Large field">
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Invalid and disabled</h3>
         <div class="po-stack po-narrow">
           <label class="po-label" for="f2">Project name</label>
           <input class="po-field po-input" id="f2" value="Atlas" aria-invalid="true" aria-describedby="f2-error">
           <p class="po-ui gallery-error" id="f2-error">That name is taken. Try another.</p>
+          <label class="po-label" for="f3">Workspace</label>
+          <input class="po-field po-input" id="f3" value="Poiesis Lab" disabled>
+        </div>
+      </div>
+    </section>
+
+    <section id="label" class="gallery-section">
+      <header><h2>Label</h2><p class="po-muted">The name of a control, next to it.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <div class="po-stack po-narrow">
+          <label class="po-label" for="l1">Region</label>
+          <input class="po-field po-input" id="l1" placeholder="Any region">
+        </div>
+      </div>
+    </section>
+
+    <section id="checkbox" class="gallery-section">
+      <header><h2>Checkbox</h2><p class="po-muted">One thing on or off.</p></header>
+      <div class="gallery-state">
+        <h3>Check <span>(default: marks an item done)</span></h3>
+        <div class="po-row">
+          <label class="po-checkbox"><input type="checkbox" aria-label="Not done"></label>
+          <label class="po-checkbox"><input type="checkbox" aria-label="Done" checked></label>
+          <label class="po-checkbox"><input type="checkbox" aria-label="Not done, unavailable" disabled></label>
+          <label class="po-checkbox"><input type="checkbox" aria-label="Done, unavailable" checked disabled></label>
         </div>
       </div>
       <div class="gallery-state">
-        <h3>Disabled</h3>
-        <div class="po-stack po-narrow">
-          <label class="po-label" for="f3">Workspace</label>
-          <input class="po-field po-input" id="f3" value="Poiesis Lab" disabled>
+        <h3>Switch <span>(data-variant="switch": a setting that applies at once)</span></h3>
+        <div class="po-stack po-narrow" style="--po-gap: 3">
+          <div class="gallery-setting"><label class="po-label" for="s1">Email me a weekly summary</label><label class="po-checkbox" data-variant="switch"><input type="checkbox" role="switch" id="s1" checked></label></div>
+          <div class="gallery-setting"><label class="po-label" for="s2">Share with the team</label><label class="po-checkbox" data-variant="switch"><input type="checkbox" role="switch" id="s2"></label></div>
+          <div class="gallery-setting"><label class="po-label" for="s3">Sync while on mobile data</label><label class="po-checkbox" data-variant="switch"><input type="checkbox" role="switch" id="s3" disabled></label></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="list" class="gallery-section">
+      <header><h2>List</h2><p class="po-muted">Items one under another: a mark, the words, and a note or actions at the end.</p></header>
+      <div class="gallery-state">
+        <h3>Lines <span>(default: hover a row for its actions; data-state="done")</span></h3>
+        <ul class="po-list po-measure">
+          <li class="po-item">
+            <span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Check the north export" data-line-check></label></span>
+            <span class="po-item-text"><strong>Check</strong> the north export <span class="po-text" data-tone="warning">· due tomorrow</span></span>
+            <span class="po-item-actions"><button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Remove “Check the north export”"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button></span>
+          </li>
+          <li class="po-item">
+            <span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Send the east figures" data-line-check></label></span>
+            <span class="po-item-text"><strong>Send</strong> the east figures <span class="po-text" data-tone="danger">· 2 days late</span></span>
+            <span class="po-item-actions"><button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Remove “Send the east figures”"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button></span>
+          </li>
+          <li class="po-item" data-state="done">
+            <span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Rename the west source" checked data-line-check></label></span>
+            <span class="po-item-text"><strong>Rename</strong> the west source</span>
+          </li>
+          <li class="po-item" data-rule="none">
+            <span class="po-item-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
+            <input class="po-field po-input" data-variant="bare" placeholder="Add a task…" aria-label="Add a task">
+          </li>
+        </ul>
+      </div>
+      <div class="gallery-state">
+        <h3>Steps done one after another <span>(--po-step, po-list-indent)</span></h3>
+        <div class="po-measure" data-steps>
+          <div class="po-item">
+            <span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Publish the report" data-steps-main></label></span>
+            <span class="po-item-text"><strong>Publish</strong> the report <span class="po-text" data-tone="caution">· due today</span></span>
+          </div>
+          <ul class="po-list po-list-indent">
+            <li class="po-item" style="--po-step: 1"><span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Draft the summary" data-line-check></label></span><span class="po-item-text"><strong>Draft</strong> the summary</span></li>
+            <li class="po-item" style="--po-step: 2"><span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Check the figures" data-line-check></label></span><span class="po-item-text"><strong>Check</strong> the figures</span></li>
+            <li class="po-item" data-rule="none" style="--po-step: 3"><span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Share the link" data-line-check></label></span><span class="po-item-text"><strong>Share</strong> the link</span></li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Options <span>(data-variant="options": aria-selected, po-item-note, po-list-more)</span></h3>
+        <div class="po-measure">
+          <ul class="po-list" data-variant="options" role="listbox" aria-label="Verbs">
+            <li class="po-item" role="option" aria-selected="false"><strong>Read</strong><span class="po-item-note">#1</span></li>
+            <li class="po-item" role="option" aria-selected="true"><strong>Review</strong><span class="po-item-note">#2</span></li>
+            <li class="po-item" role="option" aria-selected="false"><strong>Reply</strong></li>
+            <li class="po-list-more" role="presentation">+3 more</li>
+          </ul>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Options that act at once <span>(buttons, aria-current, a row with a bare input)</span></h3>
+        <div class="po-measure">
+          <div class="po-list" data-variant="options" role="group" aria-label="Pick a date">
+            <button type="button" class="po-item">Today<span class="po-item-note">Sat 24 Oct</span></button>
+            <button type="button" class="po-item" aria-current="true">Tomorrow<span class="po-item-note">Sun 25 Oct</span></button>
+            <button type="button" class="po-item">Next week<span class="po-item-note">Mon 26 Oct</span></button>
+            <label class="po-item"><input class="po-field po-input" data-variant="bare" placeholder="Other day, like 12 Nov" aria-label="Type another date"><span class="po-item-note"></span></label>
+          </div>
         </div>
       </div>
     </section>
@@ -324,7 +463,7 @@
     <section id="tabs" class="gallery-section">
       <header><h2>Tabs</h2><p class="po-muted">Layered sections of content, one shown at a time.</p></header>
       <div class="gallery-state">
-        <h3>Segmented</h3>
+        <h3>Segmented <span>(default)</span></h3>
         <po-tabs value="list">
           <div role="tablist" aria-label="View">
             <button class="po-pressable" role="tab" data-value="list">List</button>
@@ -333,7 +472,7 @@
         </po-tabs>
       </div>
       <div class="gallery-state">
-        <h3>Line</h3>
+        <h3>Line <span>(data-variant="line")</span></h3>
         <po-tabs value="overview" data-variant="line">
           <div role="tablist" aria-label="Imports">
             <button class="po-pressable" role="tab" data-value="overview">Overview</button>
@@ -350,7 +489,7 @@
     <section id="tooltip" class="gallery-section">
       <header><h2>Tooltip</h2><p class="po-muted">A short label shown on hover or focus.</p></header>
       <div class="gallery-state">
-        <h3>Default</h3>
+        <h3>Default <span>(side)</span></h3>
         <div class="po-row">
           <button class="po-pressable po-button" data-variant="outline" id="export">Export</button>
           <po-tooltip class="po-layer" for="export">Exports the visible rows</po-tooltip>
@@ -359,222 +498,13 @@
     </section>
 
     <section id="collapsible" class="gallery-section">
-      <header><h2>Collapsible</h2><p class="po-muted">Shows and hides a panel of content.</p></header>
+      <header><h2>Collapsible</h2><p class="po-muted">Shows and hides a panel of content under its trigger.</p></header>
       <div class="gallery-state">
         <h3>Default</h3>
         <details class="po-collapsible">
           <summary class="po-pressable">Advanced options</summary>
           <p class="po-muted">Keep raw files for 30 days after import.</p>
         </details>
-      </div>
-    </section>
-
-    <section id="fold" class="gallery-section">
-      <header><h2>Fold</h2><p class="po-muted">Opens and closes content in place, moving what follows with it.</p></header>
-      <div class="gallery-state">
-        <h3>Closed and open <span>(inert)</span></h3>
-        <div class="po-stack po-narrow">
-          <p><button class="po-pressable po-button" data-variant="outline" data-size="sm" aria-expanded="false" aria-controls="fold-filters" data-fold-toggle>Show filters</button></p>
-          <div class="po-fold" id="fold-filters" inert>
-            <div>
-              <div class="po-stack">
-                <label class="po-label" for="fold-source">Source</label>
-                <input class="po-field po-input" id="fold-source" placeholder="Any source">
-              </div>
-            </div>
-          </div>
-          <p class="po-muted">3 sources match.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="morph" class="gallery-section">
-      <header><h2>Morph</h2><p class="po-muted">One place whose content is swapped, its height gliding to the new content.</p></header>
-      <div class="gallery-state">
-        <h3>A button that becomes its form</h3>
-        <div class="po-stack po-narrow">
-          <po-morph data-morph>
-            <p><button class="po-pressable po-button" data-variant="outline" data-size="sm" data-morph-open>Send feedback</button></p>
-          </po-morph>
-          <template data-morph-form>
-            <div class="po-stack">
-              <label class="po-label" for="morph-note">Feedback</label>
-              <textarea class="po-field po-input gallery-demo-area" id="morph-note" placeholder="What would make this better?"></textarea>
-              <div class="po-row">
-                <button class="po-pressable po-button" data-size="sm" data-morph-close>Send</button>
-                <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-morph-close>Cancel</button>
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-    </section>
-
-    <section id="line" class="gallery-section">
-      <header><h2>Line</h2><p class="po-muted">One item of a list as a row: a mark, its words, and a rule under the words.</p></header>
-      <div class="gallery-state">
-        <h3>Rows <span>(hover a row for its actions; data-state="done")</span></h3>
-        <div class="po-measure" data-demo-list>
-          <div class="po-line">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Check the north export" data-line-check></label></span>
-            <div class="po-line-text"><strong>Check</strong> the north export <span class="po-due" data-urgency="warning">· due tomorrow</span></div>
-            <div class="po-line-actions">
-              <po-date-pick label="date" icon></po-date-pick>
-              <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Remove “Check the north export”"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button>
-            </div>
-          </div>
-          <div class="po-line">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Send the east figures" data-line-check></label></span>
-            <div class="po-line-text"><strong>Send</strong> the east figures <span class="po-due" data-urgency="danger">· 2 days late</span></div>
-            <div class="po-line-actions">
-              <po-date-pick label="date" icon></po-date-pick>
-              <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Remove “Send the east figures”"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button>
-            </div>
-          </div>
-          <div class="po-line" data-state="done">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Rename the west source" checked data-line-check></label></span>
-            <div class="po-line-text"><strong>Rename</strong> the west source</div>
-            <div class="po-line-actions">
-              <po-date-pick label="date" icon></po-date-pick>
-              <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Remove “Rename the west source”"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button>
-            </div>
-          </div>
-          <po-line-form date-always add-on-blur clear-on-save stay data-demo-add>
-            <form class="po-line" data-rule="none">
-              <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
-              <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task">
-              <span class="po-line-form-controls">
-                <po-date-pick label="date"></po-date-pick>
-                <button type="submit" class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Add task"><span class="po-icon" data-icon="check" aria-hidden="true"></span></button>
-              </span>
-            </form>
-            <div class="po-fold" inert><div><div class="po-line-indent" data-below></div></div></div>
-          </po-line-form>
-        </div>
-      </div>
-      <div class="gallery-state">
-        <h3>Done with its steps <span>(--po-step)</span></h3>
-        <div class="po-measure" data-steps>
-          <div class="po-line">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Publish the report" data-steps-main></label></span>
-            <div class="po-line-text"><strong>Publish</strong> the report <span class="po-due" data-urgency="caution">· due today</span></div>
-          </div>
-          <div class="po-line-indent">
-          <div class="po-line" style="--po-step: 1">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Draft the summary" data-line-check></label></span>
-            <div class="po-line-text"><strong>Draft</strong> the summary</div>
-          </div>
-          <div class="po-line" style="--po-step: 2">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Check the figures" data-line-check></label></span>
-            <div class="po-line-text"><strong>Check</strong> the figures</div>
-          </div>
-          <div class="po-line" data-rule="none" style="--po-step: 3">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Share the link" data-line-check></label></span>
-            <div class="po-line-text"><strong>Share</strong> the link</div>
-          </div>
-          </div>
-        </div>
-      </div>
-      <div class="gallery-state">
-        <h3>Its own field <span>(.po-line-field; a faint plus or pen in the mark)</span></h3>
-        <div class="po-measure">
-          <div class="po-line">
-            <span class="po-line-mark"><span class="po-icon" data-icon="pencil" aria-hidden="true"></span></span>
-            <input class="po-line-field" value="Check the north export" aria-label="Edit the task">
-          </div>
-          <div class="po-line" data-rule="none">
-            <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
-            <textarea class="po-line-field" rows="1" placeholder="Add a note…" aria-label="Add a note"></textarea>
-          </div>
-        </div>
-      </div>
-      <div class="gallery-state">
-        <h3>Cheer, then a tip under the line <span>(data-cheer, po-line-tip)</span></h3>
-        <div class="po-measure">
-          <div class="po-line" data-demo-cheer>
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Send the invoice"></label></span>
-            <div class="po-line-text"><strong>Send</strong> the invoice</div>
-            <p class="po-line-cheer" role="status">Nice, one less.</p>
-          </div>
-          <div class="po-line" data-rule="none">
-            <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
-            <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task">
-          </div>
-          <po-line-tip class="po-line-indent">
-            <span><b>Tip:</b> Add a date, like “by Friday”.</span>
-            <span><b>Tip:</b> Try “tomorrow” or “next week”.</span>
-            <span><b>Tip:</b> Enter adds it; type the next.</span>
-          </po-line-tip>
-        </div>
-      </div>
-    </section>
-
-    <section id="check" class="gallery-section">
-      <header><h2>Check</h2><p class="po-muted">Marks one item done, or not.</p></header>
-      <div class="gallery-state">
-        <h3>States</h3>
-        <div class="po-row">
-          <label class="po-check"><input type="checkbox" aria-label="Not done"></label>
-          <label class="po-check"><input type="checkbox" aria-label="Done" checked></label>
-          <label class="po-check"><input type="checkbox" aria-label="Not done, unavailable" disabled></label>
-          <label class="po-check"><input type="checkbox" aria-label="Done, unavailable" checked disabled></label>
-        </div>
-      </div>
-    </section>
-
-    <section id="options" class="gallery-section">
-      <header><h2>Options</h2><p class="po-muted">A short list to choose one from, five at most, with the rest counted.</p></header>
-      <div class="gallery-state">
-        <h3>Suggestions <span>(aria-selected, .po-option-note, .po-options-more)</span></h3>
-        <div class="po-measure po-line-indent">
-          <ul class="po-options" role="listbox" aria-label="Verbs">
-            <li class="po-option" role="option" aria-selected="false"><strong>Read</strong><span class="po-option-note">#1</span></li>
-            <li class="po-option" role="option" aria-selected="true"><strong>Review</strong><span class="po-option-note">#2</span></li>
-            <li class="po-option" role="option" aria-selected="false"><strong>Reply</strong></li>
-            <li class="po-option" role="option" aria-selected="false"><strong>Research</strong></li>
-            <li class="po-option" role="option" aria-selected="false"><strong>Rename</strong></li>
-            <li class="po-options-more" role="presentation">+3 more</li>
-          </ul>
-        </div>
-      </div>
-      <div class="gallery-state">
-        <h3>Choices that act at once <span>(button.po-option, aria-current, .po-option-field)</span></h3>
-        <div class="po-measure po-line-indent">
-          <div class="po-options" role="group" aria-label="Pick a date">
-            <button type="button" class="po-option">Today<span class="po-option-note">Sat 24 Oct</span></button>
-            <button type="button" class="po-option" aria-current="true">Tomorrow<span class="po-option-note">Sun 25 Oct</span></button>
-            <button type="button" class="po-option">Next week<span class="po-option-note">Mon 26 Oct</span></button>
-            <label class="po-option"><input class="po-option-field" placeholder="Other day, like 12 Nov" aria-label="Type another date"><span class="po-option-note"></span></label>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="due" class="gallery-section">
-      <header><h2>Due</h2><p class="po-muted">When something is due, in words, colored by how near it is.</p></header>
-      <div class="gallery-state">
-        <h3>Urgency <span>(data-urgency)</span></h3>
-        <div class="po-stack">
-          <span class="po-due" data-urgency="danger">2 days late</span>
-          <span class="po-due" data-urgency="caution">due today</span>
-          <span class="po-due" data-urgency="warning">due tomorrow</span>
-          <span class="po-due">due in 3 days</span>
-        </div>
-      </div>
-    </section>
-
-    <section id="bars" class="gallery-section">
-      <header><h2>Bars</h2><p class="po-muted">A few counts side by side, each with its number.</p></header>
-      <div class="gallery-state">
-        <h3>Kinds of work done <span>(--po-value)</span></h3>
-        <div class="po-narrow">
-          <div class="po-bars">
-            <span>write</span><span class="po-bar" style="--po-value: 1" role="img" aria-label="write: 6"></span><span>6</span>
-            <span>review</span><span class="po-bar" style="--po-value: 0.5" role="img" aria-label="review: 3"></span><span>3</span>
-            <span>build</span><span class="po-bar" style="--po-value: 0.33" role="img" aria-label="build: 2"></span><span>2</span>
-            <span>call</span><span class="po-bar" style="--po-value: 0" role="img" aria-label="call: 0"></span><span>0</span>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -585,87 +515,51 @@
         <div class="po-alert po-narrow" role="status"><p>New version available: 2.4</p></div>
       </div>
       <div class="gallery-state">
-        <h3>Roles <span>(data-role)</span></h3>
+        <h3>Tone <span>(data-tone)</span></h3>
         <div class="po-stack po-narrow">
-          <div class="po-alert" data-role="info" role="status"><p>Imports run every night at 2:00.</p></div>
-          <div class="po-alert" data-role="success" role="status"><p>All 3 sources imported.</p></div>
-          <div class="po-alert" data-role="warning" role="status"><p>One source has not changed in 30 days. Check that it still exports.</p></div>
-          <div class="po-alert" data-role="caution" role="status"><p>The quota is 90% used.</p></div>
-          <div class="po-alert" data-role="danger" role="alert"><p>The import failed. Check the file and try again.</p></div>
-          <div class="po-alert" data-role="new" role="status"><p>New: export to PDF.</p></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="card" class="gallery-section">
-      <header><h2>Card</h2><p class="po-muted">A container for one item.</p></header>
-      <div class="gallery-state">
-        <h3>Default</h3>
-        <article class="po-block po-card po-narrow">
-          <h4 class="po-card-title">Quarterly costs</h4>
-          <p class="po-muted">Updated 14 Oct · 3 sources</p>
-          <p>Costs rose in two of three regions.</p>
-        </article>
-      </div>
-    </section>
-
-    <section id="separator" class="gallery-section">
-      <header><h2>Separator</h2><p class="po-muted">A divider between groups.</p></header>
-      <div class="gallery-state">
-        <h3>Horizontal and vertical</h3>
-        <div class="po-stack po-narrow" style="--po-gap: 3">
-          <p>Sources</p>
-          <hr class="po-separator">
-          <div class="po-row" style="--po-gap: 3"><span>Daily</span><hr class="po-separator" aria-orientation="vertical"><span>Weekly</span><hr class="po-separator" aria-orientation="vertical"><span>Monthly</span></div>
+          <div class="po-alert" data-tone="info" role="status"><p>Imports run every night at 2:00.</p></div>
+          <div class="po-alert" data-tone="success" role="status"><p>All 3 sources imported.</p></div>
+          <div class="po-alert" data-tone="warning" role="status"><p>One source has not changed in 30 days. Check that it still exports.</p></div>
+          <div class="po-alert" data-tone="caution" role="status"><p>The quota is 90% used.</p></div>
+          <div class="po-alert" data-tone="danger" role="alert"><p>The import failed. Check the file and try again.</p></div>
+          <div class="po-alert" data-tone="new" role="status"><p>New: export to PDF.</p></div>
         </div>
       </div>
     </section>
 
     <section id="progress" class="gallery-section">
-      <header><h2>Progress</h2><p class="po-muted">How much of a task is done.</p></header>
+      <header><h2>Progress</h2><p class="po-muted">How much is done, or how high a level is.</p></header>
       <div class="gallery-state">
-        <h3>Known</h3>
+        <h3>Bar <span>(default: a known amount)</span></h3>
         <progress class="po-progress po-narrow" value="64" max="100" aria-label="Upload"></progress>
       </div>
       <div class="gallery-state">
-        <h3>Unknown <span>(no value)</span></h3>
+        <h3>Bar, unknown <span>(no value)</span></h3>
         <progress class="po-progress po-narrow" aria-label="Preparing the export"></progress>
       </div>
-    </section>
-
-    <section id="meter" class="gallery-section">
-      <header><h2>Meter</h2><p class="po-muted">A level from 1 to 3.</p></header>
       <div class="gallery-state">
-        <h3>Values</h3>
+        <h3>Level <span>(data-variant="level", data-value 1–3)</span></h3>
         <div class="po-row" style="--po-gap: 3">
-          <span class="po-meter" data-value="1" role="img" aria-label="Level 1 of 3"></span>
-          <span class="po-meter" data-value="2" role="img" aria-label="Level 2 of 3"></span>
-          <span class="po-meter" data-value="3" role="img" aria-label="Level 3 of 3"></span>
+          <span class="po-progress" data-variant="level" data-value="1" role="img" aria-label="Level 1 of 3"></span>
+          <span class="po-progress" data-variant="level" data-value="2" role="img" aria-label="Level 2 of 3"></span>
+          <span class="po-progress" data-variant="level" data-value="3" role="img" aria-label="Level 3 of 3"></span>
         </div>
       </div>
       <div class="gallery-state">
-        <h3>Tones <span>(data-tone)</span></h3>
+        <h3>Tone <span>(data-tone, either look)</span></h3>
         <div class="po-row" style="--po-gap: 3">
-          <span class="po-meter" data-value="1" data-tone="success" role="img" aria-label="Low"></span>
-          <span class="po-meter" data-value="2" data-tone="warning" role="img" aria-label="Medium"></span>
-          <span class="po-meter" data-value="2" data-tone="caution" role="img" aria-label="Medium-high"></span>
-          <span class="po-meter" data-value="3" data-tone="danger" role="img" aria-label="High"></span>
+          <span class="po-progress" data-variant="level" data-value="1" data-tone="success" role="img" aria-label="Low"></span>
+          <span class="po-progress" data-variant="level" data-value="2" data-tone="warning" role="img" aria-label="Medium"></span>
+          <span class="po-progress" data-variant="level" data-value="3" data-tone="danger" role="img" aria-label="High"></span>
+          <progress class="po-progress" data-tone="success" value="80" max="100" aria-label="Quota used" style="inline-size: calc(var(--space) * 32)"></progress>
         </div>
-      </div>
-    </section>
-
-    <section id="spinner" class="gallery-section">
-      <header><h2>Spinner</h2><p class="po-muted">Shows that something is loading.</p></header>
-      <div class="gallery-state">
-        <h3>Default</h3>
-        <div class="po-row po-muted"><span class="po-spinner" role="status" aria-label="Loading"></span>Reading the file</div>
       </div>
     </section>
 
     <section id="status-dot" class="gallery-section">
       <header><h2>Status dot</h2><p class="po-muted">The state of a process.</p></header>
       <div class="gallery-state">
-        <h3>States <span>(data-state)</span></h3>
+        <h3>State <span>(data-state)</span></h3>
         <div class="po-row" style="--po-gap: 3.5">
           <span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span>
           <span class="po-status-dot" data-state="paused" role="img" aria-label="Paused"></span>
@@ -675,29 +569,41 @@
       </div>
     </section>
 
-    <!-- Compositions -->
+    <section id="separator" class="gallery-section">
+      <header><h2>Separator</h2><p class="po-muted">A divider between groups.</p></header>
+      <div class="gallery-state">
+        <h3>Horizontal and vertical <span>(aria-orientation)</span></h3>
+        <div class="po-stack po-narrow" style="--po-gap: 3">
+          <p>Sources</p>
+          <hr class="po-separator">
+          <div class="po-row" style="--po-gap: 3"><span>Daily</span><hr class="po-separator" aria-orientation="vertical"><span>Weekly</span><hr class="po-separator" aria-orientation="vertical"><span>Monthly</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Patterns: components joined, with the behavior that joins them -->
 
     <section id="combobox" class="gallery-section">
-      <header><h2>Combobox</h2><p class="po-muted">A field with suggestions under it. Type, use ↓ ↑, then Enter or Tab; Esc closes the list.</p></header>
+      <header><h2>Combobox</h2><p class="po-muted">An input with suggestions under it. Type, use ↓ ↑, then Enter or Tab; Esc closes the list.</p></header>
       <div class="gallery-state">
-        <h3>In a line <span>(open-on-focus, data-value)</span></h3>
+        <h3>In a list row <span>(open-on-focus, data-value)</span></h3>
         <div class="po-measure">
           <po-combobox open-on-focus>
-            <div class="po-line" data-rule="none">
-              <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
-              <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task: a verb first">
+            <div class="po-item" data-rule="none">
+              <span class="po-item-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
+              <input class="po-field po-input" data-variant="bare" placeholder="Add a task…" aria-label="Add a task: a verb first">
             </div>
             <div class="po-fold" inert>
               <div>
-                <ul class="po-options po-line-indent" role="listbox" aria-label="Verbs">
-                  <li class="po-option" role="option" data-value="Read"><strong>Read</strong><span class="po-option-note">#1</span></li>
-                  <li class="po-option" role="option" data-value="Review"><strong>Review</strong><span class="po-option-note">#2</span></li>
-                  <li class="po-option" role="option" data-value="Reply"><strong>Reply</strong><span class="po-option-note">#3</span></li>
-                  <li class="po-option" role="option" data-value="Research"><strong>Research</strong></li>
-                  <li class="po-option" role="option" data-value="Rename"><strong>Rename</strong></li>
-                  <li class="po-option" role="option" data-value="Send"><strong>Send</strong></li>
-                  <li class="po-option" role="option" data-value="Share"><strong>Share</strong></li>
-                  <li class="po-option" role="option" data-value="Write"><strong>Write</strong></li>
+                <ul class="po-list po-list-indent" data-variant="options" role="listbox" aria-label="Verbs">
+                  <li class="po-item" role="option" data-value="Read"><strong>Read</strong><span class="po-item-note">#1</span></li>
+                  <li class="po-item" role="option" data-value="Review"><strong>Review</strong><span class="po-item-note">#2</span></li>
+                  <li class="po-item" role="option" data-value="Reply"><strong>Reply</strong><span class="po-item-note">#3</span></li>
+                  <li class="po-item" role="option" data-value="Research"><strong>Research</strong></li>
+                  <li class="po-item" role="option" data-value="Rename"><strong>Rename</strong></li>
+                  <li class="po-item" role="option" data-value="Send"><strong>Send</strong></li>
+                  <li class="po-item" role="option" data-value="Share"><strong>Share</strong></li>
+                  <li class="po-item" role="option" data-value="Write"><strong>Write</strong></li>
                 </ul>
               </div>
             </div>
@@ -705,25 +611,50 @@
         </div>
       </div>
       <div class="gallery-state">
-        <h3>A field of its own</h3>
+        <h3>A boxed input</h3>
         <div class="po-stack po-narrow">
           <label class="po-label" for="combo-region">Region</label>
           <po-combobox>
             <input class="po-field po-input" id="combo-region" placeholder="Any region">
             <div class="po-fold" inert>
               <div>
-                <ul class="po-options" role="listbox" aria-label="Regions">
-                  <li class="po-option" role="option">North</li>
-                  <li class="po-option" role="option">North-east</li>
-                  <li class="po-option" role="option">North-west</li>
-                  <li class="po-option" role="option">East</li>
-                  <li class="po-option" role="option">South</li>
-                  <li class="po-option" role="option">South-east</li>
-                  <li class="po-option" role="option">West</li>
+                <ul class="po-list" data-variant="options" role="listbox" aria-label="Regions">
+                  <li class="po-item" role="option">North</li>
+                  <li class="po-item" role="option">North-east</li>
+                  <li class="po-item" role="option">North-west</li>
+                  <li class="po-item" role="option">East</li>
+                  <li class="po-item" role="option">South</li>
+                  <li class="po-item" role="option">South-east</li>
+                  <li class="po-item" role="option">West</li>
                 </ul>
               </div>
             </div>
           </po-combobox>
+        </div>
+      </div>
+    </section>
+
+    <section id="picker" class="gallery-section">
+      <header><h2>Picker</h2><p class="po-muted">A search line and what it finds, to choose one item from many.</p></header>
+      <div class="gallery-state">
+        <h3>Default <span>(max; .po-picker-empty)</span></h3>
+        <div class="po-measure">
+          <po-picker data-demo-picker>
+            <div class="po-item">
+              <span class="po-item-mark"><span class="po-icon" data-icon="search" aria-hidden="true"></span></span>
+              <input class="po-field po-input" data-variant="bare" placeholder="Find a task or project" aria-label="Find a task to swap in">
+            </div>
+            <ul class="po-list po-list-indent" data-variant="options" aria-label="Tasks">
+              <li><button type="button" class="po-item" data-value="1"><span class="po-item-text"><span><strong>Check</strong> the north export</span><span class="po-item-detail">Quarterly report · <span class="po-text" data-tone="warning">due tomorrow</span></span></span></button></li>
+              <li><button type="button" class="po-item" data-value="2"><span class="po-item-text"><span><strong>Send</strong> the east figures</span><span class="po-item-detail">Quarterly report · <span class="po-text" data-tone="danger">2 days late</span></span></span></button></li>
+              <li><button type="button" class="po-item" data-value="3"><span class="po-item-text"><span><strong>Review</strong> the supplier contract</span><span class="po-item-detail">West region</span></span></button></li>
+              <li><button type="button" class="po-item" data-value="4"><span class="po-item-text"><span><strong>Rename</strong> the west source</span><span class="po-item-detail">Sources</span></span></button></li>
+              <li><button type="button" class="po-item" data-value="5"><span class="po-item-text"><span><strong>Draft</strong> the summary</span><span class="po-item-detail">Quarterly report</span></span></button></li>
+              <li><button type="button" class="po-item" data-value="6"><span class="po-item-text"><span><strong>Share</strong> the link</span><span class="po-item-detail">Quarterly report</span></span></button></li>
+              <li><button type="button" class="po-item" data-value="7"><span class="po-item-text"><span><strong>Archive</strong> last year’s files</span><span class="po-item-detail">Sources (backlog)</span></span></button></li>
+            </ul>
+            <p class="po-picker-empty po-list-indent">No open task matches. Clear the search or add the task to a project first.</p>
+          </po-picker>
         </div>
       </div>
     </section>
@@ -744,24 +675,24 @@
       <div class="gallery-state">
         <h3>Add <span>(date-always, add-on-blur, clear-on-save, stay)</span></h3>
         <div class="po-measure" data-demo-list>
-          <div class="po-line">
-            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Check the north export" data-line-check></label></span>
-            <div class="po-line-text"><strong>Check</strong> the north export <span class="po-due" data-urgency="warning">· due tomorrow</span></div>
-            <div class="po-line-actions">
+          <div class="po-item">
+            <span class="po-item-mark"><label class="po-checkbox"><input type="checkbox" aria-label="Done: Check the north export" data-line-check></label></span>
+            <span class="po-item-text"><strong>Check</strong> the north export <span class="po-text" data-tone="warning">· due tomorrow</span></span>
+            <span class="po-item-actions">
               <po-date-pick label="date" icon></po-date-pick>
               <button class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Remove “Check the north export”"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button>
-            </div>
+            </span>
           </div>
           <po-line-form date-always add-on-blur clear-on-save stay data-demo-add>
-            <form class="po-line" data-rule="none">
-              <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
-              <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task">
+            <form class="po-item" data-rule="none">
+              <span class="po-item-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
+              <input class="po-field po-input" data-variant="bare" placeholder="Add a task…" aria-label="Add a task">
               <span class="po-line-form-controls">
                 <po-date-pick label="date"></po-date-pick>
                 <button type="submit" class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Add task"><span class="po-icon" data-icon="check" aria-hidden="true"></span></button>
               </span>
             </form>
-            <div class="po-fold" inert><div><div class="po-line-indent" data-below></div></div></div>
+            <div class="po-fold" inert><div><div class="po-list-indent" data-below></div></div></div>
           </po-line-form>
         </div>
       </div>
@@ -769,41 +700,16 @@
         <h3>Edit in place <span>(edit)</span></h3>
         <div class="po-measure">
           <po-line-form edit>
-            <form class="po-line">
-              <span class="po-line-mark"><span class="po-icon" data-icon="pencil" aria-hidden="true"></span></span>
-              <input class="po-line-field" value="Send the east figures" aria-label="Edit the task">
+            <form class="po-item">
+              <span class="po-item-mark"><span class="po-icon" data-icon="pencil" aria-hidden="true"></span></span>
+              <input class="po-field po-input" data-variant="bare" value="Send the east figures" aria-label="Edit the task">
               <span class="po-line-form-controls">
                 <po-date-pick label="date" data-demo-tomorrow></po-date-pick>
                 <button type="submit" class="po-pressable po-button" data-variant="ghost" data-size="sm" data-shape="icon" aria-label="Save task"><span class="po-icon" data-icon="check" aria-hidden="true"></span></button>
               </span>
             </form>
-            <div class="po-fold" inert><div><div class="po-line-indent" data-below></div></div></div>
+            <div class="po-fold" inert><div><div class="po-list-indent" data-below></div></div></div>
           </po-line-form>
-        </div>
-      </div>
-    </section>
-
-    <section id="picker" class="gallery-section">
-      <header><h2>Picker</h2><p class="po-muted">A search line and what it finds, to choose one item from many.</p></header>
-      <div class="gallery-state">
-        <h3>Default <span>(max; .po-picker-empty)</span></h3>
-        <div class="po-measure">
-          <po-picker data-demo-picker>
-            <div class="po-line">
-              <span class="po-line-mark"><span class="po-icon" data-icon="search" aria-hidden="true"></span></span>
-              <input class="po-line-field" placeholder="Find a task or project" aria-label="Find a task to swap in">
-            </div>
-            <ul class="po-options po-line-indent" aria-label="Tasks">
-              <li><button type="button" class="po-option" data-value="1"><span class="po-option-text"><span><strong>Check</strong> the north export</span><span class="po-option-detail">Quarterly report · <span class="po-due" data-urgency="warning">due tomorrow</span></span></span></button></li>
-              <li><button type="button" class="po-option" data-value="2"><span class="po-option-text"><span><strong>Send</strong> the east figures</span><span class="po-option-detail">Quarterly report · <span class="po-due" data-urgency="danger">2 days late</span></span></span></button></li>
-              <li><button type="button" class="po-option" data-value="3"><span class="po-option-text"><span><strong>Review</strong> the supplier contract</span><span class="po-option-detail">West region</span></span></button></li>
-              <li><button type="button" class="po-option" data-value="4"><span class="po-option-text"><span><strong>Rename</strong> the west source</span><span class="po-option-detail">Sources</span></span></button></li>
-              <li><button type="button" class="po-option" data-value="5"><span class="po-option-text"><span><strong>Draft</strong> the summary</span><span class="po-option-detail">Quarterly report</span></span></button></li>
-              <li><button type="button" class="po-option" data-value="6"><span class="po-option-text"><span><strong>Share</strong> the link</span><span class="po-option-detail">Quarterly report</span></span></button></li>
-              <li><button type="button" class="po-option" data-value="7"><span class="po-option-text"><span><strong>Archive</strong> last year’s files</span><span class="po-option-detail">Sources (backlog)</span></span></button></li>
-            </ul>
-            <p class="po-picker-empty po-line-indent">No open task matches. Clear the search or add the task to a project first.</p>
-          </po-picker>
         </div>
       </div>
     </section>
@@ -821,7 +727,7 @@
     <section id="toast" class="gallery-section">
       <header><h2>Toast</h2><p class="po-muted">What just happened, at the bottom of the screen, with Undo when it can be undone.</p></header>
       <div class="gallery-state">
-        <h3>Open it <span>(open; data-role="danger" stays)</span></h3>
+        <h3>Open it <span>(open; data-tone="danger" stays)</span></h3>
         <div class="po-row">
           <button class="po-pressable po-button" data-variant="outline" data-size="sm" data-demo-toast="done">Archive a task</button>
           <button class="po-pressable po-button" data-variant="outline" data-size="sm" data-demo-toast="error">Fail to save</button>
@@ -832,6 +738,21 @@
             <button class="po-pressable po-button" data-variant="link" data-size="sm" data-undo>Undo</button>
           </div>
         </po-toast>
+      </div>
+    </section>
+
+    <section id="bars" class="gallery-section">
+      <header><h2>Bars</h2><p class="po-muted">A few counts side by side, each with its number.</p></header>
+      <div class="gallery-state">
+        <h3>Kinds of work done <span>(progress bars against the largest count)</span></h3>
+        <div class="po-narrow">
+          <div class="po-bars">
+            <span>write</span><progress class="po-progress" value="6" max="6" aria-label="write: 6"></progress><span>6</span>
+            <span>review</span><progress class="po-progress" value="3" max="6" aria-label="review: 3"></progress><span>3</span>
+            <span>build</span><progress class="po-progress" value="2" max="6" aria-label="build: 2"></progress><span>2</span>
+            <span>call</span><progress class="po-progress" value="0" max="6" aria-label="call: 0"></progress><span>0</span>
+          </div>
+        </div>
       </div>
     </section>
 

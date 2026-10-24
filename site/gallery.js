@@ -126,18 +126,21 @@ for (const button of document.querySelectorAll("[data-fold-toggle]")) {
 for (const morph of document.querySelectorAll("[data-morph]")) {
   const closed = morph.innerHTML
   const form = morph.parentElement.querySelector("[data-morph-form]")
+  const close = () => {
+    morph.innerHTML = closed
+    morph.querySelector("button")?.focus()
+  }
   morph.addEventListener("click", (e) => {
     if (e.target.closest("[data-morph-open]")) {
       morph.replaceChildren(form.content.cloneNode(true))
       morph.querySelector("textarea")?.focus()
-    } else if (e.target.closest("[data-morph-close]")) {
-      morph.innerHTML = closed
-      morph.querySelector("button")?.focus()
-    }
+    } else if (e.target.closest("[data-morph-close]")) close()
   })
+  // Esc closes the form, as any layer in place (K1).
+  morph.addEventListener("keydown", (e) => { if (e.key === "Escape" && morph.querySelector("textarea")) close() })
 }
 
-const setLine = (input) => { input.closest(".po-line").dataset.state = input.checked ? "done" : "" }
+const setLine = (input) => { input.closest(".po-item").dataset.state = input.checked ? "done" : "" }
 for (const input of document.querySelectorAll("[data-line-check]")) input.addEventListener("change", () => setLine(input))
 for (const main of document.querySelectorAll("[data-steps-main]")) {
   main.addEventListener("change", () => {
@@ -168,30 +171,19 @@ for (const form of document.querySelectorAll("[data-demo-add]")) {
   form.addEventListener("save", (e) => {
     const { text, due } = e.detail
     const [verb, ...rest] = text.split(" ")
-    const line = el("div", { className: "po-line" })
+    const line = el("div", { className: "po-item" })
     const check = el("input", { type: "checkbox" })
     check.setAttribute("aria-label", `Done: ${text}`)
     check.addEventListener("change", () => setLine(check))
-    const words = el("div", { className: "po-line-text" }, el("strong", { textContent: verb }), rest.length ? ` ${rest.join(" ")}` : "")
+    const words = el("span", { className: "po-item-text" }, el("strong", { textContent: verb }), rest.length ? ` ${rest.join(" ")}` : "")
     if (due) {
       const [label, urgency] = dueWords(due)
-      const tag = el("span", { className: "po-due", textContent: ` · ${label}` })
-      if (urgency) tag.dataset.urgency = urgency
+      const tag = el("span", { className: "po-text", textContent: ` · ${label}` })
+      tag.dataset.tone = urgency || "muted"
       words.append(tag)
     }
-    line.append(el("span", { className: "po-line-mark" }, el("label", { className: "po-check" }, check)), words)
+    line.append(el("span", { className: "po-item-mark" }, el("label", { className: "po-checkbox" }, check)), words)
     form.before(line)
-  })
-}
-
-// A task checked off: a few words take its place for about 2 s.
-for (const line of document.querySelectorAll("[data-demo-cheer]")) {
-  const check = line.querySelector("input")
-  check.addEventListener("change", () => {
-    line.dataset.state = check.checked ? "done" : ""
-    if (!check.checked) return delete line.dataset.cheer
-    line.dataset.cheer = ""
-    setTimeout(() => delete line.dataset.cheer, 2000)
   })
 }
 
@@ -204,7 +196,12 @@ for (const picker of document.querySelectorAll("[data-demo-picker]")) {
     field.dispatchEvent(new Event("input", { bubbles: true }))
     field.focus()
   })
-  picker.addEventListener("close", () => picker.querySelector("input").blur())
+  // Esc: the search empties and keeps the focus, as there is nothing here to close.
+  picker.addEventListener("close", () => {
+    const field = picker.querySelector("input")
+    field.value = ""
+    field.dispatchEvent(new Event("input", { bubbles: true }))
+  })
 }
 
 // The toast: a routine change with Undo, or an error that stays until it is closed.
@@ -213,8 +210,8 @@ for (const button of document.querySelectorAll("[data-demo-toast]")) {
   button.addEventListener("click", () => {
     const error = button.dataset.demoToast === "error"
     const alert = toast.querySelector(".po-alert")
-    if (error) alert.dataset.role = "danger"
-    else delete alert.dataset.role
+    if (error) alert.dataset.tone = "danger"
+    else delete alert.dataset.tone
     alert.setAttribute("role", error ? "alert" : "status")
     alert.querySelector("p").textContent = error ? "Couldn’t save the task. Check your connection and try again." : "Moved “Send the contract” to Archive."
     const action = alert.querySelector("button")
