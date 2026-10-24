@@ -52,6 +52,7 @@
         <li><a class="po-pressable" href="#check">Check</a></li>
         <li><a class="po-pressable" href="#options">Options</a></li>
         <li><a class="po-pressable" href="#due">Due</a></li>
+        <li><a class="po-pressable" href="#bars">Bars</a></li>
         <li><a class="po-pressable" href="#alert">Alert</a></li>
         <li><a class="po-pressable" href="#card">Card</a></li>
         <li><a class="po-pressable" href="#separator">Separator</a></li>
@@ -65,6 +66,11 @@
         <li><a class="po-pressable" href="#combobox">Combobox</a></li>
         <li><a class="po-pressable" href="#date-pick">Date pick</a></li>
         <li><a class="po-pressable" href="#line-form">Line form</a></li>
+        <li><a class="po-pressable" href="#picker">Picker</a></li>
+        <li><a class="po-pressable" href="#pager">Pager</a></li>
+        <li><a class="po-pressable" href="#toast">Toast</a></li>
+        <li><a class="po-pressable" href="#empty">Empty</a></li>
+        <li><a class="po-pressable" href="#masthead">Masthead</a></li>
         <li><a class="po-pressable" href="#sections">Sections</a></li>
       </ul>
     </nav>
@@ -482,6 +488,25 @@
           </div>
         </div>
       </div>
+      <div class="gallery-state">
+        <h3>Cheer, then a tip under the line <span>(data-cheer, po-line-tip)</span></h3>
+        <div class="po-measure">
+          <div class="po-line" data-demo-cheer>
+            <span class="po-line-mark"><label class="po-check"><input type="checkbox" aria-label="Done: Send the invoice"></label></span>
+            <div class="po-line-text"><strong>Send</strong> the invoice</div>
+            <p class="po-line-cheer" role="status">Nice, one less.</p>
+          </div>
+          <div class="po-line" data-rule="none">
+            <span class="po-line-mark"><span class="po-icon" data-icon="plus" aria-hidden="true"></span></span>
+            <input class="po-line-field" placeholder="Add a task…" aria-label="Add a task">
+          </div>
+          <po-line-tip class="po-line-indent">
+            <span><b>Tip:</b> Add a date, like “by Friday”.</span>
+            <span><b>Tip:</b> Try “tomorrow” or “next week”.</span>
+            <span><b>Tip:</b> Enter adds it; type the next.</span>
+          </po-line-tip>
+        </div>
+      </div>
     </section>
 
     <section id="check" class="gallery-section">
@@ -508,8 +533,8 @@
             <li class="po-option" role="option" aria-selected="false"><strong>Reply</strong></li>
             <li class="po-option" role="option" aria-selected="false"><strong>Research</strong></li>
             <li class="po-option" role="option" aria-selected="false"><strong>Rename</strong></li>
+            <li class="po-options-more" role="presentation">+3 more</li>
           </ul>
-          <p class="po-options-more">+3 more</p>
         </div>
       </div>
       <div class="gallery-state">
@@ -534,6 +559,21 @@
           <span class="po-due" data-urgency="caution">due today</span>
           <span class="po-due" data-urgency="warning">due tomorrow</span>
           <span class="po-due">due in 3 days</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="bars" class="gallery-section">
+      <header><h2>Bars</h2><p class="po-muted">A few counts side by side, each with its number.</p></header>
+      <div class="gallery-state">
+        <h3>Kinds of work done <span>(--po-value)</span></h3>
+        <div class="po-narrow">
+          <div class="po-bars">
+            <span>write</span><span class="po-bar" style="--po-value: 1" role="img" aria-label="write: 6"></span><span>6</span>
+            <span>review</span><span class="po-bar" style="--po-value: 0.5" role="img" aria-label="review: 3"></span><span>3</span>
+            <span>build</span><span class="po-bar" style="--po-value: 0.33" role="img" aria-label="build: 2"></span><span>2</span>
+            <span>call</span><span class="po-bar" style="--po-value: 0" role="img" aria-label="call: 0"></span><span>0</span>
+          </div>
         </div>
       </div>
     </section>
@@ -740,6 +780,82 @@
             <div class="po-fold" inert><div><div class="po-line-indent" data-below></div></div></div>
           </po-line-form>
         </div>
+      </div>
+    </section>
+
+    <section id="picker" class="gallery-section">
+      <header><h2>Picker</h2><p class="po-muted">A search line and what it finds, to choose one item from many.</p></header>
+      <div class="gallery-state">
+        <h3>Default <span>(max; .po-picker-empty)</span></h3>
+        <div class="po-measure">
+          <po-picker data-demo-picker>
+            <div class="po-line">
+              <span class="po-line-mark"><span class="po-icon" data-icon="search" aria-hidden="true"></span></span>
+              <input class="po-line-field" placeholder="Find a task or project" aria-label="Find a task to swap in">
+            </div>
+            <ul class="po-options po-line-indent" aria-label="Tasks">
+              <li><button type="button" class="po-option" data-value="1"><span class="po-option-text"><span><strong>Check</strong> the north export</span><span class="po-option-detail">Quarterly report · <span class="po-due" data-urgency="warning">due tomorrow</span></span></span></button></li>
+              <li><button type="button" class="po-option" data-value="2"><span class="po-option-text"><span><strong>Send</strong> the east figures</span><span class="po-option-detail">Quarterly report · <span class="po-due" data-urgency="danger">2 days late</span></span></span></button></li>
+              <li><button type="button" class="po-option" data-value="3"><span class="po-option-text"><span><strong>Review</strong> the supplier contract</span><span class="po-option-detail">West region</span></span></button></li>
+              <li><button type="button" class="po-option" data-value="4"><span class="po-option-text"><span><strong>Rename</strong> the west source</span><span class="po-option-detail">Sources</span></span></button></li>
+              <li><button type="button" class="po-option" data-value="5"><span class="po-option-text"><span><strong>Draft</strong> the summary</span><span class="po-option-detail">Quarterly report</span></span></button></li>
+              <li><button type="button" class="po-option" data-value="6"><span class="po-option-text"><span><strong>Share</strong> the link</span><span class="po-option-detail">Quarterly report</span></span></button></li>
+              <li><button type="button" class="po-option" data-value="7"><span class="po-option-text"><span><strong>Archive</strong> last year’s files</span><span class="po-option-detail">Sources (backlog)</span></span></button></li>
+            </ul>
+            <p class="po-picker-empty po-line-indent">No open task matches. Clear the search or add the task to a project first.</p>
+          </po-picker>
+        </div>
+      </div>
+    </section>
+
+    <section id="pager" class="gallery-section">
+      <header><h2>Pager</h2><p class="po-muted">Which part of a long list shows, with arrows to the parts before and after.</p></header>
+      <div class="gallery-state">
+        <h3>Default <span>(total, size, from, note)</span></h3>
+        <div class="po-narrow">
+          <po-pager total="12" from="0" note="3 done" prev-label="Newer feedback" next-label="Earlier feedback"></po-pager>
+        </div>
+      </div>
+    </section>
+
+    <section id="toast" class="gallery-section">
+      <header><h2>Toast</h2><p class="po-muted">What just happened, at the bottom of the screen, with Undo when it can be undone.</p></header>
+      <div class="gallery-state">
+        <h3>Open it <span>(open; data-role="danger" stays)</span></h3>
+        <div class="po-row">
+          <button class="po-pressable po-button" data-variant="outline" data-size="sm" data-demo-toast="done">Archive a task</button>
+          <button class="po-pressable po-button" data-variant="outline" data-size="sm" data-demo-toast="error">Fail to save</button>
+        </div>
+        <po-toast id="demo-toast">
+          <div class="po-alert" role="status">
+            <p>Moved “Send the contract” to Archive.</p>
+            <button class="po-pressable po-button" data-variant="link" data-size="sm" data-undo>Undo</button>
+          </div>
+        </po-toast>
+      </div>
+    </section>
+
+    <section id="empty" class="gallery-section">
+      <header><h2>Empty</h2><p class="po-muted">What an empty place is for, and how to fill it.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <div class="po-empty po-measure">
+          <p class="po-empty-title">Add a source you import from</p>
+          <p class="po-empty-text">Costs appear here once a source has run once.</p>
+          <button class="po-pressable po-button" data-variant="outline" data-size="sm">Add a source</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="masthead" class="gallery-section">
+      <header><h2>Masthead</h2><p class="po-muted">The top of a page or app: its name, a byline, what it is and one action.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <header class="po-masthead">
+          <p><span class="po-masthead-name">Costs</span> <span class="po-masthead-byline">· Saturday 24 October</span></p>
+          <p class="po-masthead-description">Your regions’ costs this quarter, from 3 sources.</p>
+          <a class="po-pressable po-button" data-size="sm" href="#masthead">Import</a>
+        </header>
       </div>
     </section>
 

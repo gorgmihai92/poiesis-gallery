@@ -40,7 +40,7 @@ const ROLES = [
   ["ui", "Every component's text: buttons, labels, captions, content"],
 ]
 const COLOR_ROLES = [["info", "Info"], ["success", "Success"], ["warning", "Warning"], ["caution", "Caution"], ["danger", "Danger"], ["new", "New"]]
-const ICONS = ["chevron-down", "close", "check", "grid", "filter", "spinner", "info", "success", "warning", "caution", "danger", "new", "circle", "plus", "pencil", "calendar-plus"]
+const ICONS = ["chevron-down", "close", "check", "grid", "filter", "spinner", "info", "success", "warning", "caution", "danger", "new", "circle", "plus", "pencil", "calendar-plus", "search", "arrow-left", "arrow-right"]
 
 // Fills a sample's details once its style is known, and again when the web fonts arrive.
 const measured = []
@@ -181,5 +181,46 @@ for (const form of document.querySelectorAll("[data-demo-add]")) {
     }
     line.append(el("span", { className: "po-line-mark" }, el("label", { className: "po-check" }, check)), words)
     form.before(line)
+  })
+}
+
+// A task checked off: a few words take its place for about 2 s.
+for (const line of document.querySelectorAll("[data-demo-cheer]")) {
+  const check = line.querySelector("input")
+  check.addEventListener("change", () => {
+    line.dataset.state = check.checked ? "done" : ""
+    if (!check.checked) return delete line.dataset.cheer
+    line.dataset.cheer = ""
+    setTimeout(() => delete line.dataset.cheer, 2000)
+  })
+}
+
+// A task picked: its line says so, and the search starts again.
+for (const picker of document.querySelectorAll("[data-demo-picker]")) {
+  picker.addEventListener("change", (e) => {
+    const field = picker.querySelector("input")
+    field.value = ""
+    field.placeholder = `Picked: ${e.detail.option.querySelector("span span").textContent}`
+    field.dispatchEvent(new Event("input", { bubbles: true }))
+    field.focus()
+  })
+  picker.addEventListener("close", () => picker.querySelector("input").blur())
+}
+
+// The toast: a routine change with Undo, or an error that stays until it is closed.
+const toast = document.getElementById("demo-toast")
+for (const button of document.querySelectorAll("[data-demo-toast]")) {
+  button.addEventListener("click", () => {
+    const error = button.dataset.demoToast === "error"
+    const alert = toast.querySelector(".po-alert")
+    if (error) alert.dataset.role = "danger"
+    else delete alert.dataset.role
+    alert.setAttribute("role", error ? "alert" : "status")
+    alert.querySelector("p").textContent = error ? "Couldn’t save the task. Check your connection and try again." : "Moved “Send the contract” to Archive."
+    const action = alert.querySelector("button")
+    action.textContent = error ? "Close" : "Undo"
+    action.toggleAttribute("data-undo", !error)
+    action.toggleAttribute("data-close", error)
+    toast.setAttribute("open", "")
   })
 }
