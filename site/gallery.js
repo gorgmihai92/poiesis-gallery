@@ -40,7 +40,7 @@ const ROLES = [
   ["ui", "Every component's text: buttons, labels, captions, content"],
 ]
 const COLOR_ROLES = [["info", "Info"], ["success", "Success"], ["warning", "Warning"], ["caution", "Caution"], ["danger", "Danger"], ["new", "New"]]
-const ICONS = ["chevron-down", "close", "check", "grid", "filter", "spinner", "info", "success", "warning", "caution", "danger", "new"]
+const ICONS = ["chevron-down", "close", "check", "grid", "filter", "spinner", "info", "success", "warning", "caution", "danger", "new", "circle", "plus", "pencil", "calendar-plus"]
 
 // Fills a sample's details once its style is known, and again when the web fonts arrive.
 const measured = []
@@ -110,8 +110,9 @@ for (const id of links.keys()) {
   if (section) io.observe(section)
 }
 
-// Demos that need a hand from the page: a control that opens a fold, a morph swapped to its form and back, and
-// checks that set their line done (a task's check sets its steps too, one after another by --po-step).
+// Demos that need a hand from the page: a control that opens a fold, a morph swapped to its form and back, checks
+// that set their line done (a task's check sets its steps too, one after another by --po-step), dates set to
+// tomorrow, and the tasks a line form adds, shown as rows above it.
 for (const button of document.querySelectorAll("[data-fold-toggle]")) {
   const fold = document.getElementById(button.getAttribute("aria-controls"))
   button.addEventListener("click", () => {
@@ -145,5 +146,40 @@ for (const main of document.querySelectorAll("[data-steps-main]")) {
       step.checked = main.checked
       setLine(step)
     }
+  })
+}
+
+const day = (offset) => {
+  const d = new Date()
+  d.setDate(d.getDate() + offset)
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`
+}
+for (const pick of document.querySelectorAll("[data-demo-tomorrow]")) pick.setAttribute("value", day(1))
+
+// A task added: its verb in strong, its date in words and colored by how near it is, as the rows above it.
+const dueWords = (value) => {
+  const days = Math.round((new Date(`${value}T12:00`) - new Date(`${day(0)}T12:00`)) / 864e5)
+  if (days < 0) return [`${-days} day${days === -1 ? "" : "s"} late`, "danger"]
+  if (days === 0) return ["due today", "caution"]
+  if (days === 1) return ["due tomorrow", "warning"]
+  return [days < 7 ? `due in ${days} days` : `due ${new Date(`${value}T12:00`).toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" })}`, ""]
+}
+for (const form of document.querySelectorAll("[data-demo-add]")) {
+  form.addEventListener("save", (e) => {
+    const { text, due } = e.detail
+    const [verb, ...rest] = text.split(" ")
+    const line = el("div", { className: "po-line" })
+    const check = el("input", { type: "checkbox" })
+    check.setAttribute("aria-label", `Done: ${text}`)
+    check.addEventListener("change", () => setLine(check))
+    const words = el("div", { className: "po-line-text" }, el("strong", { textContent: verb }), rest.length ? ` ${rest.join(" ")}` : "")
+    if (due) {
+      const [label, urgency] = dueWords(due)
+      const tag = el("span", { className: "po-due", textContent: ` · ${label}` })
+      if (urgency) tag.dataset.urgency = urgency
+      words.append(tag)
+    }
+    line.append(el("span", { className: "po-line-mark" }, el("label", { className: "po-check" }, check)), words)
+    form.before(line)
   })
 }
