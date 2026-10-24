@@ -1,44 +1,33 @@
 # Poiesis Gallery
 
-The Poiesis component set, in one place, in the Poiesis theme. This is where you **look at** it;
-[poiesis-design](https://github.com/gorgmihai92/poiesis-design) is where the components (the poiesis-components
-plugin), the rules and the theme **live**. Nothing is copied here: the page reads them from a poiesis-design checkout.
+The Poiesis library in one place, in the Poiesis theme: the tokens, the primitives and every component in its
+states. This is where you **look at** it; [poiesis-design](https://github.com/gorgmihai92/poiesis-design) is
+where the tokens (poiesis-ui), the primitives and components (poiesis-components) and the rules **live**. Nothing
+is copied here while developing: the page reads them from a poiesis-design checkout.
 
-The components are [shadcn/ui](https://ui.shadcn.com) (MIT), plus two built the same way where shadcn has none
-(status dot, meter). They keep shadcn's structure and behavior; their look comes from poiesis-ui, read straight
-out of a poiesis-design checkout: `poiesis.css` (the token engine) and one **theme**.
-
-## Themes: another feel without touching the components
-
-A theme is one file in poiesis-ui's `tokens/themes/` that picks one file from each layer and can set extra atoms:
-
-| Layer | Sets | Files |
-|---|---|---|
-| palette | colors: paper, ink, and a color + tint for info, success, warning, caution, danger, new | `tokens/palettes/` |
-| typeface | the sans, serif and mono families | `tokens/typefaces/` |
-| preset | type and density | `tokens/presets/` |
-| style | corners, lines, shadows, selection | `tokens/styles/` |
-
-To try another feel, point the theme line in `src/index.css` at another theme. To make one, copy
-`themes/poiesis.css` and change its layers or atoms. Components use only role names (`bg-success`,
-`text-danger`, `bg-surface`…), so they follow any theme.
+The gallery is plain HTML, CSS and a small script, like the library it shows. No framework, no packages, nothing
+to install.
 
 ## Run
 
 ```
-npm install
-npm run dev
-npm run build      # static site in dist/
+npm run dev        # http://localhost:5174/ (the next free port if taken; PORT=… for another)
+npm run build      # a static site in dist/, the library copied in
 ```
 
-It expects poiesis-design next to it (`../poiesis-design`). Anywhere else: `POIESIS_DESIGN=/path/to/poiesis-design npm run dev`.
+Node 18+. It expects poiesis-design next to it (`../poiesis-design`). Anywhere else:
+`POIESIS_DESIGN=/path/to/poiesis-design npm run dev`. Reload the page to see a change in poiesis-design.
 
 ## What lives where
 
 | File | Holds |
 |---|---|
-| poiesis-design `…/poiesis-components/skills/components/library/` | the components (imported here as `@/components/ui/…`); a new one is added there, then shown here |
-| `src/App.tsx` | the gallery page: each component and its states |
-| `src/typography.tsx` | the typography section: typefaces, type atoms, scale and roles, with live values |
-| `src/index.css` | Tailwind, shadcn's base, `poiesis.css` and the theme line |
-| poiesis-design `…/tokens/poiesis.css` | the theme: atoms, cells, and the components’ colour, radius, shadow, font and spacing slots mapped onto the cells |
+| `site/index.html` | the page: tokens, primitives, and each component in its states |
+| `site/gallery.css` | imports the tokens, the theme and the library, then the page's own layout |
+| `site/gallery.js` | reads the typography values from the browser, lists the icons, marks the current section |
+| `serve.mjs`, `build.mjs`, `paths.mjs` | the development server and the static build, Node's own modules only |
+| poiesis-design `…/poiesis-ui/skills/ui/tokens/` | served as `poiesis-ui/`: atoms, cells, the theme |
+| poiesis-design `…/poiesis-components/skills/components/library/` | served as `poiesis-components/`: primitives, components, their scripts |
+
+To try another feel, change atoms in poiesis-ui's `tokens/themes/poiesis.css` and reload: every primitive and
+component follows.

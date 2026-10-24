@@ -1,0 +1,453 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Poiesis Gallery</title>
+  <meta name="description" content="A design system: tokens, primitives and components, shown in its own theme.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400..800;1,400..800&family=Fragment+Mono:ital@0;1&display=swap">
+  <link rel="stylesheet" href="gallery.css">
+  <script type="module" src="poiesis-components/poiesis-components.js"></script>
+  <script type="module" src="gallery.js"></script>
+</head>
+<body class="po-paper">
+<div class="gallery">
+
+  <aside class="gallery-side">
+    <header class="gallery-masthead po-stack">
+      <p><strong>Poiesis Gallery</strong> <span class="po-muted">by <a class="po-pressable po-button" data-variant="quiet" href="https://georgemihai.com" target="_blank" rel="noreferrer">George Mihai</a></span></p>
+      <p class="po-muted">A design system: tokens, primitives and components, shown in its own theme.</p>
+      <p><a class="po-pressable po-button" data-size="sm" href="https://github.com/gorgmihai92/poiesis-design" target="_blank" rel="noreferrer">Get</a></p>
+    </header>
+    <nav class="gallery-nav" aria-label="Sections">
+      <p class="gallery-nav-group">Tokens</p>
+      <ul>
+        <li><a class="po-pressable" href="#typography">Typography</a></li>
+        <li><a class="po-pressable" href="#colors">Colors</a></li>
+        <li><a class="po-pressable" href="#tokens">Size, shape and state</a></li>
+      </ul>
+      <p class="gallery-nav-group">Primitives</p>
+      <ul>
+        <li><a class="po-pressable" href="#layout">Layout</a></li>
+        <li><a class="po-pressable" href="#text">Text</a></li>
+        <li><a class="po-pressable" href="#surface">Surface</a></li>
+        <li><a class="po-pressable" href="#pressable">Pressable</a></li>
+        <li><a class="po-pressable" href="#field">Field</a></li>
+      </ul>
+      <p class="gallery-nav-group">Components</p>
+      <ul>
+        <li><a class="po-pressable" href="#icon">Icon</a></li>
+        <li><a class="po-pressable" href="#button">Button</a></li>
+        <li><a class="po-pressable" href="#toggle">Toggle</a></li>
+        <li><a class="po-pressable" href="#switch">Switch</a></li>
+        <li><a class="po-pressable" href="#input">Input and label</a></li>
+        <li><a class="po-pressable" href="#tabs">Tabs</a></li>
+        <li><a class="po-pressable" href="#tooltip">Tooltip</a></li>
+        <li><a class="po-pressable" href="#collapsible">Collapsible</a></li>
+        <li><a class="po-pressable" href="#alert">Alert</a></li>
+        <li><a class="po-pressable" href="#card">Card</a></li>
+        <li><a class="po-pressable" href="#separator">Separator</a></li>
+        <li><a class="po-pressable" href="#progress">Progress</a></li>
+        <li><a class="po-pressable" href="#meter">Meter</a></li>
+        <li><a class="po-pressable" href="#spinner">Spinner</a></li>
+        <li><a class="po-pressable" href="#status-dot">Status dot</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="gallery-main">
+
+    <!-- Tokens -->
+
+    <section id="typography" class="gallery-section">
+      <header><h2>Typography</h2><p class="po-muted">Three typefaces, the type atoms, the scale they produce and the text roles. Values are read from the page, so they are the current theme's.</p></header>
+      <div class="gallery-state"><h3>Typefaces</h3><div class="po-stack" style="--po-gap: 8" data-faces></div></div>
+      <div class="gallery-state"><h3>Atoms</h3><div class="gallery-scroll"><table class="gallery-table"><tbody data-atoms></tbody></table></div></div>
+      <div class="gallery-state"><h3>Scale</h3><div class="gallery-rows" data-scale></div></div>
+      <div class="gallery-state"><h3>Roles</h3><div class="gallery-rows" data-roles></div></div>
+    </section>
+
+    <section id="colors" class="gallery-section">
+      <header><h2>Colors</h2><p class="po-muted">The palette's roles. Each is one color, for fills, text, icons and lines, with a tint for backgrounds under ink text.</p></header>
+      <div class="gallery-state"><h3>Roles</h3><div class="po-stack" data-roles-colors></div></div>
+      <div class="gallery-state">
+        <h3>Neutrals</h3>
+        <div class="gallery-swatches">
+          <div class="gallery-swatch" style="background: var(--paper); color: var(--ink); box-shadow: inset 0 0 0 1px var(--divider)"><span>Paper</span><span>page, blocks</span></div>
+          <div class="gallery-swatch" style="background: var(--surface); color: var(--ink)"><span>Surface</span><span>grey fill, hover</span></div>
+          <div class="gallery-swatch" style="background: var(--divider); color: var(--ink)"><span>Divider</span><span>between sections</span></div>
+          <div class="gallery-swatch" style="background: var(--line-color); color: var(--paper)"><span>Line</span><span>control edges</span></div>
+          <div class="gallery-swatch" style="background: var(--faint); color: var(--ink)"><span>Faint</span><span>text out of focus</span></div>
+          <div class="gallery-swatch" style="background: var(--muted); color: var(--paper)"><span>Muted</span><span>secondary text</span></div>
+          <div class="gallery-swatch" style="background: var(--ink); color: var(--paper)"><span>Ink</span><span>text, primary fill</span></div>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>States</h3>
+        <div class="gallery-swatches">
+          <div class="gallery-swatch" style="background: var(--selected-bg); color: var(--selected-fg)">Selected</div>
+          <div class="gallery-swatch" style="background: var(--surface); color: var(--ink)">Hover, plain</div>
+          <div class="gallery-swatch" style="background: var(--ink); color: var(--paper); opacity: var(--hover)">Hover, filled</div>
+          <div class="gallery-swatch" style="background: var(--ink); color: var(--paper); opacity: var(--disabled)">Disabled</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="tokens" class="gallery-section">
+      <header><h2>Size, shape and state</h2><p class="po-muted">Control heights and padding follow density; icons, the disabled look and widths each have one token.</p></header>
+      <div class="gallery-state">
+        <h3>Control heights <span>(--control-*)</span></h3>
+        <div class="po-row" style="--po-gap: 3; align-items: end">
+          <div class="gallery-height"><div style="block-size: var(--control-xs)"></div><span>xs</span></div>
+          <div class="gallery-height"><div style="block-size: var(--control-sm)"></div><span>sm</span></div>
+          <div class="gallery-height"><div style="block-size: var(--control-md)"></div><span>md</span></div>
+          <div class="gallery-height"><div style="block-size: var(--control-lg)"></div><span>lg</span></div>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Icons <span>(--icon, --icon-sm)</span></h3>
+        <div class="po-row" style="--po-gap: 3">
+          <span class="po-icon" data-icon="grid" aria-hidden="true"></span>
+          <span class="po-icon" data-icon="grid" aria-hidden="true" style="inline-size: var(--icon-sm); block-size: var(--icon-sm)"></span>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Disabled <span>(--disabled)</span></h3>
+        <div class="po-row"><button class="po-pressable po-button">Enabled</button><button class="po-pressable po-button" disabled>Disabled</button></div>
+      </div>
+      <div class="gallery-state">
+        <h3>Widths <span>(--measure-narrow, --measure)</span></h3>
+        <div class="po-stack" style="--po-gap: 6">
+          <div class="po-stack" style="--po-gap: 1"><span class="po-muted">Narrow · tooltips, notices, short forms</span><p class="po-narrow">A line stops at this width, so text never stretches across the whole screen and stays easy to follow from one line to the next.</p></div>
+          <div class="po-stack" style="--po-gap: 1"><span class="po-muted">Measure · running text</span><p class="po-measure">A line stops at this width, so text never stretches across the whole screen and stays easy to follow from one line to the next.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Primitives -->
+
+    <section id="layout" class="gallery-section">
+      <header><h2>Layout</h2><p class="po-muted">Places things: a stack, a row, a grid and a padded box. Gaps are steps of the space atom.</p></header>
+      <div class="gallery-state">
+        <h3>Stack <span>(.po-stack, --po-gap)</span></h3>
+        <div class="po-stack gallery-demo-boxes"><div></div><div></div><div></div></div>
+      </div>
+      <div class="gallery-state">
+        <h3>Row <span>(.po-row, wraps)</span></h3>
+        <div class="po-row gallery-demo-boxes"><div></div><div></div><div></div><div></div></div>
+      </div>
+      <div class="gallery-state">
+        <h3>Grid <span>(.po-grid, --po-min)</span></h3>
+        <div class="po-grid gallery-demo-boxes" style="--po-min: 6rem"><div></div><div></div><div></div><div></div><div></div></div>
+      </div>
+      <div class="gallery-state">
+        <h3>Box <span>(.po-box, --po-pad)</span></h3>
+        <div class="po-box gallery-demo-pad"><div></div></div>
+      </div>
+    </section>
+
+    <section id="text" class="gallery-section">
+      <header><h2>Text</h2><p class="po-muted">The text roles as classes: each sets size, weight, line height, face and spacing together.</p></header>
+      <div class="gallery-state">
+        <h3>Roles <span>(.po-title … .po-code, .po-ui)</span></h3>
+        <div class="po-stack" style="--po-gap: 3">
+          <p class="po-title">Quarterly report</p>
+          <p class="po-heading">Costs by region</p>
+          <p class="po-subheading">North and east</p>
+          <p class="po-body">Costs rose in two of three regions, led by energy and transport.</p>
+          <p class="po-caption po-muted">Updated 14 Oct · 3 sources</p>
+          <p class="po-code">&lt;button class="po-pressable po-button"&gt;Save&lt;/button&gt;</p>
+          <p class="po-ui">Every component's text: buttons, labels, captions, content</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="surface" class="gallery-section">
+      <header><h2>Surface</h2><p class="po-muted">What things sit on: the paper, a block, and a layer that floats above the page.</p></header>
+      <div class="gallery-state">
+        <h3>Paper, block, layer <span>(.po-paper, .po-block, .po-layer)</span></h3>
+        <div class="po-row" style="--po-gap: 4; align-items: stretch">
+          <div class="po-paper po-box gallery-demo-surface" style="box-shadow: inset 0 0 0 1px var(--divider)">Paper</div>
+          <div class="po-block po-box gallery-demo-surface">Block</div>
+          <div class="po-layer po-box gallery-demo-surface">Layer</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pressable" class="gallery-section">
+      <header><h2>Pressable</h2><p class="po-muted">The base of everything pressed: its text, cursor, focus ring and shared states.</p></header>
+      <div class="gallery-state">
+        <h3>States <span>(hover, selected, disabled)</span></h3>
+        <div class="po-row">
+          <button class="po-pressable gallery-demo-pressable">Plain</button>
+          <button class="po-pressable gallery-demo-pressable" aria-pressed="true">Selected</button>
+          <button class="po-pressable gallery-demo-pressable" disabled>Disabled</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="field" class="gallery-section">
+      <header><h2>Field</h2><p class="po-muted">The base of everything typed into: one edge, the text, the placeholder and the shared states.</p></header>
+      <div class="gallery-state">
+        <h3>States <span>(default, invalid, disabled)</span></h3>
+        <div class="po-stack po-narrow">
+          <input class="po-field gallery-demo-field" aria-label="Default field" placeholder="Untitled">
+          <input class="po-field gallery-demo-field" aria-label="Invalid field" value="Atlas" aria-invalid="true">
+          <input class="po-field gallery-demo-field" aria-label="Disabled field" value="Poiesis Lab" disabled>
+        </div>
+      </div>
+    </section>
+
+    <!-- Components -->
+
+    <section id="icon" class="gallery-section">
+      <header><h2>Icon</h2><p class="po-muted">The one icon set, in the current text color.</p></header>
+      <div class="gallery-state">
+        <h3>Set <span>(data-icon)</span></h3>
+        <div class="gallery-icons" data-icons></div>
+      </div>
+    </section>
+
+    <section id="button" class="gallery-section">
+      <header><h2>Button</h2><p class="po-muted">Triggers an action.</p></header>
+      <div class="gallery-state">
+        <h3>Variants</h3>
+        <div class="po-row">
+          <button class="po-pressable po-button">Primary</button>
+          <button class="po-pressable po-button" data-variant="secondary">Secondary</button>
+          <button class="po-pressable po-button" data-variant="outline">Outline</button>
+          <button class="po-pressable po-button" data-variant="ghost">Ghost</button>
+          <button class="po-pressable po-button" data-variant="danger">Delete</button>
+          <button class="po-pressable po-button" data-variant="link">Link</button>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Quiet link <span>(a byline or credit, in the text's own color)</span></h3>
+        <p class="po-muted">Photo by <a class="po-pressable po-button" data-variant="quiet" href="#button">Ana Pop</a></p>
+      </div>
+      <div class="gallery-state">
+        <h3>Sizes</h3>
+        <div class="po-row">
+          <button class="po-pressable po-button" data-size="sm">Small</button>
+          <button class="po-pressable po-button">Default</button>
+          <button class="po-pressable po-button" data-size="lg">Large</button>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Icon</h3>
+        <div class="po-row">
+          <button class="po-pressable po-button" data-variant="outline" data-shape="icon" aria-label="Grid view"><span class="po-icon" data-icon="grid" aria-hidden="true"></span></button>
+          <button class="po-pressable po-button" data-variant="ghost" data-shape="icon" aria-label="Close"><span class="po-icon" data-icon="close" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Disabled</h3>
+        <div class="po-row">
+          <button class="po-pressable po-button" disabled>Saving…</button>
+          <button class="po-pressable po-button" data-variant="secondary" disabled>Disabled</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="toggle" class="gallery-section">
+      <header><h2>Toggle</h2><p class="po-muted">A two-state button that can be on or off.</p></header>
+      <div class="gallery-state">
+        <h3>Off and on</h3>
+        <div class="po-row">
+          <label class="po-pressable po-toggle" data-shape="icon"><input type="checkbox" aria-label="Filter"><span class="po-icon" data-icon="filter" aria-hidden="true"></span></label>
+          <label class="po-pressable po-toggle" data-shape="icon"><input type="checkbox" aria-label="Filter" checked><span class="po-icon" data-icon="filter" aria-hidden="true"></span></label>
+          <label class="po-pressable po-toggle"><input type="checkbox">Bold</label>
+        </div>
+      </div>
+    </section>
+
+    <section id="switch" class="gallery-section">
+      <header><h2>Switch</h2><p class="po-muted">Toggles a setting on or off.</p></header>
+      <div class="gallery-state">
+        <h3>With label</h3>
+        <div class="po-stack po-narrow" style="--po-gap: 3">
+          <div class="gallery-setting"><label class="po-label" for="s1">Email me a weekly summary</label><input type="checkbox" role="switch" class="po-focus po-switch" id="s1" checked></div>
+          <div class="gallery-setting"><label class="po-label" for="s2">Share with the team</label><input type="checkbox" role="switch" class="po-focus po-switch" id="s2"></div>
+          <div class="gallery-setting"><label class="po-label" for="s3">Sync while on mobile data</label><input type="checkbox" role="switch" class="po-focus po-switch" id="s3" disabled></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="input" class="gallery-section">
+      <header><h2>Input and label</h2><p class="po-muted">A line of text, named by its label.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <div class="po-stack po-narrow">
+          <label class="po-label" for="f1">Project name</label>
+          <input class="po-field po-input" id="f1" placeholder="Untitled" maxlength="40" aria-describedby="f1-hint">
+          <p class="po-ui po-muted" id="f1-hint">Up to 40 characters.</p>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Invalid</h3>
+        <div class="po-stack po-narrow">
+          <label class="po-label" for="f2">Project name</label>
+          <input class="po-field po-input" id="f2" value="Atlas" aria-invalid="true" aria-describedby="f2-error">
+          <p class="po-ui gallery-error" id="f2-error">That name is taken. Try another.</p>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Disabled</h3>
+        <div class="po-stack po-narrow">
+          <label class="po-label" for="f3">Workspace</label>
+          <input class="po-field po-input" id="f3" value="Poiesis Lab" disabled>
+        </div>
+      </div>
+    </section>
+
+    <section id="tabs" class="gallery-section">
+      <header><h2>Tabs</h2><p class="po-muted">Layered sections of content, one shown at a time.</p></header>
+      <div class="gallery-state">
+        <h3>Segmented</h3>
+        <po-tabs value="list">
+          <div role="tablist" aria-label="View">
+            <button class="po-pressable" role="tab" data-value="list">List</button>
+            <button class="po-pressable" role="tab" data-value="grid">Grid</button>
+          </div>
+        </po-tabs>
+      </div>
+      <div class="gallery-state">
+        <h3>Line</h3>
+        <po-tabs value="overview" data-variant="line">
+          <div role="tablist" aria-label="Imports">
+            <button class="po-pressable" role="tab" data-value="overview">Overview</button>
+            <button class="po-pressable" role="tab" data-value="activity">Activity</button>
+            <button class="po-pressable" role="tab" data-value="settings">Settings</button>
+          </div>
+          <div role="tabpanel" data-value="overview" class="po-muted">3 imports this week.</div>
+          <div role="tabpanel" data-value="activity" class="po-muted">Last change 2 hours ago.</div>
+          <div role="tabpanel" data-value="settings" class="po-muted">Notifications are on.</div>
+        </po-tabs>
+      </div>
+    </section>
+
+    <section id="tooltip" class="gallery-section">
+      <header><h2>Tooltip</h2><p class="po-muted">A short label shown on hover or focus.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <div class="po-row">
+          <button class="po-pressable po-button" data-variant="outline" id="export">Export</button>
+          <po-tooltip class="po-layer" for="export">Exports the visible rows</po-tooltip>
+        </div>
+      </div>
+    </section>
+
+    <section id="collapsible" class="gallery-section">
+      <header><h2>Collapsible</h2><p class="po-muted">Shows and hides a panel of content.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <details class="po-collapsible">
+          <summary class="po-pressable">Advanced options</summary>
+          <p class="po-muted">Keep raw files for 30 days after import.</p>
+        </details>
+      </div>
+    </section>
+
+    <section id="alert" class="gallery-section">
+      <header><h2>Alert</h2><p class="po-muted">A message that needs attention.</p></header>
+      <div class="gallery-state">
+        <h3>Plain</h3>
+        <div class="po-alert po-narrow" role="status"><p>New version available: 2.4</p></div>
+      </div>
+      <div class="gallery-state">
+        <h3>Roles <span>(data-role)</span></h3>
+        <div class="po-stack po-narrow">
+          <div class="po-alert" data-role="info" role="status"><p>Imports run every night at 2:00.</p></div>
+          <div class="po-alert" data-role="success" role="status"><p>All 3 sources imported.</p></div>
+          <div class="po-alert" data-role="warning" role="status"><p>One source has not changed in 30 days. Check that it still exports.</p></div>
+          <div class="po-alert" data-role="caution" role="status"><p>The quota is 90% used.</p></div>
+          <div class="po-alert" data-role="danger" role="alert"><p>The import failed. Check the file and try again.</p></div>
+          <div class="po-alert" data-role="new" role="status"><p>New: export to PDF.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="card" class="gallery-section">
+      <header><h2>Card</h2><p class="po-muted">A container for one item.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <article class="po-block po-card po-narrow">
+          <h4 class="po-card-title">Quarterly costs</h4>
+          <p class="po-muted">Updated 14 Oct · 3 sources</p>
+          <p>Costs rose in two of three regions.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="separator" class="gallery-section">
+      <header><h2>Separator</h2><p class="po-muted">A divider between groups.</p></header>
+      <div class="gallery-state">
+        <h3>Horizontal and vertical</h3>
+        <div class="po-stack po-narrow" style="--po-gap: 3">
+          <p>Sources</p>
+          <hr class="po-separator">
+          <div class="po-row" style="--po-gap: 3"><span>Daily</span><hr class="po-separator" aria-orientation="vertical"><span>Weekly</span><hr class="po-separator" aria-orientation="vertical"><span>Monthly</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="progress" class="gallery-section">
+      <header><h2>Progress</h2><p class="po-muted">How much of a task is done.</p></header>
+      <div class="gallery-state">
+        <h3>Known</h3>
+        <progress class="po-progress po-narrow" value="64" max="100" aria-label="Upload"></progress>
+      </div>
+      <div class="gallery-state">
+        <h3>Unknown <span>(no value)</span></h3>
+        <progress class="po-progress po-narrow" aria-label="Preparing the export"></progress>
+      </div>
+    </section>
+
+    <section id="meter" class="gallery-section">
+      <header><h2>Meter</h2><p class="po-muted">A level from 1 to 3.</p></header>
+      <div class="gallery-state">
+        <h3>Values</h3>
+        <div class="po-row" style="--po-gap: 3">
+          <span class="po-meter" data-value="1" role="img" aria-label="Level 1 of 3"></span>
+          <span class="po-meter" data-value="2" role="img" aria-label="Level 2 of 3"></span>
+          <span class="po-meter" data-value="3" role="img" aria-label="Level 3 of 3"></span>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Tones <span>(data-tone)</span></h3>
+        <div class="po-row" style="--po-gap: 3">
+          <span class="po-meter" data-value="1" data-tone="success" role="img" aria-label="Low"></span>
+          <span class="po-meter" data-value="2" data-tone="warning" role="img" aria-label="Medium"></span>
+          <span class="po-meter" data-value="2" data-tone="caution" role="img" aria-label="Medium-high"></span>
+          <span class="po-meter" data-value="3" data-tone="danger" role="img" aria-label="High"></span>
+        </div>
+      </div>
+    </section>
+
+    <section id="spinner" class="gallery-section">
+      <header><h2>Spinner</h2><p class="po-muted">Shows that something is loading.</p></header>
+      <div class="gallery-state">
+        <h3>Default</h3>
+        <div class="po-row po-muted"><span class="po-spinner" role="status" aria-label="Loading"></span>Reading the file</div>
+      </div>
+    </section>
+
+    <section id="status-dot" class="gallery-section">
+      <header><h2>Status dot</h2><p class="po-muted">The state of a process.</p></header>
+      <div class="gallery-state">
+        <h3>States <span>(data-state)</span></h3>
+        <div class="po-row" style="--po-gap: 3.5">
+          <span class="po-status-dot" data-state="active" role="img" aria-label="Active"></span>
+          <span class="po-status-dot" data-state="paused" role="img" aria-label="Paused"></span>
+          <span class="po-status-dot" data-state="stopped" role="img" aria-label="Stopped"></span>
+          <span class="po-status-dot" data-state="error" role="img" aria-label="Error"></span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+</div>
+</body>
+</html>
