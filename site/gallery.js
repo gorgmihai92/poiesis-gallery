@@ -221,3 +221,9 @@ for (const button of document.querySelectorAll("[data-demo-toast]")) {
     toast.setAttribute("open", "")
   })
 }
+
+// The evidence table: a pressed button keeps the rows its conclusion rests on in ink and mutes the others.
+for (const input of document.querySelectorAll("[data-demo-filter]")) {
+  const box = document.getElementById(input.dataset.demoFilter)
+  input.addEventListener("change", () => box.toggleAttribute("data-filter", input.checked))
+}

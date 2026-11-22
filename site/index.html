@@ -67,6 +67,10 @@
         <li><a class="po-pressable" href="#sections">Sections</a></li>
         <li><a class="po-pressable" href="#nav">Nav</a></li>
         <li><a class="po-pressable" href="#frame">Frame</a></li>
+        <li><a class="po-pressable" href="#verdict">Verdict</a></li>
+        <li><a class="po-pressable" href="#evidence">Evidence</a></li>
+        <li><a class="po-pressable" href="#series">Series</a></li>
+        <li><a class="po-pressable" href="#dot-map">Dot map</a></li>
       </ul>
     </nav>
   </aside>
@@ -814,6 +818,166 @@
 
     <section id="frame" class="gallery-section">
       <header><h2>Frame</h2><p class="po-muted">A side column with the masthead and the nav, then the page. This page is one: from 64rem the side stays in view, a free column follows it, then the page; on a phone the side sits above.</p></header>
+    </section>
+
+    <section id="verdict" class="gallery-section">
+      <header><h2>Verdict</h2><p class="po-muted">What a challenge decided about a conclusion: a mark and a word, never color alone.</p></header>
+      <div class="gallery-state">
+        <h3>State <span>(data-state; with none, it reads as not challenged)</span></h3>
+        <div class="po-row">
+          <span class="po-verdict" data-state="kept">Kept</span>
+          <span class="po-verdict" data-state="weakened">Weakened</span>
+          <span class="po-verdict" data-state="dropped">Dropped</span>
+          <span class="po-verdict">Not challenged</span>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>Beside its conclusion</h3>
+        <dl class="gallery-verdicts po-measure">
+          <dt><span class="po-verdict" data-state="kept">Kept</span></dt><dd>Most late deliveries leave the depot on a Monday.</dd>
+          <dt><span class="po-verdict" data-state="weakened">Weakened</span></dt><dd>Late deliveries start with the address more often than with the courier.</dd>
+          <dt><span class="po-verdict" data-state="dropped">Dropped</span></dt><dd>Customers accept a delivery that is one day late.</dd>
+          <dt><span class="po-verdict">Not challenged</span></dt><dd>Refunds are asked for less often than a year ago.</dd>
+        </dl>
+      </div>
+    </section>
+
+    <section id="evidence" class="gallery-section">
+      <header><h2>Evidence</h2><p class="po-muted">One source in each row, one question in each column, so a value can be looked up and a missing one shows.</p></header>
+      <div class="gallery-state">
+        <h3>Default <span>(a note in muted; data-type="number"; data-state="none" and "gap")</span></h3>
+        <div class="po-evidence" role="region" aria-label="Four interviews about late deliveries" tabindex="0" id="demo-evidence">
+          <table>
+            <caption>Four interviews about late deliveries, March 2026.</caption>
+            <thead>
+              <tr><th scope="col">Interview</th><th scope="col">When a delivery runs late</th><th scope="col">What they do then</th><th scope="col">Orders a week</th><th scope="col">Asked for a refund?</th></tr>
+            </thead>
+            <tbody>
+              <tr data-state="on">
+                <th scope="row">A shop owner <span class="po-evidence-note">12 March · 40 minutes</span></th>
+                <td>Mondays <span class="po-evidence-note">after the weekend's orders</span></td>
+                <td>Calls the depot</td>
+                <td data-type="number">120</td>
+                <td>Twice this year</td>
+              </tr>
+              <tr data-state="on">
+                <th scope="row">A dispatcher <span class="po-evidence-note">14 March · 55 minutes</span></th>
+                <td>Mondays and after holidays</td>
+                <td>Moves the order to the next van</td>
+                <td data-type="number">2,300</td>
+                <td data-state="none">Not asked</td>
+              </tr>
+              <tr>
+                <th scope="row">A courier <span class="po-evidence-note">14 March · 25 minutes</span></th>
+                <td>When the address is incomplete</td>
+                <td>Phones the customer</td>
+                <td data-type="number">310</td>
+                <td data-state="none">Not asked</td>
+              </tr>
+              <tr>
+                <th scope="row">A customer <span class="po-evidence-note">19 March · 20 minutes</span></th>
+                <td data-state="none">Did not say</td>
+                <td>Waits one day, then writes</td>
+                <td data-type="number">1</td>
+                <td data-state="gap">Never</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="gallery-state">
+        <h3>The rows a conclusion rests on <span>(data-filter on the box, data-state="on" on its rows)</span></h3>
+        <div class="po-row">
+          <label class="po-pressable po-button" data-variant="outline" data-size="sm"><input type="checkbox" data-demo-filter="demo-evidence">Mondays: show its two interviews</label>
+        </div>
+      </div>
+    </section>
+
+    <section id="series" class="gallery-section">
+      <header><h2>Series</h2><p class="po-muted">Counts over time as lines on one scale that starts at zero, each line named where it ends, drawn from a table that stays on the page.</p></header>
+      <div class="gallery-state">
+        <h3>Three lines <span>(data-focus on a header; data-partial on a row; press a name)</span></h3>
+        <po-series unit="orders a week, average over the year">
+          <table>
+            <thead>
+              <tr><th scope="col">Year</th><th scope="col" data-focus>Delivered on time</th><th scope="col">Delivered late</th><th scope="col">Returned</th></tr>
+            </thead>
+            <tbody>
+              <tr><th scope="row">2019</th><td data-value="1240">1,240</td><td data-value="210">210</td><td data-value="64">64</td></tr>
+              <tr><th scope="row">2020</th><td data-value="1810">1,810</td><td data-value="390">390</td><td data-value="92">92</td></tr>
+              <tr><th scope="row">2021</th><td data-value="2060">2,060</td><td data-value="350">350</td><td data-value="110">110</td></tr>
+              <tr><th scope="row">2022</th><td data-value="2150">2,150</td><td data-value="330">330</td><td data-value="104">104</td></tr>
+              <tr><th scope="row">2023</th><td data-value="2290">2,290</td><td data-value="410">410</td><td data-value="121">121</td></tr>
+              <tr><th scope="row">2024</th><td data-value="2380">2,380</td><td data-value="520">520</td><td data-value="118">118</td></tr>
+              <tr><th scope="row">2025</th><td data-value="2410">2,410</td><td data-value="610">610</td><td data-value="133">133</td></tr>
+              <tr data-partial="so far"><th scope="row">2026</th><td data-value="2520">2,520</td><td data-value="480">480</td><td data-value="127">127</td></tr>
+            </tbody>
+          </table>
+        </po-series>
+      </div>
+      <div class="gallery-state">
+        <h3>A gap, and a scale that does not start at zero <span>(an empty cell; min="auto")</span></h3>
+        <div class="po-measure">
+          <po-series unit="°C, depot cold room at 8:00" min="auto" style="--po-series-height: calc(var(--space) * 40)">
+            <table>
+              <thead>
+                <tr><th scope="col">Day</th><th scope="col" data-focus>Cold room</th></tr>
+              </thead>
+              <tbody>
+                <tr><th scope="row">1</th><td>4.1</td></tr>
+                <tr><th scope="row">2</th><td>4.3</td></tr>
+                <tr><th scope="row">3</th><td>4.2</td></tr>
+                <tr><th scope="row">4</th><td></td></tr>
+                <tr><th scope="row">5</th><td>5.6</td></tr>
+                <tr><th scope="row">6</th><td>4.4</td></tr>
+                <tr><th scope="row">7</th><td>4.2</td></tr>
+              </tbody>
+            </table>
+          </po-series>
+        </div>
+      </div>
+    </section>
+
+    <section id="dot-map" class="gallery-section">
+      <header><h2>Dot map</h2><p class="po-muted">Things placed by two numbers, each a dot named where it stands, drawn from a table that stays on the page. Further right happens more often; higher costs more each time.</p></header>
+      <div class="gallery-state">
+        <h3>With verdicts <span>(data-state on a row; data-label; y-scale="log"; arrow keys move between dots)</span></h3>
+        <po-dot-map y-scale="log" y-unit=" h">
+          <table>
+            <thead>
+              <tr><th scope="col">Cause of a late delivery</th><th scope="col">Times a month</th><th scope="col">Hours lost each time</th><th scope="col">Challenge</th></tr>
+            </thead>
+            <tbody>
+              <tr data-state="kept" data-label><th scope="row">Monday backlog</th><td>19</td><td>6</td><td><span class="po-verdict" data-state="kept">Kept</span></td></tr>
+              <tr data-state="weakened" data-label><th scope="row">Incomplete address</th><td>31</td><td>1.5</td><td><span class="po-verdict" data-state="weakened">Weakened</span></td></tr>
+              <tr data-state="dropped"><th scope="row">Courier off sick</th><td>4</td><td>9</td><td><span class="po-verdict" data-state="dropped">Dropped</span></td></tr>
+              <tr data-state="none" data-label><th scope="row">Van breakdown</th><td>2</td><td>30</td><td><span class="po-verdict">Not challenged</span></td></tr>
+              <tr data-state="weakened"><th scope="row">Stock miscount</th><td>11</td><td>3</td><td><span class="po-verdict" data-state="weakened">Weakened</span></td></tr>
+              <tr data-state="none"><th scope="row">Customs hold</th><td>1</td><td>72</td><td><span class="po-verdict">Not challenged</span></td></tr>
+              <tr data-state="kept"><th scope="row">Label printer down</th><td>6</td><td>2</td><td><span class="po-verdict" data-state="kept">Kept</span></td></tr>
+            </tbody>
+          </table>
+        </po-dot-map>
+      </div>
+      <div class="gallery-state">
+        <h3>Plain dots <span>(no data-state; data-focus presses one; x-signed)</span></h3>
+        <div class="po-measure">
+          <po-dot-map x-unit="%" x-signed y-unit=" min" style="--po-dot-map-height: calc(var(--space) * 56)">
+            <table>
+              <thead>
+                <tr><th scope="col">Depot</th><th scope="col">Change in orders since last year</th><th scope="col">Minutes to load a van</th></tr>
+              </thead>
+              <tbody>
+                <tr data-focus><th scope="row">North</th><td>12</td><td>38</td></tr>
+                <tr><th scope="row">Harbour</th><td>-6</td><td>52</td></tr>
+                <tr><th scope="row">Old town</th><td>3</td><td>44</td></tr>
+                <tr><th scope="row">Airport</th><td>21</td><td>61</td></tr>
+                <tr><th scope="row">Riverside</th><td>-2</td><td>35</td></tr>
+              </tbody>
+            </table>
+          </po-dot-map>
+        </div>
+      </div>
     </section>
 
   </main>
