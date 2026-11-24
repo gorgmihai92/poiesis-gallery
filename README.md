@@ -1,5 +1,7 @@
 # Poiesis Gallery
 
+[![Cognitive Centered Design Oath: signed](https://raw.githubusercontent.com/gorgmihai92/ccd-oath/main/badges/ccd-oath-signed.svg)](https://github.com/gorgmihai92/ccd-oath/blob/main/SIGNATORIES.md)
+
 The Poiesis library in one place, in the Poiesis theme: the tokens, the primitives, and every component and
 pattern in its states. This is where you **look at** it; [poiesis-design](https://github.com/gorgmihai92/poiesis-design) is
 where the tokens (poiesis-ui), the primitives and components (poiesis-components) and the rules **live**. Nothing
